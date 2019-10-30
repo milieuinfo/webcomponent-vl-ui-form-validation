@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html class="js">
+	<head>
+        <title>vl-form-validation voorbeeld</title>
+        <script type="module" src="demo.js"></script>
+        <script type="module" src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+        <script type="module" src="/node_modules/vl-ui-form-grid/vl-form-grid.js"></script>
+        <script type="module" src="/node_modules/vl-ui-input-field/vl-input-field.js"></script>
+        <script type="module" src="/node_modules/vl-ui-form-message/vl-form-message.js"></script>
+        <script type="module" src="/node_modules/vl-ui-button/vl-button.js"></script>
+        <script type="module" src="../vl-form-validation.src.js"></script>
+
+        <script type="module">
+            import { VlFormValidation } from '../vl-form-validation.src.js';
+            
+            class a extends VlFormValidation(Object) {
+
+            }
+            a.ready().then(() => {
+                new a().dress(document.querySelector('form'));
+            });
+        </script>
+    </head>
+
+	<body>
+        <h1>vl-ui-form-validation demo</h1>
+        <p>
+            <a href="https://overheid.vlaanderen.be/webuniversum/v3/documentation/forms/vl-ui-form-validation">Meer voorbeelden en documentatie</a>.
+        </p>
+
+        <div>
+            <h2>Test</h2>
+            <pre>
+                <code class="line-numbers language-markup">
+                    &lt;form&gt;
+                        &lt;div is="vl-form-grid" is-stacked&gt;
+                            &lt;div is="vl-form-column" size="12"&gt;
+                                &lt;label is="vl-form-label" for="txt1" block&gt;Voornaam&lt;/label&gt;
+                                &lt;input id="txt1" is='vl-input-field' placeholder="Jos" block data-required="true" data-vl-success-class="vl-input-field--success" data-vl-error-class="vl-input-field--error" data-vl-error-message="Veld &quot;Voornaam&quot; is verplicht" data-vl-error-placeholder="validation-1-error"/&gt;
+                                &lt;p is="vl-form-validation" error data-vl-error-id="validation-1-error"&gt;&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;div is="vl-form-column" size="12"&gt;
+                                &lt;label is="vl-form-label" for="txt2" block&gt;Naam&lt;/label&gt;
+                                &lt;input id="txt2" is='vl-input-field' placeholder="Bosmans" block data-required="true" data-vl-success-class="vl-input-field--success" data-vl-error-class="vl-input-field--error" data-vl-error-message="Veld &quot;Naam&quot; is verplicht" data-vl-error-placeholder="validation-2-error"/&gt;
+                                &lt;p is="vl-form-validation" error data-vl-error-id="validation-2-error"&gt;&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;div is="vl-form-column" size="12"&gt;
+                                &lt;button is="vl-button"&gt;Gegevens opslaan&lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/form&gt;
+                </code>
+            </pre>
+            <div class="demo">
+                <form>
+                    <div is="vl-form-grid" is-stacked>
+                        <div is="vl-form-column" size="12">
+                            <label is="vl-form-label" for="txt1" block>Voornaam</label>
+                            <input id="txt1" is='vl-input-field' placeholder="Jos" block data-required="true" data-vl-success-class="vl-input-field--success" data-vl-error-class="vl-input-field--error" data-vl-error-message="Veld &quot;Voornaam&quot; is verplicht" data-vl-error-placeholder="validation-1-error"/>
+                            <p is="vl-form-validation" error data-vl-error-id="validation-1-error"></p>
+                        </div>
+                        <div is="vl-form-column" size="12">
+                            <label is="vl-form-label" for="txt2" block>Naam</label>
+                            <input id="txt2" is='vl-input-field' placeholder="Bosmans" block data-required="true" data-vl-success-class="vl-input-field--success" data-vl-error-class="vl-input-field--error" data-vl-error-message="Veld &quot;Naam&quot; is verplicht" data-vl-error-placeholder="validation-2-error"/>
+                            <p is="vl-form-validation" error data-vl-error-id="validation-2-error"></p>
+                        </div>
+                        <div is="vl-form-column" size="12">
+                            <button is="vl-button">Gegevens opslaan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
