@@ -3,7 +3,7 @@ version: 2
 plan:
   project-key: WEBCO
   key: VLFORMVALIDATION
-  name: webcomponent-vl-form-validation
+  name: webcomponent-vl-ui-form-validation
 
 triggers:
   - polling: 130
