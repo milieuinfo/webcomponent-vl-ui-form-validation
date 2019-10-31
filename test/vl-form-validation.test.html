@@ -5,24 +5,40 @@
   <meta charset="utf-8">
   <script src="../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
-
-  <script type="module" src="../vl-form-validation.src.js"></script>
+  
+  <script src="../node_modules/sinon/pkg/sinon.js"></script>
 </head>
 
 <body>
-  <test-fixture id="vl-form-validation-fixture">
-    <template>
-      
-    </template>
-  </test-fixture>
+  <script type="module">
+    import { VlFormValidation } from '../vl-form-validation.src.js';
 
-  <script>
-    suite('<vl-form-validation>', () => {
+    setup((done) => {
+      window.vl = {
+        formValidation: {
+          dress: sinon.fake()
+        }
+      }
+
+      Promise.all([
+        VlFormValidation(Object).awaitUntilReady()
+      ]).then(() => done());
+    });
+
+    suite('vl-form-validation', () => {
       const should = chai.should();
+      class VlFormValidationImplementatie extends VlFormValidation(Object) { }
 
-      test('vl-form-validation test', () => {
-        const form-validation = fixture('vl-form-validation-fixture');
-        assert.isTrue(true);
+      test('een class die de form validatie mixin toepast heeft een dress functie om de form validatie te activeren', () => {
+        const implementatie = new VlFormValidationImplementatie();
+        assert.isDefined(implementatie.dress);
+      });
+
+      test('de dress functie zal de form validatie activeren', () => {
+        const implementatie = new VlFormValidationImplementatie();
+        const element = document.createElement('div');
+        implementatie.dress(element);
+        assert(window.vl.formValidation.dress.calledWith(element));
       });
     });
   </script>
