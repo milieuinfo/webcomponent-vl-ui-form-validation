@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/milieuinfo/webcomponent-vl-ui-form-validation#readme",
   "dependencies": {
-    "vl-ui-util": "^2.0.5",
     "vl-ui-core": "^2.0.0",
     "replace": "^1.1.1",
     "@govflanders/vl-ui-form-validation": "^3.9.1"
@@ -40,7 +39,7 @@
     "vl-ui-form-grid": "^1.0.12",
     "vl-ui-form-message": "^2.2.7",
     "vl-ui-input-field": "^1.1.1",
-    "vl-ui-util": "^2.0.0",
+    "vl-ui-util": "^2.0.13",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2"
   },
