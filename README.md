@@ -1,7 +1,7 @@
 # vl-ui-form-validation
 ![GitHub issues](https://img.shields.io/github/issues-raw/milieuinfo/webcomponent-vl-ui-form-validation) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/milieuinfo/webcomponent-vl-ui-form-validation) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/milieuinfo/webcomponent-vl-ui-form-validation)
 
-De form validatie verzekert dat bij het invullen van het formulier de input van de gebruiker geldig is.
+De formulier validatie verzekert dat bij het invullen van het formulier de input van de gebruiker geldig is.
 
 ## Installatie
 ```
