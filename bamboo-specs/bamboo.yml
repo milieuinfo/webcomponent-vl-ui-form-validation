@@ -2,8 +2,8 @@
 version: 2
 plan:
   project-key: WEBCO
-  key: VLBLUEPRINT
-  name: webcomponent-vl-blueprint
+  key: VLUIFORMVALIDATION
+  name: webcomponent-vl-ui-form-validation
 
 triggers:
   - polling: 130
@@ -48,7 +48,7 @@ Release:
 ---
 version: 2
 plan:
-  key: VLBLUEPRINT
+  key: VLUIFORMVALIDATION
 
 plan-permissions:
   - groups:
