@@ -1,6 +1,6 @@
 {
   "name": "vl-blueprint",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "De form validatie verzekert dat bij het invullen van het formulier de input van de gebruiker geldig is.",
   "scripts": {
     "prepare": "npm update --dev vl-ui-util && npm run prepare:util",
