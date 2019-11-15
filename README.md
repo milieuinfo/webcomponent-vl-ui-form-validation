@@ -4,8 +4,8 @@
 De formulier validatie verzekert dat bij het invullen van het formulier de input van de gebruiker geldig is.
 
 ## Installatie
-```
-npm install --save vl-ui-form-validation
+``` bash
+$ npm install --save vl-ui-form-validation
 ```
 
 ## API
@@ -13,16 +13,16 @@ De [API](https://webcomponenten.omgeving.vlaanderen.be/doc/VlFormValidation.html
 
 ## Demo
 De [demo](https://webcomponenten.omgeving.vlaanderen.be/demo/vl-form-validation.html) pagina bevat een overzicht van de mogelijkheden met code voorbeelden. Lokaal opstarten kan met onderstaand [NPM](https://www.npmjs.com) script.
-```
-npm run demo
+``` bash
+$ npm run demo
 ```
 
 ## Testen
 De webcomponent bevat verschillende unit testen die bij elke commit geautomatiseerd in Chrome en Firefox draaien. Hierdoor kunnen we bij elke release een minimum aan kwaliteit garanderen. Later zullen er ook nog UI testen toegevoegd worden zodat al de functionaliteit uitgebreid getest wordt.
 
 De testen kunnen lokaal opgestart worden met onderstaand [NPM](https://www.npmjs.com) script.
-```
-npm run test
+``` bash
+$ npm run test
 ```
 
 ## Issues
