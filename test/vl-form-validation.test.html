@@ -40,6 +40,14 @@
         implementatie.dress(element);
         assert(window.vl.formValidation.dress.calledWith(element));
       });
+
+      test('de dress functie zal de form validatie niet activeren indien het attribuut novalidation aanwezig is', () => {
+        const implementatie = new VlFormValidationImplementatie();
+        const element = document.createElement('div');
+        element.setAttribute('novalidate', '');
+        implementatie.dress(element);
+        assert(window.vl.formValidation.dress.notCalled);
+      });
     });
   </script>
 </body>
