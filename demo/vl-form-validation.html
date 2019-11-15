@@ -30,14 +30,14 @@
                             &lt;input id="txt1" is='vl-input-field' placeholder="Jos" block data-required="true"
                                 data-vl-error-message="Veld &quot;Voornaam&quot; is verplicht"
                                 data-vl-error-placeholder="validation-1-error" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-1-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;Naam&lt;/label&gt;
                             &lt;input id="txt2" is='vl-input-field' placeholder="Bosmans" block data-required="true"
                                 data-vl-error-message="Veld &quot;Naam&quot; is verplicht"
                                 data-vl-error-placeholder="validation-2-error" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-2-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-2-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;E-mailadres&lt;/label&gt;
@@ -45,7 +45,7 @@
                                 data-required="true" 
                                 data-vl-error-message="Een geldig &quot;E-mailadres&quot; is verplicht"
                                 data-vl-error-placeholder="validation-3-error" data-vl-validation-type="email" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-3-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-3-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;IBAN-nummer&lt;/label&gt;
@@ -53,7 +53,7 @@
                                 data-required="true" 
                                 data-vl-error-message="Een geldig &quot;IBAN-nummer&quot; is verplicht"
                                 data-vl-error-placeholder="validation-4-error" data-vl-validation-type="iban" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-4-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-4-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;Telefoonnummer&lt;/label&gt;
@@ -61,7 +61,7 @@
                                 data-required="true" 
                                 data-vl-error-message="Een geldig &quot;Telefoonnummer&quot; is verplicht"
                                 data-vl-error-placeholder="validation-5-error" data-vl-validation-type="phone" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-5-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-5-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;Rijksregisternummer&lt;/label&gt;
@@ -69,7 +69,7 @@
                                 data-required="true" 
                                 data-vl-error-message="Een geldig &quot;Rijksregisternummer&quot; is verplicht"
                                 data-vl-error-placeholder="validation-6-error" data-vl-validation-type="rrn" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-6-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-6-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;button is="vl-button"&gt;Formulier valideren&lt;/button&gt;
@@ -86,28 +86,28 @@
                         <input id="txt1" is='vl-input-field' placeholder="Jos" block data-required="true"
                             data-vl-error-message="Veld &quot;Voornaam&quot; is verplicht"
                             data-vl-error-placeholder="validation-1-error" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-1-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>Naam</label>
                         <input id="txt2" is='vl-input-field' placeholder="Bosmans" block data-required="true"
                             data-vl-error-message="Veld &quot;Naam&quot; is verplicht"
                             data-vl-error-placeholder="validation-2-error" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-2-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-2-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>E-mailadres</label>
                         <input id="txt2" is='vl-input-field' placeholder="email@provider.com" block type="email"
                             data-required="true" data-vl-error-message="Een geldig &quot;E-mailadres&quot; is verplicht"
                             data-vl-error-placeholder="validation-3-error" data-vl-validation-type="email" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-3-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-3-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>IBAN-nummer</label>
                         <input id="txt2" is='vl-input-field' placeholder="BE00 0000 0000 0000" block type="text"
                             data-required="true" data-vl-error-message="Een geldig &quot;IBAN-nummer&quot; is verplicht"
                             data-vl-error-placeholder="validation-4-error" data-vl-validation-type="iban" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-4-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>Telefoonnummer</label>
@@ -115,7 +115,7 @@
                             data-required="true"
                             data-vl-error-message="Een geldig &quot;Telefoonnummer&quot; is verplicht"
                             data-vl-error-placeholder="validation-5-error" data-vl-validation-type="phone" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-5-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-5-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>Rijksregisternummer</label>
@@ -123,7 +123,7 @@
                             data-required="true"
                             data-vl-error-message="Een geldig &quot;Rijksregisternummer&quot; is verplicht"
                             data-vl-error-placeholder="validation-6-error" data-vl-validation-type="rrn" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-6-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-6-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <button is="vl-button">Formulier valideren</button>
@@ -144,14 +144,14 @@
                             &lt;input id="txt1" is='vl-input-field' placeholder="Jos" block data-required="true"
                                 data-vl-error-message="Veld &quot;Voornaam&quot; is verplicht"
                                 data-vl-error-placeholder="validation-1-error" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-1-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;Naam&lt;/label&gt;
                             &lt;input id="txt2" is='vl-input-field' placeholder="Bosmans" block data-required="true"
                                 data-vl-error-message="Veld &quot;Naam&quot; is verplicht"
                                 data-vl-error-placeholder="validation-2-error" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-2-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-2-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;E-mailadres&lt;/label&gt;
@@ -159,7 +159,7 @@
                                 data-required="true" 
                                 data-vl-error-message="Een geldig &quot;E-mailadres&quot; is verplicht"
                                 data-vl-error-placeholder="validation-3-error" data-vl-validation-type="email" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-3-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-3-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;IBAN-nummer&lt;/label&gt;
@@ -167,7 +167,7 @@
                                 data-required="true" 
                                 data-vl-error-message="Een geldig &quot;IBAN-nummer&quot; is verplicht"
                                 data-vl-error-placeholder="validation-4-error" data-vl-validation-type="iban" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-4-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-4-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;Telefoonnummer&lt;/label&gt;
@@ -175,7 +175,7 @@
                                 data-required="true" 
                                 data-vl-error-message="Een geldig &quot;Telefoonnummer&quot; is verplicht"
                                 data-vl-error-placeholder="validation-5-error" data-vl-validation-type="phone" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-5-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-5-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-label" for="txt2" block&gt;Rijksregisternummer&lt;/label&gt;
@@ -183,7 +183,7 @@
                                 data-required="true" 
                                 data-vl-error-message="Een geldig &quot;Rijksregisternummer&quot; is verplicht"
                                 data-vl-error-placeholder="validation-6-error" data-vl-validation-type="rrn" /&gt;
-                            &lt;p is="vl-form-validation" error data-vl-error-id="validation-6-error"&gt;&lt;/p&gt;
+                            &lt;p is="vl-form-validation-message" error data-vl-error-id="validation-6-error"&gt;&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;button is="vl-button"&gt;Formulier valideren&lt;/button&gt;
@@ -200,28 +200,28 @@
                         <input id="txt1" is='vl-input-field' placeholder="Jos" block data-required="true"
                             data-vl-error-message="Veld &quot;Voornaam&quot; is verplicht"
                             data-vl-error-placeholder="validation-1-error" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-1-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>Naam</label>
                         <input id="txt2" is='vl-input-field' placeholder="Bosmans" block data-required="true"
                             data-vl-error-message="Veld &quot;Naam&quot; is verplicht"
                             data-vl-error-placeholder="validation-2-error" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-2-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-2-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>E-mailadres</label>
                         <input id="txt2" is='vl-input-field' placeholder="email@provider.com" block type="email"
                             data-required="true" data-vl-error-message="Een geldig &quot;E-mailadres&quot; is verplicht"
                             data-vl-error-placeholder="validation-3-error" data-vl-validation-type="email" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-3-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-3-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>IBAN-nummer</label>
                         <input id="txt2" is='vl-input-field' placeholder="BE00 0000 0000 0000" block type="text"
                             data-required="true" data-vl-error-message="Een geldig &quot;IBAN-nummer&quot; is verplicht"
                             data-vl-error-placeholder="validation-4-error" data-vl-validation-type="iban" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-4-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>Telefoonnummer</label>
@@ -229,7 +229,7 @@
                             data-required="true"
                             data-vl-error-message="Een geldig &quot;Telefoonnummer&quot; is verplicht"
                             data-vl-error-placeholder="validation-5-error" data-vl-validation-type="phone" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-5-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-5-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="txt2" block>Rijksregisternummer</label>
@@ -237,7 +237,7 @@
                             data-required="true"
                             data-vl-error-message="Een geldig &quot;Rijksregisternummer&quot; is verplicht"
                             data-vl-error-placeholder="validation-6-error" data-vl-validation-type="rrn" />
-                        <p is="vl-form-validation" error data-vl-error-id="validation-6-error"></p>
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-6-error"></p>
                     </div>
                     <div is="vl-form-column" size="12">
                         <button is="vl-button">Formulier valideren</button>
