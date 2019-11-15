@@ -34,7 +34,9 @@ export const VlFormValidation = (SuperClass) => {
          * @param {HTMLElement} element
          */
         dress(element) {
-            vl.formValidation.dress(element);
+            if (element.getAttribute('novalidate') == undefined) {
+                vl.formValidation.dress(element);
+            }
         }
     };
 };
