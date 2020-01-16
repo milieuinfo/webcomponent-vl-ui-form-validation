@@ -38,7 +38,7 @@
     "vl-ui-form-grid": "^1.0.12",
     "vl-ui-form-message": "^3.0.0",
     "vl-ui-input-field": "^1.1.1",
-    "vl-ui-util": "^3.4.1",
+    "vl-ui-util": "^3.4.2",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2"
   },
