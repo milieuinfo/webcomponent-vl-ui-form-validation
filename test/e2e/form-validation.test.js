@@ -1,5 +1,5 @@
 
-const { assert, driver } = require('vl-ui-core').Test;
+const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlFormValidationPage = require('./pages/vl-form-validation.page');
 
 describe('vl-form-validation', async () => {
