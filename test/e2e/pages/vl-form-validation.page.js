@@ -1,6 +1,5 @@
 const VlFormValidation = require('../components/vl-form-validation');
-const { Page } = require('vl-ui-core');
-const { Config } = require('vl-ui-core');
+const { Page, Config } = require('vl-ui-core').Test;
 
 class VlFormValidationPage extends Page {
     async _getFormValidation(selector) {
