@@ -6,6 +6,10 @@ class VlFormValidationPage extends Page {
         return new VlFormValidation(this.driver, selector);
     }
 
+    async getVerplichteVoornaam() {
+        return this._getFormValidation('#form-1-voornaam');
+    }
+
     async load() {
         await super.load(Config.baseUrl + '/demo/vl-form-validation.html');
     }

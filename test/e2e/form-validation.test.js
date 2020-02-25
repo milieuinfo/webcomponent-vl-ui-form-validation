@@ -11,9 +11,9 @@ describe('vl-form-validation', async () => {
         });
     });
 
-    after((done) => {
-        if(driver) {
-            done();
-        }
-    })
+   
+
+    after(async () => {
+        return driver.quit();
+    });
 });
