@@ -66,6 +66,19 @@ class VlFormValidationPage extends Page {
         return this.driver.findElement(By.css('#form-' + form + '-button')).click();
     }
 
+
+    async getFormZonderSuccesMelding() {
+        return this.driver.findElement(By.css('#form-nosuccess'));
+    }
+
+    async getFormMetSuccesMelding() {
+        return this.driver.findElement(By.css('#form-success'));
+    }
+
+    async getFormZonderValidatie() {
+        return this.driver.findElement(By.css('#form-novalidation'));
+    }
+
     async load() {
         await super.load(Config.baseUrl + '/demo/vl-form-validation.html');
     }

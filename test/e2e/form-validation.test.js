@@ -101,6 +101,21 @@ describe('vl-form-validation', async () => {
         await assert.eventually.isFalse(inputField.hasClass('vl-input-field--error'));
     });
 
+    it('Als gebruiker kan ik een formulier zonder successmeldingen zien', async() => {
+        const form = await vlFormValidationPage.getFormZonderSuccesMelding();
+        await assert.eventually.isNull(form.getAttribute('data-vl-validate-form-success'));
+    });
+
+    it('Als gebruiker kan ik een formulier met successmeldingen zien', async() => {
+        const form = await vlFormValidationPage.getFormMetSuccesMelding();
+        await assert.eventually.equal(form.getAttribute('data-vl-validate-form-success'), 'true');
+    });
+
+    it('Als gebruiker kan ik een formulier zonder validatie zien', async() => {
+        const form = await vlFormValidationPage.getFormZonderValidatie();
+        await assert.eventually.equal(form.getAttribute('novalidate'), 'true');
+    });
+
     async function assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(validationMessage, inputElement) {
         await assert.eventually.equal(validationMessage.getErrorMessage(), await inputElement.getAttribute('data-vl-error-message'));
         await assert.eventually.isTrue(inputElement.hasClass('vl-input-field--error'));
