@@ -10,7 +10,7 @@
     "import": "./src/index.js",
     "node": "./index.js",
     "default": "./index.js"
-  },
+  }, 
   "homepage": "https://github.com/milieuinfo/webcomponent-vl-ui-form-validation#readme",
   "bugs": {
     "url": "https://github.com/milieuinfo/webcomponent-vl-ui-form-validation/issues"
