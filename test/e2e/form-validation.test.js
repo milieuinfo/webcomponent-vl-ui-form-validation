@@ -4,7 +4,7 @@ const VlFormValidationPage = require('./pages/vl-form-validation.page');
 describe('vl-form-validation', async () => {
    const vlFormValidationPage = new VlFormValidationPage(driver);
 
-   before((done) => {
+   before(() => {
        return vlFormValidationPage.load();
    });
 
