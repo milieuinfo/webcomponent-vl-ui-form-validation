@@ -11,10 +11,6 @@ class VlFormValidation extends VlElement {
         return element.hasAttribute('data-required');
     }
 
-    static async getDataVlErrorMessage(element) {
-        return element.getAttribute('data-vl-error-message');
-    }
-
     static async getErrorPlaceholder(element) {
         return element.getAttribute('data-vl-error-placeholder');
     }

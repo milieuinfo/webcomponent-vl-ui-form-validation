@@ -85,7 +85,7 @@
             </code>
         </pre>
         <div class="demo">
-            <form>
+            <form id="form-nosuccess">
                 <div is="vl-form-grid" is-stacked>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="input-1" block>Voornaam</label>
@@ -199,7 +199,7 @@
             </code>
         </pre>
         <div class="demo">
-            <form data-vl-validate-form-success="true">
+            <form data-vl-validate-form-success="true" id="form-success">
                 <div is="vl-form-grid" is-stacked>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-label" for="input-1" block>Voornaam</label>
@@ -261,22 +261,22 @@
                     &lt;div is="vl-form-grid" is-stacked&gt;
                         &lt;div is="vl-form-column" size="12"&gt;
                             &lt;label is="vl-form-message" for="naam"&gt;Naam&lt;/label&gt;
-                            &lt;input is="vl-input-field" block type="text" id="input-1" value="Jos" /&gt;
+                            &lt;input is="vl-input-field" block type="text" id="form-3-naam" value="Jos" /&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
                 &lt;/form&gt;
             </code>
         </pre>
         <div class="demo">
-            <form novalidate>
+            <form novalidate id="form-novalidation">
                 <div is="vl-form-grid" is-stacked>
                     <div is="vl-form-column" size="12">
                         <label is="vl-form-message" for="naam">Naam</label>
-                        <input is="vl-input-field" block type="text" id="form-3-input-1" value="Jos" />
+                        <input is="vl-input-field" block type="text" id="form-3-naam" value="Jos"/>
                     </div>
                 </div>
             </form>
-            <button is="vl-button" onclick="document.querySelector('#form-3-input-1').value = null; document.querySelector('#form-3-input-1').dispatchEvent(new CustomEvent('change'));">Leegmaken</button>
+            <button is="vl-button" onclick="document.querySelector('#form-3-naam').value = null; document.querySelector('#form-3-input-1').dispatchEvent(new CustomEvent('change'));">Leegmaken</button>
         </div>
     </div>
 </body>
