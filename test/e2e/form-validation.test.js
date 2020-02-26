@@ -10,7 +10,7 @@ describe('vl-form-validation', async () => {
 //        });
 //    });
 
-    it("Dummy test om de browsers te sluiten", () => {
-    	assert.isTrue(true);
-    });
+    // it("Dummy test om de browsers te sluiten", () => {
+    // 	assert.isTrue(true);
+    // });
 });
