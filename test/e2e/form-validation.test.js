@@ -12,46 +12,53 @@ describe('vl-form-validation', async () => {
         });
     });
     
-    it('Als gebruiker zie ik dat alle inputvelden in het eerste formulier correct gekoppeld zijn met de corresponderende validation-message', async() => {
-        const verplichteVoornaamValidationMessage = await vlFormValidationPage.getValidationMessageVerplichteVoornaam();
-        const voornaamInputField = await vlFormValidationPage.getVerplichteVoornaam();
-        await assert.eventually.isTrue(verplichteVoornaamValidationMessage.toontFoutmeldingenVoorElement(voornaamInputField));
-
-        const verplichteNaamValidationMesage = await vlFormValidationPage.getValidationMessageVerplichteNaam();
-        const naamInputField = await vlFormValidationPage.getVerplichteNaam();
-        await assert.eventually.isTrue(verplichteNaamValidationMesage.toontFoutmeldingenVoorElement(naamInputField));
-
-        const verplichteEmailValidationMessage = await vlFormValidationPage.getValidationMessageVerplichteEmail();
-        const emailInputField = await vlFormValidationPage.getVerplichteEmail();
-        await assert.eventually.isTrue(verplichteEmailValidationMessage.toontFoutmeldingenVoorElement(emailInputField));
-
-        const verplichteIbanValiationMessage = await vlFormValidationPage.getValidationMessageVerplichteIban();
-        const ibanInputField = await vlFormValidationPage.getVerplichteIban();
-        await assert.eventually.isTrue(verplichteIbanValiationMessage.toontFoutmeldingenVoorElement(ibanInputField));
-
-        const verplichtTelefoonnrValidationMessage = await vlFormValidationPage.getValidationMessageVerplichtTelefoonnummer();
-        const telefoonnrInputField = await vlFormValidationPage.getVerplichtTelefoonnummer();
-        await assert.eventually.isTrue(verplichtTelefoonnrValidationMessage.toontFoutmeldingenVoorElement(telefoonnrInputField));
-
-        const verplichtRRNValidationMessage = await vlFormValidationPage.getValidationMessageRijksregisternummer();
-        const rrnInputField = await vlFormValidationPage.getVerplichtRijksregisternummer();
-        await assert.eventually.isTrue(verplichtRRNValidationMessage.toontFoutmeldingenVoorElement(rrnInputField));
+    it('Als gebruiker zie ik dat alle inputvelden in het eerste en tweede formulier correct gekoppeld zijn met de corresponderende validation-message', async() => {
+       
+        var forms = [1, 2];
+        for (const form of forms) {
+            const voornaamValidationMessage = await vlFormValidationPage.getValidationMessageVoornaam(form);
+            const voornaamInputField = await vlFormValidationPage.getVoornaam(form);
+            await assert.eventually.isTrue(voornaamValidationMessage.toontFoutmeldingenVoorElement(voornaamInputField));
+               
+            const naamValidationMesage = await vlFormValidationPage.getValidationMessageNaam(form);
+            const naamInputField = await vlFormValidationPage.getNaam(form);
+            await assert.eventually.isTrue(naamValidationMesage.toontFoutmeldingenVoorElement(naamInputField));
+                
+            const emailValidationMessage = await vlFormValidationPage.getValidationMessageEmail(form);
+            const emailInputField = await vlFormValidationPage.getEmail(form);
+            await assert.eventually.isTrue(emailValidationMessage.toontFoutmeldingenVoorElement(emailInputField));
+                
+            const ibanValiationMessage = await vlFormValidationPage.getValidationMessageIban(form);
+            const ibanInputField = await vlFormValidationPage.getIban(form);
+            await assert.eventually.isTrue(ibanValiationMessage.toontFoutmeldingenVoorElement(ibanInputField));
+                
+            const telefoonnrValidationMessage = await vlFormValidationPage.getValidationMessageTelefoonnummer(form);
+            const telefoonnrInputField = await vlFormValidationPage.getTelefoonnummer(form);
+            await assert.eventually.isTrue(telefoonnrValidationMessage.toontFoutmeldingenVoorElement(telefoonnrInputField));
+                
+            const rrnValidationMessage = await vlFormValidationPage.getValidationMessageRijksregisternummer(form);
+            const rrnInputField = await vlFormValidationPage.getRijksregisternummer(form);
+            await assert.eventually.isTrue(rrnValidationMessage.toontFoutmeldingenVoorElement(rrnInputField));
+        }
     });
 
     it('Als gebruiker zie ik geen foutmelding als een verplicht veld is ingevuld', async() => {
-        const validationMessage = await vlFormValidationPage.getValidationMessageVerplichteVoornaam();
-        const inputField = await vlFormValidationPage.getVerplichteVoornaam();
+        const formZonderSuccessMelding = 1;
+        const validationMessage = await vlFormValidationPage.getValidationMessageVoornaam(formZonderSuccessMelding);
+        const inputField = await vlFormValidationPage.getVoornaam(formZonderSuccessMelding);
 
         await inputField.setInputValue('Joske');
         await inputField.sendKeys(Key.TAB);
 
         await assert.eventually.equal(validationMessage.getErrorMessage(), "");
         await assert.eventually.isFalse(inputField.hasClass('vl-input-field--error'));
+        await assert.eventually.isFalse(inputField.hasClass('vl-input-field--success'));
     });
 
     it('Als gebruiker zie ik een foutmelding als een verplicht veld niet is ingevuld', async() => {
-        const validationMessage = await vlFormValidationPage.getValidationMessageVerplichteNaam();
-        const inputField = await vlFormValidationPage.getVerplichteNaam();
+        const form = 1;
+        const validationMessage = await vlFormValidationPage.getValidationMessageNaam(form);
+        const inputField = await vlFormValidationPage.getNaam(form);
 
         await inputField.setInputValue('');
         await inputField.sendKeys(Key.TAB);
@@ -60,8 +67,9 @@ describe('vl-form-validation', async () => {
     });
 
     it('Als gebruiker zie ik een foutmelding als een verplicht veld niet correct is ingevuld', async() => {
-        const validationMessage = await vlFormValidationPage.getValidationMessageVerplichteEmail();
-        const inputField = await vlFormValidationPage.getVerplichteEmail();
+        const form = 1;
+        const validationMessage = await vlFormValidationPage.getValidationMessageEmail(form);
+        const inputField = await vlFormValidationPage.getEmail(form);
 
         await inputField.setInputValue('JoskeMail.com');
         await inputField.sendKeys(Key.TAB);
@@ -69,18 +77,30 @@ describe('vl-form-validation', async () => {
         await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(validationMessage, inputField);
     });
 
-
-    
-
     it('Als gebruiker zie ik foutmeldingen bij het valideren van een niet correct ingevuld formulier', async() => {
-        await vlFormValidationPage.validateFirstForm();
+        var forms = [1, 2];
+        for (const form of forms) {
+            await vlFormValidationPage.validateForm(form);
+            
+            await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageVoornaam(form), await vlFormValidationPage.getVoornaam(form));
+            await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageNaam(form), await vlFormValidationPage.getNaam(form));
+            await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageEmail(form), await vlFormValidationPage.getEmail(form));
+            await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageIban(form), await vlFormValidationPage.getIban(form));
+            await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageTelefoonnummer(form), await vlFormValidationPage.getTelefoonnummer(form));
+            await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageRijksregisternummer(form), await vlFormValidationPage.getRijksregisternummer(form));
+        }
+    });
 
-        await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageVerplichteVoornaam(), await vlFormValidationPage.getVerplichteVoornaam());
-        await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageVerplichteNaam(), await vlFormValidationPage.getVerplichteNaam());
-        await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageVerplichteEmail(), await vlFormValidationPage.getVerplichteEmail());
-        await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageVerplichteIban(), await vlFormValidationPage.getVerplichteIban());
-        await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageVerplichtTelefoonnummer(), await vlFormValidationPage.getVerplichtTelefoonnummer());
-        await assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(await vlFormValidationPage.getValidationMessageRijksregisternummer(), await vlFormValidationPage.getVerplichtRijksregisternummer());
+    it('Als gebruiker zie ik een success melding als een veld correct is ingevuld', async() => {
+        const formMetSuccessMelding = 2;
+        const validationMessage = await vlFormValidationPage.getValidationMessageVoornaam(formMetSuccessMelding);
+        const inputField = await vlFormValidationPage.getVoornaam(formMetSuccessMelding);
+
+        await inputField.setInputValue('Joske');
+        await inputField.sendKeys(Key.TAB);
+
+        await assert.eventually.equal(validationMessage.getErrorMessage(), "");
+        await assert.eventually.isTrue(inputField.hasClass('vl-input-field--success'));
     });
 
     async function assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(validationMessage, inputElement) {

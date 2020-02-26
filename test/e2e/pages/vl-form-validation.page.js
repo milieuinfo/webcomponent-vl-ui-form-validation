@@ -14,56 +14,56 @@ class VlFormValidationPage extends Page {
         return new VlInputField(this.driver, selector);
     }
 
-    async getVerplichteVoornaam() {
-        return this._getInputField('#form-1-voornaam');
+    async getVoornaam(form) {
+        return this._getInputField('#form-'+ form + '-voornaam');
     }
 
-    async getValidationMessageVerplichteVoornaam() {
-        return this._getFormValidation('#form-1-validation-message-voornaam');
+    async getValidationMessageVoornaam(form) {
+        return this._getFormValidation('#form-' + form +'-validation-message-voornaam');
     }
 
-    async getVerplichteNaam() {
-        return this._getInputField('#form-1-naam');
+    async getNaam(form) {
+        return this._getInputField('#form-' + form + '-naam');
     }
 
-    async getValidationMessageVerplichteNaam() {
-        return this._getFormValidation('#form-1-validation-message-naam');
+    async getValidationMessageNaam(form) {
+        return this._getFormValidation('#form-' + form + '-validation-message-naam');
     }
 
-    async getVerplichteEmail() {
-        return this._getInputField('#form-1-email');
+    async getEmail(form) {
+        return this._getInputField('#form-' + form + '-email');
     }
 
-    async getValidationMessageVerplichteEmail() {
-        return this._getFormValidation('#form-1-validation-message-email');
+    async getValidationMessageEmail(form) {
+        return this._getFormValidation('#form-' + form + '-validation-message-email');
     }
 
-    async getVerplichteIban() {
-        return this._getInputField('#form-1-iban');
+    async getIban(form) {
+        return this._getInputField('#form-' + form + '-iban');
     }
 
-    async getValidationMessageVerplichteIban() {
-        return this._getFormValidation('#form-1-validation-message-iban');
+    async getValidationMessageIban(form) {
+        return this._getFormValidation('#form-' + form + '-validation-message-iban');
     }
 
-    async getVerplichtTelefoonnummer() {
-        return this._getInputField('#form-1-telefoonnr');
+    async getTelefoonnummer(form) {
+        return this._getInputField('#form-' + form + '-telefoonnr');
     }
 
-    async getValidationMessageVerplichtTelefoonnummer() {
-        return this._getFormValidation('#form-1-validation-message-telefoonnr');
+    async getValidationMessageTelefoonnummer(form) {
+        return this._getFormValidation('#form-' + form + '-validation-message-telefoonnr');
     }
 
-    async getVerplichtRijksregisternummer() {
-        return this._getInputField('#form-1-rijksregisternr');
+    async getRijksregisternummer(form) {
+        return this._getInputField('#form-' + form + '-rijksregisternr');
     }
 
-    async getValidationMessageRijksregisternummer() {
-        return this._getFormValidation('#form-1-validation-message-rrn');
+    async getValidationMessageRijksregisternummer(form) {
+        return this._getFormValidation('#form-' + form + '-validation-message-rrn');
     }
 
-    async validateFirstForm() {
-        return this.driver.findElement(By.css('#form-1-button')).click();
+    async validateForm(form) {
+        return this.driver.findElement(By.css('#form-' + form + '-button')).click();
     }
 
     async load() {
