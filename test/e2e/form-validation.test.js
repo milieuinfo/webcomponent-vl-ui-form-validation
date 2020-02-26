@@ -13,7 +13,6 @@ describe('vl-form-validation', async () => {
     });
     
     it('Als gebruiker zie ik dat alle verplichte inputvelden in het eerste en tweede formulier correct gekoppeld zijn met de corresponderende validation-message', async() => {
-       
         var forms = [1, 2];
         for (const form of forms) {
             await verplichtInputElementIsCorrectGekoppeldAanValidationMessage(await vlFormValidationPage.getValidationMessageVoornaam(form), await vlFormValidationPage.getVoornaam(form));
