@@ -1,4 +1,3 @@
-
 const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlFormValidationPage = require('./pages/vl-form-validation.page');
 const { Key } = require('selenium-webdriver');
@@ -124,8 +123,4 @@ describe('vl-form-validation', async () => {
         await assert.eventually.isTrue(validationMessage.toontFoutmeldingenVoorElement(inputElement));
         await assert.eventually.isTrue(inputElement.hasAttribute('data-required'));
     }
-
-    after(async () => {
-        return driver.quit();
-    });
 });
