@@ -2,12 +2,13 @@ const VlFormValidation = require('../components/vl-form-validation');
 
 const { Page, Config } = require('vl-ui-core').Test;
 const { VlInputField } = require('vl-ui-input-field').Test;
+const { VlFormValidationMessage } = require('vl-ui-form-message').Test;
 const { By } = require('selenium-webdriver');
 
 
 class VlFormValidationPage extends Page {
-    async _getFormValidation(selector) {
-        return new VlFormValidation(this.driver, selector);
+    async _getFormValidationMessage(selector) {
+        return new VlFormValidationMessage(this.driver, selector);
     }
 
     async _getInputField(selector) {
@@ -19,7 +20,7 @@ class VlFormValidationPage extends Page {
     }
 
     async getValidationMessageVoornaam(form) {
-        return this._getFormValidation('#form-' + form +'-validation-message-voornaam');
+        return this._getFormValidationMessage('#form-' + form +'-validation-message-voornaam');
     }
 
     async getNaam(form) {
@@ -27,7 +28,7 @@ class VlFormValidationPage extends Page {
     }
 
     async getValidationMessageNaam(form) {
-        return this._getFormValidation('#form-' + form + '-validation-message-naam');
+        return this._getFormValidationMessage('#form-' + form + '-validation-message-naam');
     }
 
     async getEmail(form) {
@@ -35,7 +36,7 @@ class VlFormValidationPage extends Page {
     }
 
     async getValidationMessageEmail(form) {
-        return this._getFormValidation('#form-' + form + '-validation-message-email');
+        return this._getFormValidationMessage('#form-' + form + '-validation-message-email');
     }
 
     async getIban(form) {
@@ -43,7 +44,7 @@ class VlFormValidationPage extends Page {
     }
 
     async getValidationMessageIban(form) {
-        return this._getFormValidation('#form-' + form + '-validation-message-iban');
+        return this._getFormValidationMessage('#form-' + form + '-validation-message-iban');
     }
 
     async getTelefoonnummer(form) {
@@ -51,7 +52,7 @@ class VlFormValidationPage extends Page {
     }
 
     async getValidationMessageTelefoonnummer(form) {
-        return this._getFormValidation('#form-' + form + '-validation-message-telefoonnr');
+        return this._getFormValidationMessage('#form-' + form + '-validation-message-telefoonnr');
     }
 
     async getRijksregisternummer(form) {
@@ -59,7 +60,7 @@ class VlFormValidationPage extends Page {
     }
 
     async getValidationMessageRijksregisternummer(form) {
-        return this._getFormValidation('#form-' + form + '-validation-message-rrn');
+        return this._getFormValidationMessage('#form-' + form + '-validation-message-rrn');
     }
 
     async validateForm(form) {

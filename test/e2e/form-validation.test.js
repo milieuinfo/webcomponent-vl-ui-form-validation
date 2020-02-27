@@ -120,7 +120,8 @@ describe('vl-form-validation', async () => {
     }
 
     async function verplichtInputElementIsCorrectGekoppeldAanValidationMessage(validationMessage, inputElement) {
-        await assert.eventually.isTrue(validationMessage.toontFoutmeldingenVoorElement(inputElement));
-        await assert.eventually.isTrue(inputElement.hasAttribute('data-required'));
+
+        // await assert.eventually.isTrue(validationMessage.toontFoutmeldingenVoorElement(inputElement));
+        await assert.eventually.isTrue(inputElement.hasDataRequired());
     }
 });
