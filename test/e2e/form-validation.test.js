@@ -5,10 +5,8 @@ const { Key } = require('selenium-webdriver');
 describe('vl-form-validation', async () => {
     const vlFormValidationPage = new VlFormValidationPage(driver);
     
-    beforeEach((done) => {
-        vlFormValidationPage.load().then(() => {
-            done();
-        });
+    beforeEach(async () => {
+        return vlFormValidationPage.load();
     });
     
     it('Als gebruiker zie ik dat alle verplichte inputvelden in het eerste en tweede formulier correct gekoppeld zijn met de corresponderende validation-message', async() => {
@@ -31,7 +29,7 @@ describe('vl-form-validation', async () => {
         await inputField.setInputValue('Joske');
         await inputField.sendKeys(Key.TAB);
 
-        await assert.eventually.equal(validationMessage.getErrorMessage(), "");
+        await assert.eventually.equal(validationMessage.getText(), "");
         await assert.eventually.isFalse(inputField.hasClass('vl-input-field--error'));
         await assert.eventually.isFalse(inputField.hasClass('vl-input-field--success'));
     });
@@ -80,7 +78,7 @@ describe('vl-form-validation', async () => {
         await inputField.setInputValue('Joske');
         await inputField.sendKeys(Key.TAB);
 
-        await assert.eventually.equal(validationMessage.getErrorMessage(), "");
+        await assert.eventually.equal(validationMessage.getText(), "");
         await assert.eventually.isTrue(inputField.hasClass('vl-input-field--success'));
     });
 
@@ -92,8 +90,7 @@ describe('vl-form-validation', async () => {
         await assert.eventually.isFalse(inputField.hasClass('vl-input-field--success'));
         await assert.eventually.isFalse(inputField.hasClass('vl-input-field--error'));
 
-        await inputField.setInputValue('');
-        await inputField.sendKeys(Key.TAB);
+        await vlFormValidationPage.validateForm(1);
         
         await assert.eventually.isFalse(inputField.hasClass('vl-input-field--success'));
         await assert.eventually.isFalse(inputField.hasClass('vl-input-field--error'));
@@ -115,13 +112,12 @@ describe('vl-form-validation', async () => {
     });
 
     async function assertFoutmeldingVoorFoutiefInputElementWordtCorrectGetoond(validationMessage, inputElement) {
-        await assert.eventually.equal(validationMessage.getErrorMessage(), await inputElement.getAttribute('data-vl-error-message'));
+        await assert.eventually.equal(validationMessage.getText(), await inputElement.getAttribute('data-vl-error-message'));
         await assert.eventually.isTrue(inputElement.hasClass('vl-input-field--error'));
     }
 
     async function verplichtInputElementIsCorrectGekoppeldAanValidationMessage(validationMessage, inputElement) {
-
-        // await assert.eventually.isTrue(validationMessage.toontFoutmeldingenVoorElement(inputElement));
+        await assert.eventually.equal(validationMessage.getAttribute('data-vl-error-id'), await inputElement.getErrorPlaceholder());
         await assert.eventually.isTrue(inputElement.hasDataRequired());
     }
 });
