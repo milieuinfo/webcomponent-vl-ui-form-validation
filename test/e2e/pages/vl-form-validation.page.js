@@ -2,7 +2,7 @@ const VlFormValidation = require('../components/vl-form-validation');
 
 const { Page, Config, VlElement } = require('vl-ui-core').Test;
 // const { VlFormValidationMessage } = require('vl-ui-form-message').Test;
-const { By } = require('selenium-webdriver');
+const { By, Key } = require('selenium-webdriver');
 
 
 class VlFormValidationPage extends Page {
@@ -128,10 +128,10 @@ class DummyForm extends VlElement {
         return new DummyInputValidationField(this.driver, inputField);
     }
 
-    async getSubmitButton() {
-        const submitButton = await this.findElement(By.tagName('button'));
-        return new VlElement(this.driver, submitButton);
-    }
+    // async getSubmitButton() {
+    //     const submitButton = await this.findElement(By.tagName('button'));
+    //     return new VlElement(this.driver, submitButton);
+    // }
 
     async getErrorMessage() {
         const errorMessage = await this.findElement(By.css('.error-message'));
@@ -143,22 +143,26 @@ class DummyForm extends VlElement {
         return new DummySelectValidationField(this.driver, selectField);
     }
 
-    async valideer() {
-        
-        const submitButton = await this.getSubmitButton();
-        return submitButton.click();
-    }
+    // async valideer() {
+    //     const submitButton = await this.getSubmitButton();
+    //     return submitButton.click();
+    // }
 
 }
 
 class DummyInputValidationField extends VlFormValidation { 
     
     async setInputValue(content) {
+        await this.clear();
         return this.sendKeys(content);
     }
 
     async getInputValue() {
         return this.getAttribute('value');
+    }
+
+    async blur() {
+        return this.sendKeys(Key.TAB);
     }
 }
 

@@ -1,114 +1,106 @@
 const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlFormValidationPage = require('./pages/vl-form-validation.page');
-// const { Key, By } = require('selenium-webdriver');
+const { Key } = require('selenium-webdriver');
 
 describe('vl-form-validation', async () => {
     const vlFormValidationPage = new VlFormValidationPage(driver);
 
-    const errorClassIsPresent = true;
-    const successClassIsPresent = true;
+    const expectedErrorClass = "error-style";
+    const expectedSuccessClass = "success-style";
     
     beforeEach(async () => {
         return vlFormValidationPage.load();
     });
 
-    // it('Als een gebruiker een veld correct invult, ziet hij geen foutmelding', async() => {
-    //     let form = await vlFormValidationPage.getFormMetVerplichtVeld();
-
-    //     const inputField = await form.getInputField();
-
-    //     await assert.eventually.isTrue(inputField.isRequired());
-    //     await assertFormValidationElementHasErrorClassOrSuccessClass(inputField, !errorClassIsPresent, !successClassIsPresent);
-
-    //     await inputField.setInputValue('omdat het moet');
-    //     await form.valideer();
-
-    //     form = await vlFormValidationPage.getFormMetVerplichtVeld();
-    //     await assertFormValidationElementHasErrorClassOrSuccessClass(inputField, !errorClassIsPresent, !successClassIsPresent);
-    // });
-    
-    it('Als gebruiker zie ik een foutmelding als een verplicht veld niet is ingevuld in een form dat validatie doet', async() => {
-        const form = await vlFormValidationPage.getFormMetVerplichtVeld();
-        await assertThatFormMetOngeldigeInputCorrectGevalideerdWordt(form, '');
-    });
-
-    it('Als gebruiker zie ik een foutmelding als een e-mailadres verkeerd geformatteerd is', async() => {
-        const form = await vlFormValidationPage.getFormMetVerplichtEmailVeld();
-        await assertThatFormMetOngeldigeInputCorrectGevalideerdWordt(form, 'invalid@company');
-    });
-
-    it('Als gebruiker zie ik een foutmelding als een iban nummer niet gelding is', async() => {
-        const form = await vlFormValidationPage.getFormMetVerplichtIbanVeld();
-        await assertThatFormMetOngeldigeInputCorrectGevalideerdWordt(form, 'BE12000000000000');
-    });
-
-    it('Als gebruiker zie ik een foutmelding als een telefoonnr niet geldig is', async() => {
-        const form = await vlFormValidationPage.getFormMetVerplichtTelefoonnummerVeld();
-        await assertThatFormMetOngeldigeInputCorrectGevalideerdWordt(form, '02 123 44 3');
-    });
-
-    it('Als gebruiker zie ik een foutmelding als een datum niet geldig is', async() => {
-        const form = await vlFormValidationPage.getFormMetVerplichtDatumVeld();
-        await assertThatFormMetOngeldigeInputCorrectGevalideerdWordt(form, '29.02.2019');
-    });
-
-    it('Als gebruiker zie ik een foutmelding als een rijksregisternummer niet geldig is', async() => {
-        const form = await vlFormValidationPage.getFormMetVerplichtRRNVeld();
-        await assertThatFormMetOngeldigeInputCorrectGevalideerdWordt(form, '123');
-    });
-
-
-    it('Als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async() => {
-        const form = await vlFormValidationPage.getFormMetVerplichtSelectVeld();
-
-        const selectField = await form.getSelectField();
-        await assert.eventually.isTrue(selectField.isRequired());
-        await assertFormValidationElementHasErrorClassOrSuccessClass(selectField, false, false);
-
-        let selectedOption = await selectField.getAttribute('value');
-        
-        await form.valideer();
-
-        selectedOption = await selectField.getAttribute('value');
-
-        assert.equal(selectedOption, '');
-
-        await assertFormValidationElementHasErrorClassOrSuccessClass(selectField, true, false);
-    });
-
-    async function assertThatFormMetOngeldigeInputCorrectGevalideerdWordt(form, ongeldigeInput) {
-        await assert.eventually.isTrue(form.hasAttribute('data-vl-validate-form'));
-
-        let inputField = await form.getInputField();
-        await assert.eventually.isTrue(inputField.isRequired());
-        await assertFormValidationElementHasErrorClassOrSuccessClass(inputField, false, false);
-        
-        const validationMessageElement = await form.getErrorMessage();
-        await assert.eventually.isFalse(validationMessageElement.isDisplayed());
-
-        await inputField.setInputValue(ongeldigeInput);
-        await form.valideer();
-
-        await assertFormValidationElementHasErrorClassOrSuccessClass(inputField, true, false);
-        await assertThatFoutmeldingCorrectGetoondWordt(validationMessageElement, inputField);
-    }
-
-    async function assertFormValidationElementHasErrorClassOrSuccessClass(formValidationElement, errorClassIsSet, successClassIsSet) {
-        const expectedErrorClass = "error-style";
-        const expectedSuccessClass = "success-style";
+    async function assertThatGeenFoutmeldingWordtGetoond(formValidationElement, validationMessageElement) {
         await assert.eventually.equal(formValidationElement.getErrorClass(), expectedErrorClass);
         await assert.eventually.equal(formValidationElement.getSuccessClass(), expectedSuccessClass);
-
-        await assert.eventually.equal(formValidationElement.hasClass(expectedErrorClass), errorClassIsSet);
-        await assert.eventually.equal(formValidationElement.hasClass(expectedSuccessClass), successClassIsSet);
+        await assert.eventually.isFalse(formValidationElement.hasClass(expectedErrorClass));
+        await assert.eventually.isFalse(formValidationElement.hasClass(expectedSuccessClass));
+        await assert.eventually.isFalse(validationMessageElement.isDisplayed());
     }
 
-    async function assertThatFoutmeldingCorrectGetoondWordt(validationMessageElement, formValidationElement) {
+    async function assertThatFoutmeldingenCorrectGetoondWorden(formValidationElement, validationMessageElement) {
         debugger
+        await assert.eventually.isTrue(formValidationElement.hasClass(expectedErrorClass));
+        console.log(await formValidationElement.hasClass(expectedSuccessClass));
+        await assert.eventually.isFalse(formValidationElement.hasClass(expectedSuccessClass));
         await assert.eventually.isTrue(validationMessageElement.isDisplayed());
         await assert.eventually.equal(formValidationElement.getErrorPlaceholder(), await validationMessageElement.getErrorId());
         await assert.eventually.equal(validationMessageElement.getText(), await formValidationElement.getErrorMessage());
     }
+
+    async function assertThatFormMetInputFieldCorrectValideert(form, geldigeInput, ongeldigeInput) {
+        await assert.eventually.isTrue(form.hasAttribute('data-vl-validate-form'));
+
+        const inputField = await form.getInputField();
+        await assert.eventually.isTrue(inputField.isRequired());
+
+        const validationMessageElement = await form.getErrorMessage();
+
+        await assertThatGeenFoutmeldingWordtGetoond(inputField, validationMessageElement);
+
+        await inputField.setInputValue(ongeldigeInput);
+        await inputField.blur();
+        
+        await assertThatFoutmeldingenCorrectGetoondWorden(inputField, validationMessageElement);
+        
+        await inputField.setInputValue(geldigeInput);
+        await inputField.blur();
+
+        await assertThatGeenFoutmeldingWordtGetoond(inputField, validationMessageElement);
+    }
+
+    it('Als gebruiker zie ik een foutmelding als een verplicht veld niet is ingevuld in een form dat validatie doet', async() => {
+        const form = await vlFormValidationPage.getFormMetVerplichtVeld();
+        await assertThatFormMetInputFieldCorrectValideert(form, 'iets verschillend van niets', '');
+    });
+
+    it('Als gebruiker zie ik een foutmelding als een e-mailadres verkeerd geformatteerd is', async() => {
+        const form = await vlFormValidationPage.getFormMetVerplichtEmailVeld();
+        await assertThatFormMetInputFieldCorrectValideert(form, 'valid@email.be', 'invalid@email');
+    });
+
+    it('Als gebruiker zie ik een foutmelding als een iban nummer niet gelding is', async() => {
+        const form = await vlFormValidationPage.getFormMetVerplichtIbanVeld();
+        await assertThatFormMetInputFieldCorrectValideert(form, 'BE19 0000 0000 1212', 'BE00 0000 0000 1212');
+    });
+
+    it('Als gebruiker zie ik een foutmelding als een telefoonnr niet geldig is', async() => {
+        const form = await vlFormValidationPage.getFormMetVerplichtTelefoonnummerVeld();
+        await assertThatFormMetInputFieldCorrectValideert(form, '02 222 22 22', '02 123 44 3');
+    });
+
+    it('Als gebruiker zie ik een foutmelding als een datum niet geldig is', async() => {
+        const form = await vlFormValidationPage.getFormMetVerplichtDatumVeld();
+        await assertThatFormMetInputFieldCorrectValideert(form, '29.02.2020', '29.02.2019');
+    });
+
+    it('Als gebruiker zie ik een foutmelding als een rijksregisternummer niet geldig is', async() => {
+        const form = await vlFormValidationPage.getFormMetVerplichtRRNVeld();
+        await assertThatFormMetInputFieldCorrectValideert(form, '93.05.18-223.61', '93.05.18-223');
+    });
+
+
+    // it.only('Als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async() => {
+    //     const form = await vlFormValidationPage.getFormMetVerplichtSelectVeld();
+
+    //     const selectField = await form.getSelectField();
+    //     debugger;
+    //     await assert.eventually.isTrue(selectField.isRequired());
+
+    //     const validationMessageElement = await form.getErrorMessage();
+
+    //     await assertThatGeenFoutmeldingWordtGetoond(selectField, validationMessageElement);
+
+    //     await selectField.selectByIndex(1);
+    //     await assertThatGeenFoutmeldingWordtGetoond(selectField, validationMessageElement);
+
+    //     await selectField.selectByIndex(0);
+    //     await assertThatFoutmeldingenCorrectGetoondWorden(selectField, validationMessageElement);
+    // });
+
+   
     
     /*
     it('Als gebruiker zie ik geen foutmelding als een verplicht veld is ingevuld', async() => {
