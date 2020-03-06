@@ -1,88 +1,182 @@
 const VlFormValidation = require('../components/vl-form-validation');
 
-const { Page, Config } = require('vl-ui-core').Test;
-const { VlInputField } = require('vl-ui-input-field').Test;
-const { VlFormValidationMessage } = require('vl-ui-form-message').Test;
+const { Page, Config, VlElement } = require('vl-ui-core').Test;
+// const { VlFormValidationMessage } = require('vl-ui-form-message').Test;
 const { By } = require('selenium-webdriver');
 
 
 class VlFormValidationPage extends Page {
-    async _getFormValidationMessage(selector) {
-        return new VlFormValidationMessage(this.driver, selector);
+
+    async getFormMetVerplichtVeld() {
+        return new DummyForm(this.driver, '#form-met-verplicht-veld');
     }
 
-    async _getInputField(selector) {
-        return new VlInputField(this.driver, selector);
+    async getFormMetVerplichtEmailVeld() {
+        return new DummyForm(this.driver, '#form-met-email-veld');
     }
 
-    async getVoornaam(form) {
-        return this._getInputField('#form-'+ form + '-voornaam');
+    async getFormMetVerplichtIbanVeld() {
+        return new DummyForm(this.driver, '#form-met-iban-veld');
     }
 
-    async getValidationMessageVoornaam(form) {
-        return this._getFormValidationMessage('#form-' + form +'-validation-message-voornaam');
+    async getFormMetVerplichtTelefoonnummerVeld() {
+        return new DummyForm(this.driver, '#form-met-telefoonnr-veld');
     }
 
-    async getNaam(form) {
-        return this._getInputField('#form-' + form + '-naam');
+    async getFormMetVerplichtDatumVeld() {
+        return new DummyForm(this.driver, '#form-met-datum-veld');
     }
 
-    async getValidationMessageNaam(form) {
-        return this._getFormValidationMessage('#form-' + form + '-validation-message-naam');
+    async getFormMetVerplichtRRNVeld() {
+        return new DummyForm(this.driver, '#form-met-rrn-veld');
     }
 
-    async getEmail(form) {
-        return this._getInputField('#form-' + form + '-email');
+    async getFormMetVerplichtSelectVeld() {
+        return new DummyForm(this.driver, '#form-met-select-veld');
     }
 
-    async getValidationMessageEmail(form) {
-        return this._getFormValidationMessage('#form-' + form + '-validation-message-email');
-    }
-
-    async getIban(form) {
-        return this._getInputField('#form-' + form + '-iban');
-    }
-
-    async getValidationMessageIban(form) {
-        return this._getFormValidationMessage('#form-' + form + '-validation-message-iban');
-    }
-
-    async getTelefoonnummer(form) {
-        return this._getInputField('#form-' + form + '-telefoonnr');
-    }
-
-    async getValidationMessageTelefoonnummer(form) {
-        return this._getFormValidationMessage('#form-' + form + '-validation-message-telefoonnr');
-    }
-
-    async getRijksregisternummer(form) {
-        return this._getInputField('#form-' + form + '-rijksregisternr');
-    }
-
-    async getValidationMessageRijksregisternummer(form) {
-        return this._getFormValidationMessage('#form-' + form + '-validation-message-rrn');
-    }
-
-    async validateForm(form) {
-        return this.driver.findElement(By.css('#form-' + form + '-button')).click();
-    }
+    // async getVerplichteNaam() {
+    //     return this._getInputField('#input-naam');
+    // }
 
 
-    async getFormZonderSuccesMelding() {
-        return this.driver.findElement(By.css('#form-nosuccess'));
-    }
+    
+    
 
-    async getFormMetSuccesMelding() {
-        return this.driver.findElement(By.css('#form-success'));
-    }
+    // async _getFormValidationMessage(selector) {
+    //     return new VlFormValidationMessage(this.driver, selector);
+    // }
 
-    async getFormZonderValidatie() {
-        return this.driver.findElement(By.css('#form-novalidation'));
-    }
+    // async _getInputField(selector) {
+    //     return new DummyValidationField(this.driver, selector);
+    // }
+
+    // async getVoornaam(form) {
+    //     return this._getInputField('#form-'+ form + '-voornaam');
+    // }
+
+    // async getValidationMessageVoornaam(form) {
+    //     return this._getFormValidationMessage('#form-' + form +'-validation-message-voornaam');
+    // }
+
+    // async getNaam(form) {
+    //     return this._getInputField('#form-' + form + '-naam');
+    // }
+
+    // async getValidationMessageNaam(form) {
+    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-naam');
+    // }
+
+    // async getEmail(form) {
+    //     return this._getInputField('#form-' + form + '-email');
+    // }
+
+    // async getValidationMessageEmail(form) {
+    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-email');
+    // }
+
+    // async getIban(form) {
+    //     return this._getInputField('#form-' + form + '-iban');
+    // }
+
+    // async getValidationMessageIban(form) {
+    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-iban');
+    // }
+
+    // async getTelefoonnummer(form) {
+    //     return this._getInputField('#form-' + form + '-telefoonnr');
+    // }
+
+    // async getValidationMessageTelefoonnummer(form) {
+    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-telefoonnr');
+    // }
+
+    // async getRijksregisternummer(form) {
+    //     return this._getInputField('#form-' + form + '-rijksregisternr');
+    // }
+
+    // async getValidationMessageRijksregisternummer(form) {
+    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-rrn');
+    // }
+
+    // async validateForm(form) {
+    //     return this.driver.findElement(By.css('#form-' + form + '-button')).click();
+    // }
+
+
+    // async getFormZonderSuccesMelding() {
+    //     return this.driver.findElement(By.css('#form-nosuccess'));
+    // }
+
+    // async getFormMetSuccesMelding() {
+    //     return this.driver.findElement(By.css('#form-success'));
+    // }
+
+    // async getFormZonderValidatie() {
+    //     return this.driver.findElement(By.css('#form-novalidation'));
+    // }
 
     async load() {
         await super.load(Config.baseUrl + '/demo/vl-form-validation.html');
     }
 }
 
+class DummyForm extends VlElement {
+
+    async getInputField() {
+        const inputField =  await this.findElement(By.tagName('input'));
+        return new DummyInputValidationField(this.driver, inputField);
+    }
+
+    async getSubmitButton() {
+        const submitButton = await this.findElement(By.tagName('button'));
+        return new VlElement(this.driver, submitButton);
+    }
+
+    async getErrorMessage() {
+        const errorMessage = await this.findElement(By.css('.error-message'));
+        return new DummyFormValidationMessage(this.driver, errorMessage);
+    }
+
+    async getSelectField() {
+        const selectField = await this.findElement(By.tagName('select'));
+        return new DummySelectValidationField(this.driver, selectField);
+    }
+
+    async valideer() {
+        
+        const submitButton = await this.getSubmitButton();
+        return submitButton.click();
+    }
+
+}
+
+class DummyInputValidationField extends VlFormValidation { 
+    
+    async setInputValue(content) {
+        return this.sendKeys(content);
+    }
+
+    async getInputValue() {
+        return this.getAttribute('value');
+    }
+}
+
+class DummyFormValidationMessage extends VlElement {
+
+    async getErrorId() {
+        return this.getAttribute('data-vl-error-id');
+    }
+   
+}
+
+class DummySelectValidationField extends VlFormValidation {
+
+    async selectByIndex(index) {
+        const options = await this.findElements(By.tagName('option'));
+        return  options[index].click();
+    }
+}
+
+module.exports = DummyInputValidationField;
 module.exports = VlFormValidationPage;

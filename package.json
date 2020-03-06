@@ -50,9 +50,7 @@
   },
   "devDependencies": {
     "@govflanders/vl-ui-util": "^3.9.1",
-    "vl-ui-button": "^4.0.0",
-    "vl-ui-form-message": "^5.0.0",
-    "vl-ui-input-field": "^3.0.0",
+    "vl-ui-form-message": "milieuinfo/webcomponent-vl-ui-form-message#UIG-358",
     "vl-ui-util": "^5.0.8"
   }
 }

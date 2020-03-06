@@ -2,12 +2,7 @@ const { VlElement } = require('vl-ui-core').Test;
 
 
 class VlFormValidation extends VlElement {  
-   
-    // async getErrorId() {
-    //     return this.getAttribute('data-vl-error-id');
-    // }
-
-    async hasDataRequired() {
+       async isRequired() {
         return this.hasAttribute('data-required');
     }
 
@@ -19,26 +14,13 @@ class VlFormValidation extends VlElement {
         return this.getAttribute('data-vl-error-placeholder');
     }
 
-    // static async elementHasisDataRequired(element) {
-    //     return element.hasAttribute('data-required');
-    // }
+    async getErrorClass() {
+        return this.getAttribute('data-vl-error-class');
+    }
 
-    // static async getErrorPlaceholder(element) {
-    //     return element.getAttribute('data-vl-error-placeholder');
-    // }
-
-    // async toontFoutmeldingenVoorElement(element) {
-    //     const errorId = await this.getErrorId();
-    //     const errorPlaceholderIdFromElement = await VlFormValidation.getErrorPlaceholder(element);
-    //     return errorId == errorPlaceholderIdFromElement;
-    // }
-
-    // async getErrorMessage() {
-    //     return this.getText();
-    // }
-  
+    async getSuccessClass() {
+        return this.getAttribute('data-vl-success-class')
+    }
 }
-
-
 
 module.exports = VlFormValidation;
