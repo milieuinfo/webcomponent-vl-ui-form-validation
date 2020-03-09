@@ -197,6 +197,28 @@
         </div>
     </div>
 
+    <div>
+        <h2>Form zonder validatie</h2>
+        Gebruik het <strong>[data-vl-validate-form-success="true"]</strong> attribuut op de form om een succesvol ingevuld veld een stijl te geven.
+        <pre>
+            <code class="line-numbers language-markup">
+
+            </code>
+        </pre>
+        <div class="demo">
+            <form id="form-zonder-validatie" novalidate>
+                <label class="vl-form__label" for="validation-1">E-mailadres</label>
+                <div class="vl-input-group">
+                    <input name="validation-email" type="text" placeholder="email@provider.com" data-required="true"
+                        data-vl-success-class="success-style" data-vl-error-class="error-style"
+                        data-vl-error-message="Een geldig e-mailadres is verplicht" data-vl-validation-type="email"
+                        data-vl-error-placeholder="validation-email-error" aria-required="true" aria-invalid="true" />
+                </div>
+                <div class="error-message" data-vl-error-id="validation-email-error"></div>
+            </form>
+        </div>
+    </div>
+
     <!-- <button is="vl-button" id="form-2-button">Formulier valideren</button> -->
     <!-- </form> -->
 

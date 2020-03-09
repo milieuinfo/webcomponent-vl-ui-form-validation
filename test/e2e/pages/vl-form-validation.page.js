@@ -39,6 +39,10 @@ class VlFormValidationPage extends Page {
         return new DummyForm(this.driver, '#form-success-met-verplicht-veld');
     }
 
+    async getFormZonderValidatie() {
+        return new DummyForm(this.driver, '#form-zonder-validatie');
+    }
+
     // async getVerplichteNaam() {
     //     return this._getInputField('#input-naam');
     // }
