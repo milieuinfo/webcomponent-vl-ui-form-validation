@@ -166,20 +166,25 @@ class DummyInputValidationField extends VlFormValidation {
     }
 }
 
+class DummySelectValidationField extends VlFormValidation {
+
+    async selectByIndex(index) {
+        const options = await this.findElements(By.tagName('option'));
+        await options[index].click();
+        return this.blur();
+    }
+
+    async blur() {
+        return this.sendKeys(Key.TAB);
+    }
+}
+
 class DummyFormValidationMessage extends VlElement {
 
     async getErrorId() {
         return this.getAttribute('data-vl-error-id');
     }
    
-}
-
-class DummySelectValidationField extends VlFormValidation {
-
-    async selectByIndex(index) {
-        const options = await this.findElements(By.tagName('option'));
-        return  options[index].click();
-    }
 }
 
 module.exports = DummyInputValidationField;

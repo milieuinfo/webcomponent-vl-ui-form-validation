@@ -1,6 +1,5 @@
 const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlFormValidationPage = require('./pages/vl-form-validation.page');
-const { Key } = require('selenium-webdriver');
 
 describe('vl-form-validation', async () => {
     const vlFormValidationPage = new VlFormValidationPage(driver);
@@ -21,9 +20,7 @@ describe('vl-form-validation', async () => {
     }
 
     async function assertThatFoutmeldingenCorrectGetoondWorden(formValidationElement, validationMessageElement) {
-        debugger
         await assert.eventually.isTrue(formValidationElement.hasClass(expectedErrorClass));
-        console.log(await formValidationElement.hasClass(expectedSuccessClass));
         await assert.eventually.isFalse(formValidationElement.hasClass(expectedSuccessClass));
         await assert.eventually.isTrue(validationMessageElement.isDisplayed());
         await assert.eventually.equal(formValidationElement.getErrorPlaceholder(), await validationMessageElement.getErrorId());
@@ -82,23 +79,22 @@ describe('vl-form-validation', async () => {
     });
 
 
-    // it.only('Als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async() => {
-    //     const form = await vlFormValidationPage.getFormMetVerplichtSelectVeld();
+    it('Als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async() => {
+        const form = await vlFormValidationPage.getFormMetVerplichtSelectVeld();
 
-    //     const selectField = await form.getSelectField();
-    //     debugger;
-    //     await assert.eventually.isTrue(selectField.isRequired());
+        const selectField = await form.getSelectField();
+        await assert.eventually.isTrue(selectField.isRequired());
 
-    //     const validationMessageElement = await form.getErrorMessage();
+        const validationMessageElement = await form.getErrorMessage();
 
-    //     await assertThatGeenFoutmeldingWordtGetoond(selectField, validationMessageElement);
+        await assertThatGeenFoutmeldingWordtGetoond(selectField, validationMessageElement);
 
-    //     await selectField.selectByIndex(1);
-    //     await assertThatGeenFoutmeldingWordtGetoond(selectField, validationMessageElement);
+        await selectField.selectByIndex(1);
+        await assertThatGeenFoutmeldingWordtGetoond(selectField, validationMessageElement);
 
-    //     await selectField.selectByIndex(0);
-    //     await assertThatFoutmeldingenCorrectGetoondWorden(selectField, validationMessageElement);
-    // });
+        await selectField.selectByIndex(0);
+        await assertThatFoutmeldingenCorrectGetoondWorden(selectField, validationMessageElement);
+    });
 
    
     
