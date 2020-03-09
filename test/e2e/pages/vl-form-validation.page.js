@@ -44,7 +44,7 @@ class VlFormValidationPage extends Page {
     }
 
     async load() {
-        await super.load(Config.baseUrl + '/demo/vl-form-validation.html');
+        await super.load(Config.baseUrl + '/demo/vl-form-validation-e2e.html');
     }
 }
 
