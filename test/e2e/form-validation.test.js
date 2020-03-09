@@ -95,35 +95,4 @@ describe('vl-form-validation', async () => {
         await selectField.selectByIndex(0);
         await assertThatFoutmeldingenCorrectGetoondWorden(selectField, validationMessageElement);
     });
-
-    it('Als gebruiker zie ik geen foutmelding en de succes-stijl wanneer een veld succesvol is', async() => {
-        const form = await vlFormValidationPage.getSuccessFormMetVerplichtVeld();
-        await assert.eventually.isTrue(form.hasAttribute('data-vl-validate-form'));
-        const inputField = await form.getInputField();
-        await assert.eventually.isTrue(inputField.isRequired());
-        const validationMessageElement = await form.getErrorMessage();
-
-        await assertThatGeenFoutmeldingWordtGetoond(inputField, validationMessageElement);
-
-        await inputField.setInputValue("geldige input");
-        await inputField.blur();
-
-        await assert.eventually.isFalse(inputField.hasClass(expectedErrorClass));
-        await assert.eventually.isTrue(inputField.hasClass(expectedSuccessClass));
-        await assert.eventually.isFalse(validationMessageElement.isDisplayed());
-    });
-   
-    it('Als gebruiker zie ik geen foutmelding bij een foutief ingevuld inputfield in een form zonder validatie', async() => {
-        const form = await vlFormValidationPage.getFormZonderValidatie();
-        await assert.eventually.isTrue(form.hasAttribute('novalidate'));
-
-        const inputField = await form.getInputField();
-        await assert.eventually.isTrue(inputField.isRequired());
-        const validationMessageElement = await form.getErrorMessage();
-
-        await assertThatGeenFoutmeldingWordtGetoond(inputField, validationMessageElement);
-        await inputField.setInputValue("ongeldigEmailadres");
-        await inputField.blur();
-        await assertThatGeenFoutmeldingWordtGetoond(inputField, validationMessageElement);
-    });
 });
