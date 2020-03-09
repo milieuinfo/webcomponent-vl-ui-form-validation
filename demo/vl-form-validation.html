@@ -157,15 +157,17 @@
         <div class="demo">
             <form id="form-met-select-veld" data-vl-validate-form>
                 <label class="vl-form__label" for="validation-1">Stad</label>
-                <div class="vl-input-group">
-                    <select name="validation-select" data-required="true"
-                        data-vl-success-class="success-style" data-vl-error-class="error-style"
-                        data-vl-error-message="Kies een stad" data-vl-validation-type="select"
-                        data-vl-error-placeholder="validation-select-error" aria-required="true" aria-invalid="true">
-                            <option placeholder value="">-- Kies een stad --</option>
-                            <option value="Aalst">Aalst</option>
-                            <option value="Antwerpen">Antwerpen</option>
-                        </select>
+                <div class="vl-form-group">
+                    <div data-vl-validate-error-parent>
+                        <select name="validation-select" data-required="true"
+                            data-vl-success-class="success-style" data-vl-error-class="error-style"
+                            data-vl-error-message="Kies een stad" data-vl-validation-type="select"
+                            data-vl-error-placeholder="validation-select-error" aria-required="true" aria-invalid="true">
+                                <option placeholder value="">-- Kies een stad --</option>
+                                <option value="Aalst">Aalst</option>
+                                <option value="Antwerpen">Antwerpen</option>
+                            </select>
+                        </div>
                 </div>
                 <div class="error-message" data-vl-error-id="validation-select-error"></div>
             </form>
