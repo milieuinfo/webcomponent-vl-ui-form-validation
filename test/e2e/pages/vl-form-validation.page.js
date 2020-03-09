@@ -1,8 +1,8 @@
 const VlFormValidation = require('../components/vl-form-validation');
 
 const { Page, Config, VlElement } = require('vl-ui-core').Test;
-// const { VlFormValidationMessage } = require('vl-ui-form-message').Test;
-const { By, Key } = require('selenium-webdriver');
+const { By } = require('vl-ui-core').Test.Setup;
+const { Key } = require('selenium-webdriver');
 
 
 class VlFormValidationPage extends Page {
@@ -43,87 +43,6 @@ class VlFormValidationPage extends Page {
         return new DummyForm(this.driver, '#form-zonder-validatie');
     }
 
-    // async getVerplichteNaam() {
-    //     return this._getInputField('#input-naam');
-    // }
-
-
-    
-    
-
-    // async _getFormValidationMessage(selector) {
-    //     return new VlFormValidationMessage(this.driver, selector);
-    // }
-
-    // async _getInputField(selector) {
-    //     return new DummyValidationField(this.driver, selector);
-    // }
-
-    // async getVoornaam(form) {
-    //     return this._getInputField('#form-'+ form + '-voornaam');
-    // }
-
-    // async getValidationMessageVoornaam(form) {
-    //     return this._getFormValidationMessage('#form-' + form +'-validation-message-voornaam');
-    // }
-
-    // async getNaam(form) {
-    //     return this._getInputField('#form-' + form + '-naam');
-    // }
-
-    // async getValidationMessageNaam(form) {
-    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-naam');
-    // }
-
-    // async getEmail(form) {
-    //     return this._getInputField('#form-' + form + '-email');
-    // }
-
-    // async getValidationMessageEmail(form) {
-    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-email');
-    // }
-
-    // async getIban(form) {
-    //     return this._getInputField('#form-' + form + '-iban');
-    // }
-
-    // async getValidationMessageIban(form) {
-    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-iban');
-    // }
-
-    // async getTelefoonnummer(form) {
-    //     return this._getInputField('#form-' + form + '-telefoonnr');
-    // }
-
-    // async getValidationMessageTelefoonnummer(form) {
-    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-telefoonnr');
-    // }
-
-    // async getRijksregisternummer(form) {
-    //     return this._getInputField('#form-' + form + '-rijksregisternr');
-    // }
-
-    // async getValidationMessageRijksregisternummer(form) {
-    //     return this._getFormValidationMessage('#form-' + form + '-validation-message-rrn');
-    // }
-
-    // async validateForm(form) {
-    //     return this.driver.findElement(By.css('#form-' + form + '-button')).click();
-    // }
-
-
-    // async getFormZonderSuccesMelding() {
-    //     return this.driver.findElement(By.css('#form-nosuccess'));
-    // }
-
-    // async getFormMetSuccesMelding() {
-    //     return this.driver.findElement(By.css('#form-success'));
-    // }
-
-    // async getFormZonderValidatie() {
-    //     return this.driver.findElement(By.css('#form-novalidation'));
-    // }
-
     async load() {
         await super.load(Config.baseUrl + '/demo/vl-form-validation.html');
     }
@@ -136,11 +55,6 @@ class DummyForm extends VlElement {
         return new DummyInputValidationField(this.driver, inputField);
     }
 
-    // async getSubmitButton() {
-    //     const submitButton = await this.findElement(By.tagName('button'));
-    //     return new VlElement(this.driver, submitButton);
-    // }
-
     async getErrorMessage() {
         const errorMessage = await this.findElement(By.css('.error-message'));
         return new DummyFormValidationMessage(this.driver, errorMessage);
@@ -150,12 +64,6 @@ class DummyForm extends VlElement {
         const selectField = await this.findElement(By.tagName('select'));
         return new DummySelectValidationField(this.driver, selectField);
     }
-
-    // async valideer() {
-    //     const submitButton = await this.getSubmitButton();
-    //     return submitButton.click();
-    // }
-
 }
 
 class DummyInputValidationField extends VlFormValidation { 
