@@ -96,6 +96,21 @@ describe('vl-form-validation', async () => {
         await assertThatFoutmeldingenCorrectGetoondWorden(selectField, validationMessageElement);
     });
 
+    it('Als gebruiker zie ik geen foutmelding en de succes-stijl wanneer een veld succesvol is', async() => {
+        const form = await vlFormValidationPage.getSuccessFormMetVerplichtVeld();
+        const inputField = await form.getInputField();
+        await assert.eventually.isTrue(inputField.isRequired());
+        const validationMessageElement = await form.getErrorMessage();
+
+        await assertThatGeenFoutmeldingWordtGetoond(inputField, validationMessageElement);
+
+        await inputField.setInputValue("input");
+        await inputField.blur();
+
+        await assert.eventually.isFalse(inputField.hasClass(expectedErrorClass));
+        await assert.eventually.isTrue(inputField.hasClass(expectedSuccessClass));
+        await assert.eventually.isFalse(validationMessageElement.isDisplayed());
+    });
    
     
     /*

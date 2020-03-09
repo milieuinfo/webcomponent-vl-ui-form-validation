@@ -18,6 +18,7 @@
     </p>
     
     <!-- <form id="form-met-validatie" data-vl-validate-form data-vl-validate-form-success="true"> -->
+    <div>
         <h2>Verplichte validatie</h2>
         Gebruik het <strong>[data-required="true"]</strong> attribuut om een veld verplicht te maken.
         <pre>
@@ -170,6 +171,28 @@
                         </div>
                         <div class="error-message" data-vl-error-id="validation-select-error"></div>
                 </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <h2>Verplichte validatie met succes melding</h2>
+        Gebruik het <strong>[data-vl-validate-form-success="true"]</strong> attribuut op de form om een succesvol ingevuld veld een stijl te geven.
+        <pre>
+            <code class="line-numbers language-markup">
+
+            </code>
+        </pre>
+        <div class="demo">
+            <form id="form-success-met-verplicht-veld" data-vl-validate-form data-vl-validate-form-success="true">
+                <label class="vl-form__label" for="validation-1">Naam</label>
+                <div class="vl-input-group">
+                    <input name="validation-naam" type="text" data-required="true"
+                        data-vl-success-class="success-style" data-vl-error-class="error-style"
+                        data-vl-error-message="Veld &quot;Naam&quot; is verplicht"
+                        data-vl-error-placeholder="validation-naam-error" aria-required="true" aria-invalid="true" />
+                </div>
+                <div class="error-message" data-vl-error-id="validation-naam-error"></div>
             </form>
         </div>
     </div>
