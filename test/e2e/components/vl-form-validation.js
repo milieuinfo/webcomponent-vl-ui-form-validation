@@ -22,6 +22,16 @@ class VlFormValidation extends VlElement {
     async getSuccessClass() {
         return this.getAttribute('data-vl-success-class')
     }
+
+    async hasError() {
+        const errorClass = await this.getErrorClass();
+        return this.hasClass(errorClass);
+    }
+
+    async isSuccess() {
+        const successClass = await this.getSuccessClass();
+        return this.hasClass(successClass);
+    }
 }
 
 module.exports = VlFormValidation;

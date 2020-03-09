@@ -4,32 +4,25 @@ const VlFormValidationPage = require('./pages/vl-form-validation.page');
 describe('vl-form-validation', async () => {
     const vlFormValidationPage = new VlFormValidationPage(driver);
 
-    const expectedErrorClass = "error-style";
-    const expectedSuccessClass = "success-style";
-    
     beforeEach(async () => {
         return vlFormValidationPage.load();
     });
 
     async function assertThatGeenFoutmeldingWordtGetoond(formValidationElement, validationMessageElement) {
-        await assert.eventually.equal(formValidationElement.getErrorClass(), expectedErrorClass);
-        await assert.eventually.equal(formValidationElement.getSuccessClass(), expectedSuccessClass);
-        await assert.eventually.isFalse(formValidationElement.hasClass(expectedErrorClass));
-        await assert.eventually.isFalse(formValidationElement.hasClass(expectedSuccessClass));
+        await assert.eventually.isFalse(formValidationElement.hasError());
+        await assert.eventually.isFalse(formValidationElement.isSuccess());
         await assert.eventually.isFalse(validationMessageElement.isDisplayed());
     }
 
     async function assertThatFoutmeldingenCorrectGetoondWorden(formValidationElement, validationMessageElement) {
-        await assert.eventually.isTrue(formValidationElement.hasClass(expectedErrorClass));
-        await assert.eventually.isFalse(formValidationElement.hasClass(expectedSuccessClass));
+        await assert.eventually.isTrue(formValidationElement.hasError());
+        await assert.eventually.isFalse(formValidationElement.isSuccess());
         await assert.eventually.isTrue(validationMessageElement.isDisplayed());
         await assert.eventually.equal(formValidationElement.getErrorPlaceholder(), await validationMessageElement.getErrorId());
         await assert.eventually.equal(validationMessageElement.getText(), await formValidationElement.getErrorMessage());
     }
 
     async function assertThatFormMetInputFieldCorrectValideert(form, geldigeInput, ongeldigeInput) {
-        await assert.eventually.isTrue(form.hasAttribute('data-vl-validate-form'));
-
         const inputField = await form.getInputField();
         await assert.eventually.isTrue(inputField.isRequired());
 
