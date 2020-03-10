@@ -8,13 +8,19 @@ describe('vl-form-validation', async () => {
         return vlFormValidationPage.load();
     });
 
-    async function assertThatGeenFoutmeldingWordtGetoond(formValidationElement, validationMessageElement) {
+    async function assertThatGeenFoutmeldingWordtGetoondBijGeldigeInput(formValidationElement, validationMessageElement, setGeldigeInputFunctie) {
+        if (setGeldigeInputFunctie) {
+            await setGeldigeInputFunctie();
+        }
         await assert.eventually.isFalse(formValidationElement.hasError());
         await assert.eventually.isFalse(formValidationElement.isSuccess());
         await assert.eventually.isFalse(validationMessageElement.isDisplayed());
     }
 
-    async function assertThatFoutmeldingenCorrectGetoondWorden(formValidationElement, validationMessageElement) {
+    async function assertThatFoutmeldingenCorrectGetoondWordenBijOngeldigeInput(formValidationElement, validationMessageElement, setOngeldigeInputFunctie) {
+        if (setOngeldigeInputFunctie) {
+            await setOngeldigeInputFunctie();
+        }
         await assert.eventually.isTrue(formValidationElement.hasError());
         await assert.eventually.isFalse(formValidationElement.isSuccess());
         await assert.eventually.isTrue(validationMessageElement.isDisplayed());
@@ -26,19 +32,34 @@ describe('vl-form-validation', async () => {
         const inputField = await form.getInputField();
         await assert.eventually.isTrue(inputField.isRequired());
 
-        const validationMessageElement = await form.getErrorMessage();
+        await assertThatFormValidationCorrectValideert(inputField, await form.getErrorMessage(),
+            async function() {
+                await inputField.setInputValue(geldigeInput);
+                await inputField.blur();
+            },
+            async function() {
+                await inputField.setInputValue(ongeldigeInput);
+                await inputField.blur();
+            });
+    }
 
-        await assertThatGeenFoutmeldingWordtGetoond(inputField, validationMessageElement);
+    async function assertThatFormMetSelectFieldCorrectValideert(form, geldigeInput, ongeldigeInput) {
+        const selectField = await form.getSelectField();
+        await assert.eventually.isTrue(selectField.isRequired());
+       
+        await assertThatFormValidationCorrectValideert(selectField, await form.getErrorMessage(), 
+            async function() {
+                await selectField.selectByIndex(geldigeInput);
+            }, 
+            async function() {
+                await selectField.selectByIndex(ongeldigeInput);
+            });
+    }
 
-        await inputField.setInputValue(ongeldigeInput);
-        await inputField.blur();
-        
-        await assertThatFoutmeldingenCorrectGetoondWorden(inputField, validationMessageElement);
-        
-        await inputField.setInputValue(geldigeInput);
-        await inputField.blur();
-
-        await assertThatGeenFoutmeldingWordtGetoond(inputField, validationMessageElement);
+    async function assertThatFormValidationCorrectValideert(formValidationElement, validationMessageElement, setGeldigeInput, setOngeldigeInput) {
+        await assertThatGeenFoutmeldingWordtGetoondBijGeldigeInput(formValidationElement, validationMessageElement, setGeldigeInput);
+        await assertThatFoutmeldingenCorrectGetoondWordenBijOngeldigeInput(formValidationElement, validationMessageElement, setOngeldigeInput);
+        await assertThatGeenFoutmeldingWordtGetoondBijGeldigeInput(formValidationElement, validationMessageElement, setGeldigeInput);
     }
 
     it('Als gebruiker zie ik een foutmelding als een verplicht veld niet is ingevuld in een form dat validatie doet', async() => {
@@ -71,21 +92,8 @@ describe('vl-form-validation', async () => {
         await assertThatFormMetInputFieldCorrectValideert(form, '93.05.18-223.61', '93.05.18-223');
     });
 
-
     it('Als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async() => {
         const form = await vlFormValidationPage.getFormMetVerplichtSelectVeld();
-
-        const selectField = await form.getSelectField();
-        await assert.eventually.isTrue(selectField.isRequired());
-
-        const validationMessageElement = await form.getErrorMessage();
-
-        await assertThatGeenFoutmeldingWordtGetoond(selectField, validationMessageElement);
-
-        await selectField.selectByIndex(1);
-        await assertThatGeenFoutmeldingWordtGetoond(selectField, validationMessageElement);
-
-        await selectField.selectByIndex(0);
-        await assertThatFoutmeldingenCorrectGetoondWorden(selectField, validationMessageElement);
+        await assertThatFormMetSelectFieldCorrectValideert(form, 1, 0);
     });
 });
