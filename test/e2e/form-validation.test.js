@@ -28,32 +28,31 @@ describe('vl-form-validation', async () => {
         await assert.eventually.equal(validationMessageElement.getText(), await formValidationElement.getErrorMessage());
     }
 
+
     async function assertThatFormMetInputFieldCorrectValideert(form, geldigeInput, ongeldigeInput) {
         const inputField = await form.getInputField();
         await assert.eventually.isTrue(inputField.isRequired());
 
-        await assertThatFormValidationCorrectValideert(inputField, await form.getErrorMessage(),
-            async function() {
-                await inputField.setInputValue(geldigeInput);
+        const setInputValue = function(text) {
+            return async function() {
+                await inputField.setInputValue(text);
                 await inputField.blur();
-            },
-            async function() {
-                await inputField.setInputValue(ongeldigeInput);
-                await inputField.blur();
-            });
+            }
+        };
+
+        await assertThatFormValidationCorrectValideert(inputField, await form.getErrorMessage(), setInputValue(geldigeInput), setInputValue(ongeldigeInput));
     }
 
     async function assertThatFormMetSelectFieldCorrectValideert(form, geldigeInput, ongeldigeInput) {
         const selectField = await form.getSelectField();
         await assert.eventually.isTrue(selectField.isRequired());
        
-        await assertThatFormValidationCorrectValideert(selectField, await form.getErrorMessage(), 
-            async function() {
-                await selectField.selectByIndex(geldigeInput);
-            }, 
-            async function() {
-                await selectField.selectByIndex(ongeldigeInput);
-            });
+        const selectByIndex = function(index) {
+            return async function() {
+                await selectField.selectByIndex(index);
+            }
+        }
+        await assertThatFormValidationCorrectValideert(selectField, await form.getErrorMessage(), selectByIndex(geldigeInput), selectByIndex(ongeldigeInput));
     }
 
     async function assertThatFormValidationCorrectValideert(formValidationElement, validationMessageElement, setGeldigeInput, setOngeldigeInput) {
