@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@govflanders/vl-ui-form-validation": "^3.9.1",
-    "vl-ui-core": "^5.1.1"
+    "vl-ui-core": "^5.1.2"
   },
   "devDependencies": {
     "@govflanders/vl-ui-util": "^3.9.1",
