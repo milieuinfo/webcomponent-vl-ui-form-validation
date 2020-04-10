@@ -89,6 +89,11 @@ describe('vl-form-validation', async () => {
     it('Als gebruiker zie ik een foutmelding als een rijksregisternummer niet geldig is', async() => {
         const form = await vlFormValidationPage.getFormMetVerplichtRRNVeld();
         await assertThatFormMetInputFieldCorrectValideert(form, '93.05.18-223.61', '93.05.18-223');
+        await assertThatFormMetInputFieldCorrectValideert(form, '88.12.03-001.95', '88.12.03-001.96');
+        await assertThatFormMetInputFieldCorrectValideert(form, '00.20.01-053.57', '00.20.01-053.56');
+        await assertThatFormMetInputFieldCorrectValideert(form, '33.00.00-084.27', '33.00.00-084.26');
+        await assertThatFormMetInputFieldCorrectValideert(form, '00.00.00-001.28', '00.00.00-001.27');
+        await assertThatFormMetInputFieldCorrectValideert(form, '44.00.00-281.61', '44.00.00-281.60');
     });
 
     it('Als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async() => {
