@@ -1,7 +1,7 @@
 import { awaitUntil } from 'vl-ui-core';
 import '@govflanders/vl-ui-util/dist/js/util.js';
 import '@govflanders/vl-ui-core/dist/js/core.js';
-import '@govflanders/vl-ui-form-validation/dist/js/form-validation.js';
+import 'vl-ui-form-validation/lib/form-validation.js';
 
 /**
  * VlFormValidation
