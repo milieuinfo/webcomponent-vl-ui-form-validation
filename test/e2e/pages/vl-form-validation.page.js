@@ -1,9 +1,7 @@
 const { Page, Config } = require('vl-ui-core').Test;
-const  DummyForm = require('../components/dummy-components');
-
+const DummyForm = require('../components/dummy-components');
 
 class VlFormValidationPage extends Page {
-
     async getFormMetVerplichtVeld() {
         return new DummyForm(this.driver, '#form-met-verplicht-veld');
     }
