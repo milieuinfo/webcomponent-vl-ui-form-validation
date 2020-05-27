@@ -22,7 +22,7 @@ class DummyForm extends VlElement {
 }
 
 class DummyInputValidationField extends VlFormValidation {
-    async setInputValue(content) {
+    async setValue(content) {
         await this.clear();
         return this.sendKeys(content);
     }
