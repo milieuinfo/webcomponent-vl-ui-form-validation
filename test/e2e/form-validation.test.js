@@ -33,14 +33,14 @@ describe('vl-form-validation', async () => {
         const inputField = await form.getInputField();
         await assert.eventually.isTrue(inputField.isRequired());
 
-        const setInputValue = function(text) {
+        const setValue = function(text) {
             return async function() {
-                await inputField.setInputValue(text);
+                await inputField.setValue(text);
                 await inputField.blur();
             }
         };
 
-        await assertThatFormValidationCorrectValideert(inputField, await form.getErrorMessage(), setInputValue(geldigeInput), setInputValue(ongeldigeInput));
+        await assertThatFormValidationCorrectValideert(inputField, await form.getErrorMessage(), setValue(geldigeInput), setValue(ongeldigeInput));
     }
 
     async function assertThatFormMetSelectFieldCorrectValideert(form, geldigeInput, ongeldigeInput) {

@@ -5,11 +5,19 @@
   <meta charset="utf-8">
   <script src="../../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../../web-component-tester/browser.js"></script>
-  
+
+  <script type="module" src="./vl-form-validation-test.js"></script>
+
   <script src="../../node_modules/sinon/pkg/sinon.js"></script>
 </head>
 
 <body>
+  <test-fixture id="vl-form-validation-shadow-dom-fixture">
+    <template>
+      <vl-form-validation-test></vl-form-validation-test>
+    </template>
+  </test-fixture>
+
   <script type="module">
     import { VlFormValidation } from '../src/vl-form-validation.js';
 
@@ -47,6 +55,17 @@
         element.setAttribute('novalidate', '');
         implementatie.dress(element);
         assert(window.vl.formValidation.dress.notCalled);
+      });
+
+      test('er wordt ook een tekstuele foutmelding getoond bij validatie in shadow DOM', (done) => {
+        const element = fixture('vl-form-validation-shadow-dom-fixture');
+        const input = element.shadowRoot.querySelector('input');
+        input.addEventListener('change', () => {
+          const message = element.shadowRoot.querySelector('.error-message');
+          assert.notEqual(message.innerText, '');
+          done();
+        });
+        input.dispatchEvent(new Event('change'));
       });
     });
   </script>

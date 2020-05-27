@@ -1,8 +1,6 @@
 const { VlElement } = require('vl-ui-core').Test;
 
-
-class VlFormValidation extends VlElement {  
-       
+class VlFormValidation extends VlElement {
     async isRequired() {
         return this.hasAttribute('data-required');
     }
