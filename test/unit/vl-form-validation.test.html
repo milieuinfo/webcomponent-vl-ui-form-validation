@@ -19,23 +19,22 @@
   </test-fixture>
 
   <script type="module">
-    import { VlFormValidation } from '../src/vl-form-validation.js';
+    import {vlFormValidation} from '../src/vl-form-validation.js';
 
     setup((done) => {
       window.vl = {
         formValidation: {
-          dress: sinon.fake()
-        }
-      }
+          dress: sinon.fake(),
+        },
+      };
 
       Promise.all([
-        VlFormValidation(Object).awaitUntilReady()
+        vlFormValidation(Object).awaitUntilReady(),
       ]).then(() => done());
     });
 
     suite('vl-form-validation', () => {
-      const should = chai.should();
-      class VlFormValidationImplementatie extends VlFormValidation(Object) { }
+      class VlFormValidationImplementatie extends vlFormValidation(Object) { }
 
       test('een class die de form validatie mixin toepast heeft een dress functie om de form validatie te activeren', () => {
         const implementatie = new VlFormValidationImplementatie();
