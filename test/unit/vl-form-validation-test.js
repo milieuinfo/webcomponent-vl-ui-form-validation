@@ -1,11 +1,11 @@
-import { define, VlElement } from '/node_modules/vl-ui-core/dist/vl-core.js';
+import {vlElement, define} from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/@govflanders/vl-ui-util/dist/js/util.js';
 import '/node_modules/@govflanders/vl-ui-core/dist/js/core.js';
 import '/lib/form-validation.js';
 
-class VlFormValidationTest extends VlElement(HTMLElement) {
-    constructor() {
-        super(`
+class VlFormValidationTest extends vlElement(HTMLElement) {
+  constructor() {
+    super(`
             <form data-vl-validate-form>
                 <label class="vl-form__label" for="validation-naam">Naam</label>
                 <div class="vl-input-group">
@@ -16,15 +16,15 @@ class VlFormValidationTest extends VlElement(HTMLElement) {
                 <div class="error-message" data-vl-error-id="validation-naam-error"></div>
             </form>
         `);
-    }
+  }
 
-    get formElement() {
-        return this.shadowRoot.querySelector('form');
-    }
+  get formElement() {
+    return this.shadowRoot.querySelector('form');
+  }
 
-    connectedCallback() {
-        vl.formValidation.dress(this.formElement);
-    }
+  connectedCallback() {
+    vl.formValidation.dress(this.formElement);
+  }
 }
 
 define('vl-form-validation-test', VlFormValidationTest);

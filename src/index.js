@@ -1,3 +1,3 @@
-module.exports = { 
-    VlFormValidation: require('../dist/vl-form-validation.src.js').VlFormValidation
-}
+module.exports = {
+  VlFormValidation: require('../dist/vl-form-validation.src.js').VlFormValidation,
+};
