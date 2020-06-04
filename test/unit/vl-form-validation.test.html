@@ -5,10 +5,9 @@
   <meta charset="utf-8">
   <script src="../../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../../web-component-tester/browser.js"></script>
+  <script src="/node_modules/sinon/pkg/sinon.js"></script>
 
   <script type="module" src="./vl-form-validation-test.js"></script>
-
-  <script src="../../node_modules/sinon/pkg/sinon.js"></script>
 </head>
 
 <body>
@@ -20,17 +19,16 @@
 
   <script type="module">
     import {vlFormValidation} from '../../src/vl-form-validation.js';
+    const sandbox = sinon.createSandbox();
 
     setup((done) => {
-      window.vl = {
-        formValidation: {
-          dress: sinon.fake(),
-        },
-      };
-
       Promise.all([
         vlFormValidation(Object).awaitUntilReady(),
       ]).then(() => done());
+    });
+
+    teardown(() => {
+      sandbox.restore();
     });
 
     suite('vl-form-validation', () => {
@@ -42,6 +40,7 @@
       });
 
       test('de dress functie zal de form validatie activeren', () => {
+        sandbox.spy(window.vl.formValidation, 'dress');
         const implementatie = new VlFormValidationImplementatie();
         const element = document.createElement('div');
         implementatie.dress(element);
@@ -49,6 +48,7 @@
       });
 
       test('de dress functie zal de form validatie niet activeren indien het attribuut novalidation aanwezig is', () => {
+        sandbox.spy(window.vl.formValidation, 'dress');
         const implementatie = new VlFormValidationImplementatie();
         const element = document.createElement('div');
         element.setAttribute('novalidate', '');
