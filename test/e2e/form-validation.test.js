@@ -80,7 +80,6 @@ describe('vl-form-validation', async () => {
     }
   });
 
-
   it('Als gebruiker zie ik een foutmelding als een datum niet geldig is', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField(7);
