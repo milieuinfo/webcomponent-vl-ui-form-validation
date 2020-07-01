@@ -19,17 +19,18 @@
 
   <script type="module">
     import {vlFormValidation} from '../../src/vl-form-validation.js';
-    const sandbox = sinon.createSandbox();
-
-    setup((done) => {
-      customElements.whenDefined('vl-form-validation-test').then(() => done());
-    });
-
-    teardown(() => {
-      sandbox.restore();
-    });
 
     suite('vl-form-validation', () => {
+      const sandbox = sinon.createSandbox();
+
+      setup((done) => {
+        customElements.whenDefined('vl-form-validation-test').then(() => done());
+      });
+
+      teardown(() => {
+        sandbox.restore();
+      });
+    
       test('een class die de form validatie mixin toepast heeft een dress functie om de form validatie te activeren', () => {
         const object = {};
         assert.isUndefined(object.dress);
