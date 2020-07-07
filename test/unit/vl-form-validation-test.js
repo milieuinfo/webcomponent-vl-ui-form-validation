@@ -1,7 +1,7 @@
 import {vlElement, define} from '/node_modules/vl-ui-core/dist/vl-core.js';
 import {vlFormValidation} from '/src/vl-form-validation.js';
 
-vlFormValidation.awaitUntilReady().then(() => define('vl-form-validation-test', VlFormValidationTest));
+vlFormValidation.ready().then(() => define('vl-form-validation-test', VlFormValidationTest));
 
 class VlFormValidationTest extends vlElement(HTMLElement) {
   constructor() {
