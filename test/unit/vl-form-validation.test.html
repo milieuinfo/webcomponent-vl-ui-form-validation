@@ -56,6 +56,15 @@
         assert(window.vl.formValidation.dress.notCalled);
       });
 
+      test('de dress functie zal de form validatie niet activeren indien deze reeds uitgevoerd werd', () => {
+        sandbox.spy(window.vl.formValidation, 'dress');
+        const implementatie = new VlFormValidationImplementatie();
+        const element = document.createElement('div');
+        element.setAttribute('data-vl-formvalidation-dressed', '');
+        implementatie.dress(element);
+        assert(window.vl.formValidation.dress.notCalled);
+      });
+
       test('er wordt ook een tekstuele foutmelding getoond bij validatie in shadow DOM', (done) => {
         const element = fixture('vl-form-validation-shadow-dom-fixture');
         const input = element.shadowRoot.querySelector('input');
