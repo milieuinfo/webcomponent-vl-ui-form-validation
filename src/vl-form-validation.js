@@ -23,21 +23,21 @@ import '/lib/form-validation.js';
 export const vlFormValidation = (SuperClass) => {
   return class extends SuperClass {
     /**
-         * Wacht tot de form validatie initialisatie klaar is.
-         *
-         * @return {Promise}
-         */
+     * Wacht tot de form validatie initialisatie klaar is.
+     *
+     * @return {Promise}
+     */
     static awaitUntilReady() {
       return awaitUntil(() => window.vl && window.vl.formValidation);
     }
 
     /**
-         * Initialiseer de form validatie.
-         *
-         * @param {HTMLElement} element
-         */
+     * Initialiseer de form validatie.
+     *
+     * @param {HTMLElement} element
+     */
     dress(element) {
-      if (element.getAttribute('novalidate') == undefined) {
+      if (element.getAttribute('novalidate') == undefined && !element.hasAttribute('data-vl-formvalidation-dressed')) {
         vl.formValidation.dress(element);
       }
     }
