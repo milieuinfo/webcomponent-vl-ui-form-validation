@@ -57,12 +57,13 @@
         assert(window.vl.formValidation.dress.notCalled);
       });
 
-      test('de dress functie zal de form validatie niet activeren indien deze reeds uitgevoerd werd', () => {
+      test('de dress functie zal de form validatie niet activeren indien het attribuut novalidation aanwezig is', () => {
         sandbox.spy(window.vl.formValidation, 'dress');
-        const implementatie = new VlFormValidationImplementatie();
+        const object = {};
+        Object.assign(object, vlFormValidation);
         const element = document.createElement('div');
         element.setAttribute('data-vl-formvalidation-dressed', '');
-        implementatie.dress(element);
+        object.dress(element);
         assert(window.vl.formValidation.dress.notCalled);
       });
 
