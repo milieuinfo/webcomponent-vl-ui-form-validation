@@ -57,7 +57,7 @@
         assert(window.vl.formValidation.dress.notCalled);
       });
 
-      test('de dress functie zal de form validatie niet activeren indien het attribuut novalidation aanwezig is', () => {
+      test('de dress functie zal de form validatie niet activeren indien deze reeds uitgevoerd werd', () => {
         sandbox.spy(window.vl.formValidation, 'dress');
         const object = {};
         Object.assign(object, vlFormValidation);
