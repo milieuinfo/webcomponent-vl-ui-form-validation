@@ -33,7 +33,7 @@ export const vlFormValidation = {
    * @param {HTMLElement} element
    */
   dress(element) {
-    if (element.getAttribute('novalidate') == undefined) {
+    if (element.getAttribute('novalidate') == undefined && !element.hasAttribute('data-vl-formvalidation-dressed')) {
       vl.formValidation.dress(element);
     }
   },
