@@ -24,7 +24,7 @@ export const vlFormValidation = {
    * @return {Promise}
    */
   ready() {
-    return awaitUntil(() => window.vl && window.vl.formValidation);
+    return awaitUntil(() => window.vl != undefined && window.vl.formValidation != undefined);
   },
 
   /**
