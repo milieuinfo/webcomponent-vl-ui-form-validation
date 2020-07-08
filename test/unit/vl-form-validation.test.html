@@ -19,49 +19,51 @@
 
   <script type="module">
     import {vlFormValidation} from '../../src/vl-form-validation.js';
-    const sandbox = sinon.createSandbox();
-
-    setup((done) => {
-      Promise.all([
-        vlFormValidation(Object).awaitUntilReady(),
-      ]).then(() => done());
-    });
-
-    teardown(() => {
-      sandbox.restore();
-    });
 
     suite('vl-form-validation', () => {
-      class VlFormValidationImplementatie extends vlFormValidation(Object) { }
+      const sandbox = sinon.createSandbox();
 
+      setup((done) => {
+        customElements.whenDefined('vl-form-validation-test').then(() => done());
+      });
+
+      teardown(() => {
+        sandbox.restore();
+      });
+    
       test('een class die de form validatie mixin toepast heeft een dress functie om de form validatie te activeren', () => {
-        const implementatie = new VlFormValidationImplementatie();
-        assert.isDefined(implementatie.dress);
+        const object = {};
+        assert.isUndefined(object.dress);
+        Object.assign(object, vlFormValidation);
+        assert.isDefined(object.dress);
       });
 
       test('de dress functie zal de form validatie activeren', () => {
         sandbox.spy(window.vl.formValidation, 'dress');
-        const implementatie = new VlFormValidationImplementatie();
+        const object = {};
+        Object.assign(object, vlFormValidation);
         const element = document.createElement('div');
-        implementatie.dress(element);
+        object.dress(element);
         assert(window.vl.formValidation.dress.calledWith(element));
       });
 
       test('de dress functie zal de form validatie niet activeren indien het attribuut novalidation aanwezig is', () => {
         sandbox.spy(window.vl.formValidation, 'dress');
-        const implementatie = new VlFormValidationImplementatie();
+        const object = {};
+        Object.assign(object, vlFormValidation);
         const element = document.createElement('div');
         element.setAttribute('novalidate', '');
-        implementatie.dress(element);
+        object.dress(element);
         assert(window.vl.formValidation.dress.notCalled);
       });
 
       test('de dress functie zal de form validatie niet activeren indien deze reeds uitgevoerd werd', () => {
         sandbox.spy(window.vl.formValidation, 'dress');
-        const implementatie = new VlFormValidationImplementatie();
+        const object = {};
+        Object.assign(object, vlFormValidation);
         const element = document.createElement('div');
         element.setAttribute('data-vl-formvalidation-dressed', '');
-        implementatie.dress(element);
+        object.dress(element);
         assert(window.vl.formValidation.dress.notCalled);
       });
 

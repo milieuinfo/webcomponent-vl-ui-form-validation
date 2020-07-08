@@ -38,10 +38,10 @@
   },
   "dependencies": {
     "@govflanders/vl-ui-form-validation": "^3.9.1",
-    "vl-ui-core": "^5.5.5"
+    "vl-ui-core": "^5.6.0"
   },
   "peerDependencies": {
-    "vl-ui-core": "^5.5.5"
+    "vl-ui-core": "^5.6.0"
   },
   "devDependencies": {
     "@govflanders/vl-ui-util": "^3.9.1",
@@ -49,6 +49,7 @@
     "vl-ui-form-grid": "^3.0.4",
     "vl-ui-form-message": "^5.0.3",
     "vl-ui-input-field": "^3.1.5",
-    "vl-ui-util": "^5.2.8"
+    "vl-ui-select": "^4.1.0",
+    "vl-ui-util": "^5.2.9"
   }
 }

@@ -8,96 +8,100 @@ describe('vl-form-validation', async () => {
     return vlFormValidationPage.load();
   });
 
-  async function assertThatGeenFoutmeldingWordtGetoondBijGeldigeInput(formValidationElement, validationMessageElement, setGeldigeInputFunctie) {
-    if (setGeldigeInputFunctie) {
-      await setGeldigeInputFunctie();
-    }
-    await assert.eventually.isFalse(formValidationElement.hasError());
-    await assert.eventually.isFalse(formValidationElement.isSuccess());
-    await assert.eventually.isFalse(validationMessageElement.isDisplayed());
-  }
-
-  async function assertThatFoutmeldingenCorrectGetoondWordenBijOngeldigeInput(formValidationElement, validationMessageElement, setOngeldigeInputFunctie) {
-    if (setOngeldigeInputFunctie) {
-      await setOngeldigeInputFunctie();
-    }
-    await assert.eventually.isTrue(formValidationElement.hasError());
-    await assert.eventually.isFalse(formValidationElement.isSuccess());
-    await assert.eventually.isTrue(validationMessageElement.isDisplayed());
-    await assert.eventually.equal(formValidationElement.getErrorPlaceholder(), await validationMessageElement.getErrorId());
-    await assert.eventually.equal(validationMessageElement.getText(), await formValidationElement.getErrorMessage());
-  }
-
-
-  async function assertThatFormMetInputFieldCorrectValideert(form, geldigeInput, ongeldigeInput) {
-    const inputField = await form.getInputField();
-    await assert.eventually.isTrue(inputField.isRequired());
-
-    const setValue = function(text) {
-      return async function() {
-        await inputField.setValue(text);
-        await inputField.blur();
-      };
-    };
-
-    await assertThatFormValidationCorrectValideert(inputField, await form.getErrorMessage(), setValue(geldigeInput), setValue(ongeldigeInput));
-  }
-
-  async function assertThatFormMetSelectFieldCorrectValideert(form, geldigeInput, ongeldigeInput) {
-    const selectField = await form.getSelectField();
-    await assert.eventually.isTrue(selectField.isRequired());
-
-    const selectByIndex = function(index) {
-      return async function() {
-        await selectField.selectByIndex(index);
-      };
-    };
-    await assertThatFormValidationCorrectValideert(selectField, await form.getErrorMessage(), selectByIndex(geldigeInput), selectByIndex(ongeldigeInput));
-  }
-
-  async function assertThatFormValidationCorrectValideert(formValidationElement, validationMessageElement, setGeldigeInput, setOngeldigeInput) {
-    await assertThatGeenFoutmeldingWordtGetoondBijGeldigeInput(formValidationElement, validationMessageElement, setGeldigeInput);
-    await assertThatFoutmeldingenCorrectGetoondWordenBijOngeldigeInput(formValidationElement, validationMessageElement, setOngeldigeInput);
-    await assertThatGeenFoutmeldingWordtGetoondBijGeldigeInput(formValidationElement, validationMessageElement, setGeldigeInput);
-  }
-
   it('Als gebruiker zie ik een foutmelding als een verplicht veld niet is ingevuld in een form dat validatie doet', async () => {
-    const form = await vlFormValidationPage.getFormMetVerplichtVeld();
-    await assertThatFormMetInputFieldCorrectValideert(form, 'iets verschillend van niets', '');
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField(1);
+    await assert.eventually.isTrue(input.isRequired());
+    await assert.eventually.isFalse(input.hasError());
+
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue('Tom');
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
   });
 
   it('Als gebruiker zie ik een foutmelding als een e-mailadres verkeerd geformatteerd is', async () => {
-    const form = await vlFormValidationPage.getFormMetVerplichtEmailVeld();
-    await assertThatFormMetInputFieldCorrectValideert(form, 'valid@email.be', 'invalid@email');
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField(3);
+
+    await input.setValue('invalid@email');
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue('valid@email.be');
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
   });
 
   it('Als gebruiker zie ik een foutmelding als een iban nummer niet gelding is', async () => {
-    const form = await vlFormValidationPage.getFormMetVerplichtIbanVeld();
-    await assertThatFormMetInputFieldCorrectValideert(form, 'BE19 0000 0000 1212', 'BE00 0000 0000 1212');
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField(4);
+
+    await input.setValue('BE00 0000 0000 1212');
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue('BE19 0000 0000 1212');
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
   });
 
   it('Als gebruiker zie ik een foutmelding als een telefoonnr niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetVerplichtTelefoonnummerVeld();
-    await assertThatFormMetInputFieldCorrectValideert(form, '02 222 22 22', '02 123 44 3');
-  });
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField(5);
 
-  it('Als gebruiker zie ik een foutmelding als een datum niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetVerplichtDatumVeld();
-    await assertThatFormMetInputFieldCorrectValideert(form, '29.02.2020', '29.02.2019');
+    await input.setValue('02 123 44 3');
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue('02 222 22 22');
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
   });
 
   it('Als gebruiker zie ik een foutmelding als een rijksregisternummer niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetVerplichtRRNVeld();
-    await assertThatFormMetInputFieldCorrectValideert(form, '93.05.18-223.61', '93.05.18-223');
-    await assertThatFormMetInputFieldCorrectValideert(form, '88.12.03-001.95', '88.12.03-001.96');
-    await assertThatFormMetInputFieldCorrectValideert(form, '00.20.01-053.57', '00.20.01-053.56');
-    await assertThatFormMetInputFieldCorrectValideert(form, '33.00.00-084.27', '33.00.00-084.26');
-    await assertThatFormMetInputFieldCorrectValideert(form, '00.00.00-001.28', '00.00.00-001.27');
-    await assertThatFormMetInputFieldCorrectValideert(form, '44.00.00-281.61', '44.00.00-281.60');
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField(6);
+
+    const invalidRRN = ['93.05.18-223', '88.12.03-001.96', '00.20.01-053.56', '33.00.00-084.26', '00.00.00-001.27', '44.00.00-281.60'];
+    for (rrn of invalidRRN) {
+      await input.setValue(rrn);
+      await form.submit();
+      await assert.eventually.isTrue(input.hasError());
+    }
+
+    const validRRN = ['93.05.18-223.61', '88.12.03-001.95', '00.20.01-053.57', '33.00.00-084.27', '00.00.00-001.28', '44.00.00-281.61'];
+    for (rrn of validRRN) {
+      await input.setValue(rrn);
+      await form.submit();
+      await assert.eventually.isFalse(input.hasError());
+    }
+  });
+
+  it('Als gebruiker zie ik een foutmelding als een datum niet geldig is', async () => {
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField(7);
+
+    await input.setValue('29.02.2019');
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue('29.02.2020');
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
   });
 
   it('Als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async () => {
-    const form = await vlFormValidationPage.getFormMetVerplichtSelectVeld();
-    await assertThatFormMetSelectFieldCorrectValideert(form, 1, 0);
+    const form = await vlFormValidationPage.getForm(1);
+    const select = await form.getSelect(1);
+
+    await form.submit();
+    await assert.eventually.isTrue(select.hasError());
+
+    await select.selectByIndex(1);
+    await form.submit();
+    await assert.eventually.isFalse(select.hasError());
   });
 });
