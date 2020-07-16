@@ -24,7 +24,7 @@ const vlFormValidation = {
     return this.hasClass(errorClass);
   },
 
-  async isSuccess() {
+  async hasSuccess() {
     const successClass = await this.getSuccessClass();
     return this.hasClass(successClass);
   },
