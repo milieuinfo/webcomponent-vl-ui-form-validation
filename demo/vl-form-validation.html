@@ -4,15 +4,17 @@
 <head>
     <title>vl-form-validation voorbeeld</title>
     <script type="module" src="/node_modules/vl-ui-demo/dist/vl-demo-all.js"></script>
-
-    <script type="module" src="/src/vl-form-validation.js"></script>
-    <script type="module" src="/demo/vl-input-field-demo.js"></script>
+    <script type="module" src="/node_modules/vl-ui-body/dist/vl-body.js"></script>
     <script type="module" src="/node_modules/vl-ui-form-grid/dist/vl-form-grid.js"></script>
     <script type="module" src="/node_modules/vl-ui-form-message/dist/vl-form-message.js"></script>
     <script type="module" src="/node_modules/vl-ui-select/dist/vl-select.js"></script>
     <script type="module" src="/node_modules/vl-ui-button/dist/vl-button.js"></script>
 
+    <script type="module" src="/src/vl-form-validation.js"></script>
+    <script type="module" src="/demo/vl-input-field-demo.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/src/style.css" />
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-body/dist/style.css" />
     <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-form-grid/dist/style.css" />
     <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-form-message/dist/style.css" />
     <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-input-field/dist/style.css" />
@@ -20,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-button/dist/style.css" />
 </head>
 
-<body>
+<body is="vl-body">
     <vl-demo-page data-vl-webcomponent="vl-form-validation" data-vl-link="https://overheid.vlaanderen.be/webuniversum/v3/documentation/forms/vl-ui-form-validation">
         <vl-demo data-vl-title="Formulier validatie">
             <form id="form-1">
@@ -160,10 +162,12 @@
                     </div>
                 </div>
             </form>
-            <button is="vl-button"
-                onclick="document.querySelector('#form-3-input-1').value = null; document.querySelector('#form-3-input-1').dispatchEvent(new CustomEvent('change'));">
-                Leegmaken
-            </button>
+
+            <div is="vl-action-group" slot="actions">
+                <button is="vl-button" onclick="document.querySelector('#form-3-input-1').value = null; document.querySelector('#form-3-input-1').dispatchEvent(new CustomEvent('change'));">
+                    Leegmaken
+                </button>
+            </div>
         </vl-demo>
     </vl-demo-page>
 </body>

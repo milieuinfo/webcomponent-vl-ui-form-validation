@@ -38,18 +38,19 @@
   },
   "dependencies": {
     "@govflanders/vl-ui-form-validation": "^4.0.6",
-    "vl-ui-core": "milieuinfo/webcomponent-vl-ui-core#3.11.5"
+    "vl-ui-core": "^6.0.0"
   },
   "peerDependencies": {
-    "vl-ui-core": "milieuinfo/webcomponent-vl-ui-core#3.11.5"
+    "vl-ui-core": "^6.0.0"
   },
   "devDependencies": {
     "@govflanders/vl-ui-util": "^3.11.5",
-    "vl-ui-button": "github:milieuinfo/webcomponent-vl-ui-button#3.11.5",
+    "vl-ui-button": "^5.0.6",
     "vl-ui-form-grid": "^3.0.4",
-    "vl-ui-form-message": "github:milieuinfo/webcomponent-vl-ui-form-message#3.11.5",
+    "vl-ui-form-message": "^5.0.5",
     "vl-ui-input-field": "^3.1.5",
     "vl-ui-select": "^4.1.0",
-    "vl-ui-util": "github:milieuinfo/webcomponent-vl-ui-util#3.11.5"
+    "vl-ui-body": "^1.0.4",
+    "vl-ui-util": "^5.2.12"
   }
 }
