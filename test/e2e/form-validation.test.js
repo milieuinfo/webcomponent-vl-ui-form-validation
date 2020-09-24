@@ -104,4 +104,16 @@ describe('vl-form-validation', async () => {
     await form.submit();
     await assert.eventually.isFalse(select.hasError());
   });
+
+  it('Als gebruiker zie ik een foutmelding als er geen datum is geselecteerd', async () => {
+    const form = await vlFormValidationPage.getForm(1);
+    const datepicker = await form.getDatepicker(1);
+
+    await form.submit();
+    await assert.eventually.isTrue(datepicker.hasError());
+
+    await datepicker.selectDay(15);
+    await form.submit();
+    await assert.eventually.isFalse(datepicker.hasError());
+  });
 });

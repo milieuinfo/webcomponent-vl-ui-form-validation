@@ -1,7 +1,7 @@
 import {awaitUntil} from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/@govflanders/vl-ui-util/dist/js/util.js';
 import '/node_modules/@govflanders/vl-ui-core/dist/js/core.js';
-import '/node_modules/@govflanders/vl-ui-form-validation/dist/js/form-validation.js';
+import '/node_modules/vl-ui-form-validation/lib/form-validation.js';
 
 /**
  * De formulier validatie mixin in combinatie met een input field verzekert dat bij het invullen van het formulier de input van de gebruiker geldig is.
