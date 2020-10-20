@@ -65,7 +65,7 @@
         assert.equal(element._inputElement.name, name);
       });
 
-      test('indien de datepicker onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
+      test('indien het element onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
         sandbox.spy(vl.formValidation, 'dress');
         fixture('vl-form-validation-test-element-fixture');
         assert(vl.formValidation.dress.notCalled);
