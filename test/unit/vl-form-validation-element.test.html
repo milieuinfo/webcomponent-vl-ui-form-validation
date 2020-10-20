@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../web-component-tester/browser.js"></script>
+  <script src="/node_modules/sinon/pkg/sinon.js"></script>
+
+  <script type="module" src="./vl-form-validation-test-element.js"></script>
+</head>
+
+<body>
+  <test-fixture id="vl-form-validation-test-element-fixture">
+    <template>
+      <vl-form-validation-test-element name="validation-naam"
+        data-required="true" 
+        data-vl-success-class="success-style" 
+        data-vl-error-class="error-style" 
+        data-vl-error-message="Veld 'Naam' is verplicht" 
+        data-vl-error-placeholder="validation-naam-error" 
+        aria-required="true" 
+        aria-invalid="true">
+      </vl-form-validation-test-element>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-form-validation-test-element-form-fixture">
+    <template>
+      <form data-vl-validate-form>
+        <label class="vl-form__label" for="validation-naam">Naam</label>
+        <vl-form-validation-test-element name="validation-naam"
+          data-required="true" 
+          data-vl-success-class="success-style" 
+          data-vl-error-class="error-style" 
+          data-vl-error-message="Veld 'Naam' is verplicht" 
+          data-vl-error-placeholder="validation-naam-error" 
+          aria-required="true" 
+          aria-invalid="true">
+        </vl-form-validation-test-element>
+        <div class="error-message" data-vl-error-id="validation-naam-error"></div>
+        <button type="submit">Submit</button>
+      </form>
+    </template>
+  </test-fixture>
+
+  <script type="module">
+    suite('vl-form-validation-element', () => {
+      const sandbox = sinon.createSandbox();
+
+      setup((done) => {
+        customElements.whenDefined('vl-form-validation-test-element').then(() => done());
+      });
+
+      teardown(() => {
+        sandbox.restore();
+      });
+    
+      test('kan het name attribuut van het onderliggend input element bepalen en opvragen', () => {
+        const form = fixture('vl-form-validation-test-element-form-fixture');
+        const element = form.querySelector('vl-form-validation-test-element');
+        const name = 'name';
+        element.setAttribute('data-vl-name', name);
+        assert.equal(element.getAttribute('name'), name);
+        assert.equal(element._inputElement.name, name);
+      });
+
+      test('indien de datepicker onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
+        sandbox.spy(vl.formValidation, 'dress');
+        fixture('vl-form-validation-test-element-fixture');
+        assert(vl.formValidation.dress.notCalled);
+        const form = fixture('vl-form-validation-test-element-form-fixture');
+        assert(vl.formValidation.dress.calledWith(form));
+      });
+
+      test('de validatie succes en error class attributen worden correct gezet indien het element onderdeel is van een formulier', () => {
+        const element = fixture('vl-form-validation-test-element-form-fixture');
+        const formElement = fixture('vl-form-validation-test-element-fixture');
+        ['success', 'error'].forEach((type) => {
+          assert.isFalse(element.hasAttribute(`data-vl-${type}-class`));
+          assert.equal(formElement.getAttribute(`data-vl-${type}-class`), `${type}-style`);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

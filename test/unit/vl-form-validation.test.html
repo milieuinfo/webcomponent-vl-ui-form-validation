@@ -7,13 +7,26 @@
   <script src="../../../web-component-tester/browser.js"></script>
   <script src="/node_modules/sinon/pkg/sinon.js"></script>
 
-  <script type="module" src="./vl-form-validation-test.js"></script>
+  <script type="module" src="./vl-form-validation-test-element.js"></script>
 </head>
 
 <body>
-  <test-fixture id="vl-form-validation-shadow-dom-fixture">
+  <test-fixture id="vl-form-validation-fixture">
     <template>
-      <vl-form-validation-test></vl-form-validation-test>
+      <form data-vl-validate-form>
+        <label class="vl-form__label" for="validation-naam">Naam</label>
+        <vl-form-validation-test-element name="validation-naam"
+          data-required="true" 
+          data-vl-success-class="success-style" 
+          data-vl-error-class="error-style" 
+          data-vl-error-message="Veld 'Naam' is verplicht" 
+          data-vl-error-placeholder="validation-naam-error" 
+          aria-required="true" 
+          aria-invalid="true">
+        </vl-form-validation-test-element>
+        <div class="error-message" data-vl-error-id="validation-naam-error"></div>
+        <button type="submit">Submit</button>
+      </form>
     </template>
   </test-fixture>
 
@@ -24,7 +37,7 @@
       const sandbox = sinon.createSandbox();
 
       setup((done) => {
-        customElements.whenDefined('vl-form-validation-test').then(() => done());
+        customElements.whenDefined('vl-form-validation-test-element').then(() => done());
       });
 
       teardown(() => {
@@ -67,15 +80,12 @@
         assert(window.vl.formValidation.dress.notCalled);
       });
 
-      test('er wordt ook een tekstuele foutmelding getoond bij validatie in shadow DOM', (done) => {
-        const element = fixture('vl-form-validation-shadow-dom-fixture');
-        const input = element.shadowRoot.querySelector('input');
-        input.addEventListener('change', () => {
-          const message = element.shadowRoot.querySelector('.error-message');
-          assert.notEqual(message.innerText, '');
-          done();
-        });
-        input.dispatchEvent(new Event('change'));
+      test('er wordt ook een tekstuele foutmelding getoond bij validatie', () => {
+        const form = fixture('vl-form-validation-fixture');
+        const button = form.querySelector('button');
+        button.click();
+        const message = form.querySelector('.error-message');
+        assert.notEqual(message.innerText, '');
       });
     });
   </script>
