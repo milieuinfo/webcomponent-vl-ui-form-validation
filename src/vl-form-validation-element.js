@@ -37,7 +37,9 @@ export const vlFormValidationElement = (SuperClass) => {
       const observer = new MutationObserver((mutations) => {
         ['error', 'success'].forEach((type) => {
           if (mutations.find((mutation) => mutation.target.classList.contains(`${this.localName}--${type}`))) {
-            this.setAttribute(`data-vl-${type}`, '');
+            if (!this.hasAttribute(`data-vl-${type}`)) {
+              this.setAttribute(`data-vl-${type}`, '');
+            }
           } else {
             this.removeAttribute(`data-vl-${type}`);
           }
