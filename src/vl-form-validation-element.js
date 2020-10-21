@@ -10,7 +10,6 @@ import {vlFormValidation} from '/src/vl-form-validation.js';
 export const vlFormValidationElement = (SuperClass) => {
   return class extends SuperClass {
     connectedCallback() {
-      super.connectedCallback();
       this._setClassAttributes();
       this._observer = this._observeFormValidationClasses();
     }
