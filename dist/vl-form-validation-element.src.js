@@ -9,11 +9,6 @@ import {vlFormValidation} from 'vl-ui-form-validation/dist/vl-form-validation.sr
  */
 export const vlFormValidationElement = (SuperClass) => {
   return class extends SuperClass {
-    connectedCallback() {
-      this._setClassAttributes();
-      this._observer = this._observeFormValidationClasses();
-    }
-
     disconnectedCallback() {
       if (this._observer) {
         this._observer.disconnect();
@@ -22,6 +17,8 @@ export const vlFormValidationElement = (SuperClass) => {
 
     _dressFormValidation() {
       if (this.form) {
+        this._setClassAttributes();
+        this._observer = this._observeFormValidationClasses();
         Object.assign(this, vlFormValidation);
         this.dress(this.form);
       }
