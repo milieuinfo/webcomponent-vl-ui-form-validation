@@ -53,6 +53,6 @@
     "vl-ui-form-message": "^5.0.5",
     "vl-ui-input-field": "^3.2.5",
     "vl-ui-select": "^4.1.5",
-    "vl-ui-util": "^5.2.17"
+    "vl-ui-util": "^5.2.18"
   }
 }

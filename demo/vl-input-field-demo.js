@@ -13,13 +13,4 @@ export class VlInputFieldDemo extends VlInputField {
     super.connectedCallback();
     this._dressFormValidation();
   }
-
-  _dressFormValidation() {
-    if (this.form) {
-      this.setAttribute('data-vl-success-class', 'vl-input-field--success');
-      this.setAttribute('data-vl-error-class', 'vl-input-field--error');
-      Object.assign(this, vlFormValidation);
-      this.dress(this.form);
-    }
-  }
 }
