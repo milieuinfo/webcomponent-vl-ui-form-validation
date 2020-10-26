@@ -15,7 +15,9 @@ export const vlFormValidationElement = (SuperClass) => {
 
     constructor(html) {
       super(html);
-      this._internals = this.attachInternals();
+      if (customElements.get(this.localName)) {
+        this._internals = this.attachInternals();
+      }
     }
 
     disconnectedCallback() {
@@ -25,42 +27,19 @@ export const vlFormValidationElement = (SuperClass) => {
     }
 
     /**
-     * Returns the element's current validity state.
-     *
-     * @return {ValidityState}
-     */
-    get validity() {
-      return this._internals.validity;
-    }
-
-    /**
-     * Returns a localized message that describes the validation constraints that the control does not satisfy (if any). This is the empty string if the control is not a candidate for constraint validation (willvalidate is false), or it satisfies its constraints. This value can be set by the setCustomValidity method.
-     *
-     * @return {string}
-     */
-    get validationMessage() {
-      return this._internals.validationMessage;
-    }
-
-    /**
-     * Returns whether the element is a candidate for constraint validation.
-     *
-     * @return {boolean}
-     */
-    get willValidate() {
-      return this._internals.willValidate;
-    }
-
-    /**
      * Sets a custom validity message for the element. If this message is not the empty string, then the element is suffering from a custom validity error, and does not validate.
      *
      * @param {string} message
      */
     setCustomValidity(message) {
-      if (message) {
-        this._internals.setValidity({customError: true}, message);
+      if (this._internals) {
+        if (message) {
+          this._internals.setValidity({customError: true}, message);
+        } else {
+          this._internals.setValidity({});
+        }
       } else {
-        this._internals.setValidity({});
+        super.setCustomValidity(message);
       }
     }
 
@@ -69,15 +48,11 @@ export const vlFormValidationElement = (SuperClass) => {
      * @return {boolean}
      */
     checkValidity() {
-      return this._internals.checkValidity();
-    }
-
-    /**
-     * Returns true if the element's child controls satisfy their validation constraints. When false is returned, cancelable invalid events are fired for each invalid child and validation problems are reported to the user.
-     * @return {boolean}
-     */
-    reportValidity() {
-      return this._internals.reportValidity();
+      if (this._internals) {
+        return this._internals.checkValidity();
+      } else {
+        return super.checkValidity();
+      }
     }
 
     _dressFormValidation() {
