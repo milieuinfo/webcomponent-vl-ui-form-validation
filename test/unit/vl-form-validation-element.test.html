@@ -7,33 +7,63 @@
   <script src="../../../web-component-tester/browser.js"></script>
   <script src="/node_modules/sinon/pkg/sinon.js"></script>
 
-  <script type="module" src="./vl-form-validation-test-element.js"></script>
+  <script type="module" src="./vl-form-validation-element.js"></script>
+  <script type="module" src="./vl-form-validation-input-element.js"></script>
 </head>
 
 <body>
-  <test-fixture id="vl-form-validation-test-element-fixture">
+  <test-fixture id="vl-form-validation-element-fixture">
     <template>
-      <vl-form-validation-test-element name="validation-naam"
+      <vl-form-validation-element name="validation-naam"
         data-required="true" 
         data-vl-error-message="Veld 'Naam' is verplicht" 
         data-vl-error-placeholder="validation-naam-error" 
         aria-required="true" 
         aria-invalid="true">
-      </vl-form-validation-test-element>
+      </vl-form-validation-element>
     </template>
   </test-fixture>
 
-  <test-fixture id="vl-form-validation-test-element-form-fixture">
+  <test-fixture id="vl-form-validation-input-fixture">
+    <template>
+      <input is="vl-form-validation-input" name="validation-naam"
+        data-required="true" 
+        data-vl-error-message="Veld 'Naam' is verplicht" 
+        data-vl-error-placeholder="validation-naam-error" 
+        aria-required="true" 
+        aria-invalid="true">
+      </input>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-form-validation-element-form-fixture">
     <template>
       <form data-vl-validate-form>
         <label class="vl-form__label" for="validation-naam">Naam</label>
-        <vl-form-validation-test-element name="validation-naam"
+        <vl-form-validation-element name="validation-naam"
           data-required="true" 
           data-vl-error-message="Veld 'Naam' is verplicht" 
           data-vl-error-placeholder="validation-naam-error" 
           aria-required="true" 
           aria-invalid="true">
-        </vl-form-validation-test-element>
+        </vl-form-validation-element>
+        <div class="error-message" data-vl-error-id="validation-naam-error"></div>
+        <button type="submit">Submit</button>
+      </form>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-form-validation-input-form-fixture">
+    <template>
+      <form data-vl-validate-form>
+        <label class="vl-form__label" for="validation-naam">Naam</label>
+        <input is="vl-form-validation-input" name="validation-naam"
+          data-required="true" 
+          data-vl-error-message="Veld 'Naam' is verplicht" 
+          data-vl-error-placeholder="validation-naam-error" 
+          aria-required="true" 
+          aria-invalid="true">
+        </input>
         <div class="error-message" data-vl-error-id="validation-naam-error"></div>
         <button type="submit">Submit</button>
       </form>
@@ -41,11 +71,13 @@
   </test-fixture>
 
   <script type="module">
+    import {vlFormValidationElement} from '../../src/vl-form-validation-element.js';
+
     suite('vl-form-validation-element', () => {
       const sandbox = sinon.createSandbox();
 
       setup((done) => {
-        customElements.whenDefined('vl-form-validation-test-element').then(() => done());
+        customElements.whenDefined('vl-form-validation-element').then(() => done());
       });
 
       teardown(() => {
@@ -53,8 +85,8 @@
       });
     
       test('kan het name attribuut van het onderliggend input element bepalen en opvragen', () => {
-        const form = fixture('vl-form-validation-test-element-form-fixture');
-        const element = form.querySelector('vl-form-validation-test-element');
+        const form = fixture('vl-form-validation-element-form-fixture');
+        const element = form.querySelector('vl-form-validation-element');
         const name = 'name';
         element.setAttribute('data-vl-name', name);
         assert.equal(element.getAttribute('name'), name);
@@ -63,19 +95,54 @@
 
       test('indien het element onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
         sandbox.spy(vl.formValidation, 'dress');
-        fixture('vl-form-validation-test-element-fixture');
+        fixture('vl-form-validation-element-fixture');
         assert(vl.formValidation.dress.notCalled);
-        const form = fixture('vl-form-validation-test-element-form-fixture');
+        const form = fixture('vl-form-validation-element-form-fixture');
         assert(vl.formValidation.dress.calledWith(form));
       });
 
       test('de validatie succes en error class attributen worden correct gezet indien het element onderdeel is van een formulier', () => {
-        const element = fixture('vl-form-validation-test-element-fixture');
-        const formElement = fixture('vl-form-validation-test-element-form-fixture').querySelector('vl-form-validation-test-element');
+        const element = fixture('vl-form-validation-element-fixture');
+        const formElement = fixture('vl-form-validation-element-form-fixture').querySelector('vl-form-validation-element');
         ['success', 'error'].forEach((type) => {
           assert.isFalse(element.hasAttribute(`data-vl-${type}-class`));
           assert.equal(formElement.getAttribute(`data-vl-${type}-class`), `vl-form-validation--${type}`);
         });
+      });
+
+      test('form validation elementen zullen form associated zijn', () => {
+        assert.isTrue(vlFormValidationElement(HTMLElement).formAssociated);
+      });
+
+      test('element validatie kan ingesteld worden', () => {
+        ['element', 'input'].forEach((type) => {
+          const element = fixture(`vl-form-validation-${type}-fixture`);
+          assert.isTrue(element.checkValidity());
+          element.setCustomValidity('message');
+          assert.isFalse(element.checkValidity());
+          element.setCustomValidity('');
+          assert.isTrue(element.checkValidity());
+        });
+      });
+
+      test('native elements zijn focusable en zullen de focus verder delegeren', () => {
+        const form = fixture('vl-form-validation-element-form-fixture');
+        const element = form.querySelector('vl-form-validation-element');
+        const button = form.querySelector('button');
+        sandbox.spy(element, 'focus');
+        assert.equal(element.tabIndex, 0);
+        button.click();
+        assert(element.focus.called);
+      });
+
+      test('custom elements zijn focusable en zullen de focus verder delegeren', () => {
+        const form = fixture('vl-form-validation-input-form-fixture');
+        const element = form.querySelector('input');
+        const button = form.querySelector('button');
+        sandbox.spy(element, 'focus');
+        assert.equal(element.tabIndex, 0);
+        button.click();
+        assert(element.focus.called);
       });
     });
   </script>

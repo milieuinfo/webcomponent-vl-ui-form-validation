@@ -7,7 +7,7 @@
   <script src="../../../web-component-tester/browser.js"></script>
   <script src="/node_modules/sinon/pkg/sinon.js"></script>
 
-  <script type="module" src="./vl-form-validation-test-element.js"></script>
+  <script type="module" src="./vl-form-validation-element.js"></script>
 </head>
 
 <body>
@@ -15,13 +15,13 @@
     <template>
       <form data-vl-validate-form>
         <label class="vl-form__label" for="validation-naam">Naam</label>
-        <vl-form-validation-test-element name="validation-naam"
+        <vl-form-validation-element name="validation-naam"
           data-required="true" 
           data-vl-error-message="Veld 'Naam' is verplicht" 
           data-vl-error-placeholder="validation-naam-error" 
           aria-required="true" 
           aria-invalid="true">
-        </vl-form-validation-test-element>
+        </vl-form-validation-element>
         <div class="error-message" data-vl-error-id="validation-naam-error"></div>
         <button type="submit">Submit</button>
       </form>
@@ -35,7 +35,7 @@
       const sandbox = sinon.createSandbox();
 
       setup((done) => {
-        customElements.whenDefined('vl-form-validation-test-element').then(() => done());
+        customElements.whenDefined('vl-form-validation-element').then(() => done());
       });
 
       teardown(() => {

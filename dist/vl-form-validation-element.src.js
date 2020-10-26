@@ -27,7 +27,7 @@ export const vlFormValidationElement = (SuperClass) => {
     }
 
     /**
-     * Sets a custom validity message for the element. If this message is not the empty string, then the element is suffering from a custom validity error, and does not validate.
+     * Sets a custom validity message for the element.
      *
      * @param {string} message
      */
@@ -45,6 +45,7 @@ export const vlFormValidationElement = (SuperClass) => {
 
     /**
      * Returns true if the element's child controls are subject to constraint validation and satisfy those contraints; returns false if some controls do not satisfy their constraints. Fires an event named invalid at any control that does not satisfy its constraints; such controls are considered invalid if the event is not canceled. It is up to the programmer to decide how to respond to false.
+     *
      * @return {boolean}
      */
     checkValidity() {
@@ -61,6 +62,8 @@ export const vlFormValidationElement = (SuperClass) => {
         this._observer = this._observeFormValidationClasses();
         Object.assign(this, vlFormValidation);
         this.dress(this.form);
+        this.tabIndex = 0;
+        this.addEventListener('focus', () => this.focus());
       }
     }
 
