@@ -85,6 +85,13 @@
         const message = form.querySelector('.error-message');
         assert.notEqual(message.innerText, '');
       });
+
+      test('de error en success classes worden correct gedeclareerd', () => {
+        const form = fixture('vl-form-validation-fixture');
+        const element = form.querySelector('vl-form-validation-test-element');
+        assert.equal(element.getAttribute('data-vl-success-class'), `vl-${element.localName}--success`);
+        assert.equal(element.getAttribute('data-vl-error-class'), `vl-${element.localName}--error`);
+      });
     });
   </script>
 </body>
