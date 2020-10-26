@@ -33,7 +33,7 @@ export const vlFormValidationElement = (SuperClass) => {
     _observeFormValidationClasses() {
       const observer = new MutationObserver((mutations) => {
         ['error', 'success'].forEach((type) => {
-          if (mutations.find((mutation) => [...mutation.target.classList].find((clazz) => clazz.includes(`vl-${this.localName}--${type}`)))) {
+          if (mutations.find((mutation) => [...mutation.target.classList].find((clazz) => clazz.includes(`vl-form-validation--${type}`)))) {
             if (!this.hasAttribute(`data-vl-${type}`)) {
               this.setAttribute(`data-vl-${type}`, '');
             }
@@ -54,8 +54,8 @@ export const vlFormValidationElement = (SuperClass) => {
     }
 
     _setClassAttributes() {
-      this.setAttribute('data-vl-success-class', `vl-${this.localName}--success`);
-      this.setAttribute('data-vl-error-class', `vl-${this.localName}--error`);
+      this.setAttribute('data-vl-success-class', `vl-form-validation--success`);
+      this.setAttribute('data-vl-error-class', `vl-form-validation--error`);
     }
   };
 };
