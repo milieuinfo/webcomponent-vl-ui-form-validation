@@ -15,7 +15,7 @@
   <test-fixture id="vl-form-validation-element-fixture">
     <template>
       <vl-form-validation-element name="validation-naam"
-        data-required="true" 
+        data-vl-required="true" 
         data-vl-error-message="Veld 'Naam' is verplicht" 
         data-vl-error-placeholder="validation-naam-error" 
         aria-required="true" 
@@ -27,7 +27,7 @@
   <test-fixture id="vl-form-validation-input-fixture">
     <template>
       <input is="vl-form-validation-input" name="validation-naam"
-        data-required="true" 
+        data-vl-required="true" 
         data-vl-error-message="Veld 'Naam' is verplicht" 
         data-vl-error-placeholder="validation-naam-error" 
         aria-required="true" 
@@ -41,7 +41,7 @@
       <form data-vl-validate-form>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <vl-form-validation-element name="validation-naam"
-          data-required="true" 
+          data-vl-required="true" 
           data-vl-error-message="Veld 'Naam' is verplicht" 
           data-vl-error-placeholder="validation-naam-error" 
           aria-required="true" 
@@ -58,7 +58,7 @@
       <form data-vl-validate-form>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <input is="vl-form-validation-input" name="validation-naam"
-          data-required="true" 
+          data-vl-required="true" 
           data-vl-error-message="Veld 'Naam' is verplicht" 
           data-vl-error-placeholder="validation-naam-error" 
           aria-required="true" 
@@ -91,6 +91,11 @@
         element.setAttribute('data-vl-name', name);
         assert.equal(element.getAttribute('name'), name);
         assert.equal(element._inputElement.name, name);
+      });
+    
+      test('het required attribuut wordt correct omgezet', () => {
+        const element = fixture('vl-form-validation-element-fixture');
+        assert.isDefined(element.getAttribute('data-required'));
       });
 
       test('indien het element onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
