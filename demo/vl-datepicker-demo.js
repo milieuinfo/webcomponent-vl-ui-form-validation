@@ -9,6 +9,10 @@ Promise.all([
 });
 
 export class VlDatepickerDemo extends vlFormValidationElement(VlDatepicker) {
+  static get _observedAttributes() {
+    return vlFormValidation._observedAttributes();
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this._dressFormValidation();
