@@ -38,8 +38,10 @@ export const vlFormValidationElement = (SuperClass) => {
         } else {
           this._internals.setValidity({});
         }
-      } else {
+      } else if (super.setCustomValidity) {
         super.setCustomValidity(message);
+      } else {
+        this._inputElement.setCustomValidity(message);
       }
     }
 
@@ -51,8 +53,10 @@ export const vlFormValidationElement = (SuperClass) => {
     checkValidity() {
       if (this._internals) {
         return this._internals.checkValidity();
-      } else {
+      } else if (super.checkValidity) {
         return super.checkValidity();
+      } else {
+        return this._inputElement.checkValidity();
       }
     }
 
