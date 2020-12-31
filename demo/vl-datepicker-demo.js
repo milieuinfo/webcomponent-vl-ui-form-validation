@@ -10,7 +10,7 @@ Promise.all([
 
 export class VlDatepickerDemo extends vlFormValidationElement(VlDatepicker) {
   static get _observedAttributes() {
-    return vlFormValidation._observedAttributes();
+    return VlDatepicker._observedAttributes.concat(vlFormValidation._observedAttributes());
   }
 
   connectedCallback() {

@@ -10,7 +10,7 @@ Promise.all([
 
 export class VlInputFieldDemo extends vlFormValidationElement(VlInputField) {
   static get _observedAttributes() {
-    return vlFormValidation._observedAttributes();
+    return VlInputField._observedAttributes.concat(vlFormValidation._observedAttributes());
   }
 
   connectedCallback() {
