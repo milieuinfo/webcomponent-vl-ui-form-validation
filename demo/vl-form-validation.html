@@ -8,13 +8,11 @@
     <script type="module" src="/node_modules/vl-ui-form-grid/dist/vl-form-grid.js"></script>
     <script type="module" src="/node_modules/vl-ui-form-message/dist/vl-form-message.js"></script>
     <script type="module" src="/node_modules/vl-ui-select/dist/vl-select.js"></script>
-    <script type="module" src="/node_modules/vl-ui-checkbox/dist/vl-checkbox.js"></script>
     <script type="module" src="/node_modules/vl-ui-button/dist/vl-button.js"></script>
 
     <script type="module" src="/src/vl-form-validation.js"></script>
     <script type="module" src="/demo/vl-input-field-demo.js"></script>
     <script type="module" src="/demo/vl-datepicker-demo.js"></script>
-    <script type="module" src="/demo/vl-checkbox-demo.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/src/style.css" />
     <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-body/dist/style.css" />
@@ -124,14 +122,6 @@
                     </div>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-label" for="datepicker-1" data-vl-block>Cookie-verklaring</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <vl-checkbox-demo id="checkbox-1" data-vl-label="Akkoord" name="validation-checkbox"
-                            data-vl-required="true" 
-                            data-vl-error-message="Verplicht akkoord te gaan met de cookie-verklaring" 
-                            data-vl-error-placeholder="validation-10-error" data-vl-validation-type="">
-                        </vl-checkbox-demo>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-10-error"></p>
                     </div>
                     <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
                         <button is="vl-button">Formulier valideren</button>
