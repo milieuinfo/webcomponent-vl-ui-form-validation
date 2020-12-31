@@ -15,7 +15,7 @@ export const vlFormValidationElement = (SuperClass) => {
 
     constructor(html) {
       super(html);
-      if (customElements.get(this.localName)) {
+      if (this.attachInternals && customElements.get(this.localName)) {
         this._internals = this.attachInternals();
       }
     }
