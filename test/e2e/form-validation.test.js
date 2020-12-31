@@ -1,14 +1,15 @@
-const {assert, driver} = require('vl-ui-core').Test.Setup;
+const {assert, getDriver} = require('vl-ui-core').Test.Setup;
 const VlFormValidationPage = require('./pages/vl-form-validation.page');
 
 describe('vl-form-validation', async () => {
-  const vlFormValidationPage = new VlFormValidationPage(driver);
+  let vlFormValidationPage;
 
   beforeEach(async () => {
+    vlFormValidationPage = new VlFormValidationPage(getDriver());
     return vlFormValidationPage.load();
   });
 
-  it('Als gebruiker zie ik een foutmelding als een verplicht veld niet is ingevuld in een form dat validatie doet', async () => {
+  it('als gebruiker zie ik een foutmelding als een verplicht veld niet is ingevuld in een form dat validatie doet', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField(1);
     await assert.eventually.isTrue(input.isRequired());
@@ -22,7 +23,7 @@ describe('vl-form-validation', async () => {
     await assert.eventually.isFalse(input.hasError());
   });
 
-  it('Als gebruiker zie ik een foutmelding als een e-mailadres verkeerd geformatteerd is', async () => {
+  it('als gebruiker zie ik een foutmelding als een e-mailadres verkeerd geformatteerd is', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField(3);
 
@@ -35,7 +36,7 @@ describe('vl-form-validation', async () => {
     await assert.eventually.isFalse(input.hasError());
   });
 
-  it('Als gebruiker zie ik een foutmelding als een iban nummer niet gelding is', async () => {
+  it('als gebruiker zie ik een foutmelding als een iban nummer niet gelding is', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField(4);
 
@@ -48,7 +49,7 @@ describe('vl-form-validation', async () => {
     await assert.eventually.isFalse(input.hasError());
   });
 
-  it('Als gebruiker zie ik een foutmelding als een telefoonnr niet geldig is', async () => {
+  it('als gebruiker zie ik een foutmelding als een telefoonnr niet geldig is', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField(5);
 
@@ -61,7 +62,7 @@ describe('vl-form-validation', async () => {
     await assert.eventually.isFalse(input.hasError());
   });
 
-  it('Als gebruiker zie ik een foutmelding als een rijksregisternummer niet geldig is', async () => {
+  it('als gebruiker zie ik een foutmelding als een rijksregisternummer niet geldig is', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField(6);
 
@@ -80,7 +81,7 @@ describe('vl-form-validation', async () => {
     }
   });
 
-  it('Als gebruiker zie ik een foutmelding als een datum niet geldig is', async () => {
+  it('als gebruiker zie ik een foutmelding als een datum niet geldig is', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField(7);
 
@@ -93,7 +94,7 @@ describe('vl-form-validation', async () => {
     await assert.eventually.isFalse(input.hasError());
   });
 
-  it('Als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async () => {
+  it('als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const select = await form.getSelect(1);
 
@@ -105,7 +106,7 @@ describe('vl-form-validation', async () => {
     await assert.eventually.isFalse(select.hasError());
   });
 
-  it('Als gebruiker zie ik een foutmelding als er geen datum is geselecteerd', async () => {
+  it('als gebruiker zie ik een foutmelding als er geen datum is geselecteerd', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const datepicker = await form.getDatepicker(1);
 
