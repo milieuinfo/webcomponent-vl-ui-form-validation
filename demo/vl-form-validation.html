@@ -12,6 +12,7 @@
 
     <script type="module" src="/src/vl-form-validation.js"></script>
     <script type="module" src="/demo/vl-input-field-demo.js"></script>
+    <script type="module" src="/demo/vl-select-demo.js"></script>
     <script type="module" src="/demo/vl-datepicker-demo.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/src/style.css" />
@@ -98,18 +99,17 @@
                         <label is="vl-form-label" for="select-1" data-vl-block>Stad</label>
                     </div>
                     <div is="vl-form-column" data-vl-size="9">
-                        <select id="select-1" is="vl-select" data-vl-block name="validation-select" 
+                        <select id="select-1" is="vl-select-demo" data-vl-block name="validation-select" 
                             data-vl-required="true" 
                             data-vl-error-message="Een geldige 'Stad' is verplicht"
-                            data-vl-error-placeholder="validation-8-error" data-vl-validation-type="select"
-                            data-vl-success-class="vl-select--success" data-vl-error-class="vl-select--error">
+                            data-vl-error-placeholder="validation-8-error" data-vl-validation-type="select">
                             <option placeholder value="">Kies een stad</option>
                             <option value="Aalst">Aalst</option>
                             <option value="Antwerpen">Antwerpen</option>
                         </select>
                         <p is="vl-form-validation-message" error data-vl-error-id="validation-8-error"></p>
                     </div>
-                    <div is="vl-form-column" data-vl-size="3">
+                    <<div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-label" for="datepicker-1" data-vl-block>Datum</label>
                     </div>
                     <div is="vl-form-column" data-vl-size="9">
