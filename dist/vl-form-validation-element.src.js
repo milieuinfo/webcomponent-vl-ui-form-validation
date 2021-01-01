@@ -15,7 +15,7 @@ export const vlFormValidationElement = (SuperClass) => {
 
     constructor(html) {
       super(html);
-      if (customElements.get(this.localName)) {
+      if (this.attachInternals && customElements.get(this.localName)) {
         this._internals = this.attachInternals();
       }
     }
@@ -38,8 +38,10 @@ export const vlFormValidationElement = (SuperClass) => {
         } else {
           this._internals.setValidity({});
         }
-      } else {
+      } else if (super.setCustomValidity) {
         super.setCustomValidity(message);
+      } else {
+        this._inputElement.setCustomValidity(message);
       }
     }
 
@@ -51,8 +53,10 @@ export const vlFormValidationElement = (SuperClass) => {
     checkValidity() {
       if (this._internals) {
         return this._internals.checkValidity();
-      } else {
+      } else if (super.checkValidity) {
         return super.checkValidity();
+      } else {
+        return this._inputElement.checkValidity();
       }
     }
 
@@ -76,7 +80,7 @@ export const vlFormValidationElement = (SuperClass) => {
     _observeFormValidationClasses() {
       const observer = new MutationObserver((mutations) => {
         ['error', 'success'].forEach((type) => {
-          if (mutations.find((mutation) => [...mutation.target.classList].find((clazz) => clazz.includes(`vl-form-validation--${type}`)))) {
+          if (mutations.find((mutation) => [...mutation.target.classList].find((clazz) => clazz.includes(this.getAttribute(`data-vl-${type}-class`))))) {
             if (!this.hasAttribute(`data-vl-${type}`)) {
               this.setAttribute(`data-vl-${type}`, '');
             }
@@ -101,8 +105,8 @@ export const vlFormValidationElement = (SuperClass) => {
     }
 
     _setClassAttributes() {
-      this.setAttribute('data-vl-success-class', `vl-form-validation--success`);
-      this.setAttribute('data-vl-error-class', `vl-form-validation--error`);
+      this.setAttribute('data-vl-success-class', `vl-input-field--success`);
+      this.setAttribute('data-vl-error-class', `vl-input-field--error`);
     }
   };
 };
