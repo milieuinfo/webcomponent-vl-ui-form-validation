@@ -1,16 +1,16 @@
 import {define} from '/node_modules/vl-ui-core/dist/vl-core.js';
-import {VlDatepicker} from '/node_modules/vl-ui-datepicker/dist/vl-datepicker.js';
+import {VlSelect} from '/node_modules/vl-ui-select/dist/vl-select.js';
 import {vlFormValidation, vlFormValidationElement} from '/src/vl-form-validation-all.js';
 
 Promise.all([
   vlFormValidation.ready(),
 ]).then(() => {
-  define('vl-datepicker-demo', VlDatepickerDemo);
+  define('vl-select-demo', VlSelectDemo, {extends: 'select'});
 });
 
-export class VlDatepickerDemo extends vlFormValidationElement(VlDatepicker) {
+export class VlSelectDemo extends vlFormValidationElement(VlSelect) {
   static get _observedAttributes() {
-    return VlDatepicker._observedAttributes.concat(vlFormValidation._observedAttributes());
+    return VlSelect._observedAttributes.concat(vlFormValidation._observedAttributes());
   }
 
   connectedCallback() {
