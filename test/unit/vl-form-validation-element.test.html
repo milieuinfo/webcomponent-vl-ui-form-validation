@@ -111,7 +111,7 @@
         const formElement = fixture('vl-form-validation-element-form-fixture').querySelector('vl-form-validation-element');
         ['success', 'error'].forEach((type) => {
           assert.isFalse(element.hasAttribute(`data-vl-${type}-class`));
-          assert.equal(formElement.getAttribute(`data-vl-${type}-class`), `vl-form-validation--${type}`);
+          assert.equal(formElement.getAttribute(`data-vl-${type}-class`), `vl-input-field--${type}`);
         });
       });
 
