@@ -1,4 +1,4 @@
-import {vlFormValidation} from 'vl-ui-form-validation/dist/vl-form-validation.src.js';
+import {vlFormValidation} from '../dist/vl-form-validation.src.js';
 
 /**
  * Gebruik de form validation element mixin in combinatie met elementen die formulier validatie bevatten.
