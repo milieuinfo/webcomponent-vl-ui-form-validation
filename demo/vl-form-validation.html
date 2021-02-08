@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-<head>
+  <head>
     <title>vl-form-validation voorbeeld</title>
     <script type="module" src="/node_modules/vl-ui-demo/dist/vl-demo-all.js"></script>
     <script type="module" src="/node_modules/vl-ui-body/dist/vl-body.js"></script>
@@ -19,298 +19,339 @@
     <script type="module" src="/demo/vl-multi-select-demo.js"></script>
     <script type="module" src="/demo/vl-datepicker-demo.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/src/style.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-body/dist/style.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-form-grid/dist/style.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-form-message/dist/style.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-input-field/dist/style.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-select/dist/style.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-multiselect/dist/style.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-button/dist/style.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-checkbox/dist/style.css" />
-</head>
+    <link rel="stylesheet" type="text/css" href="/src/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-body/dist/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-form-grid/dist/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-form-message/dist/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-input-field/dist/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-select/dist/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-multiselect/dist/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-button/dist/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-checkbox/dist/style.css"/>
+  </head>
 
-<body is="vl-body">
-    <vl-demo-page data-vl-webcomponent="vl-form-validation" data-vl-link="https://overheid.vlaanderen.be/webuniversum/v3/documentation/forms/vl-ui-form-validation">
-        <vl-demo data-vl-title="Form.checkValidity is true ook al is form niet valid.">
-            <form id="form-1">
-                <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-1" data-vl-block>Voornaam</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input id="input-1" is="vl-input-field-demo" placeholder="Jos" data-vl-block data-vl-required="true"
-                            data-vl-error-message="Veld 'Voornaam' is verplicht"
-                            data-vl-error-placeholder="validation-1-error"/>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-2" data-vl-block>Naam</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input id="input-2" is="vl-input-field-demo" placeholder="Bosmans" data-vl-block data-vl-required="true"
-                            data-vl-error-message="Veld 'Naam' is verplicht"
-                            data-vl-error-placeholder="validation-2-error" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-2-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-3" data-vl-block>E-mailadres</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input id="input-3" is="vl-input-field-demo" placeholder="email@provider.com" data-vl-block type="email"
-                            data-vl-required="true" data-vl-error-message="Een geldig 'E-mailadres' is verplicht"
-                            data-vl-error-placeholder="validation-3-error" data-vl-validation-type="email" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-3-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-4" data-vl-block>IBAN-nummer</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input id="input-4" is="vl-input-field-demo" placeholder="BE00 0000 0000 0000" data-vl-block type="text"
-                            data-vl-required="true" data-vl-error-message="Een geldig 'IBAN-nummer' is verplicht"
-                            data-vl-error-placeholder="validation-4-error" data-vl-validation-type="iban" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-5" data-vl-block>Telefoonnummer</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input id="input-5" is="vl-input-field-demo" placeholder="+32 0 000 00 00" data-vl-block type="phone"
-                            data-vl-required="true"
-                            data-vl-error-message="Een geldig 'Telefoonnummer' is verplicht"
-                            data-vl-error-placeholder="validation-5-error" data-vl-validation-type="phone" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-5-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-6" data-vl-block>Rijksregisternummer</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input id="input-6" is="vl-input-field-demo" placeholder="11.22.33-444.55" data-vl-block type="text"
-                            data-vl-required="true"
-                            data-vl-error-message="Een geldig 'Rijksregisternummer' is verplicht"
-                            data-vl-error-placeholder="validation-6-error" data-vl-validation-type="rrn" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-6-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-7" data-vl-block>Geboortedatum</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input id="input-7" is="vl-input-field-demo" placeholder="01.01.2020" data-vl-block type="text"
-                            data-vl-required="true"
-                            data-vl-error-message="Een geldige 'Geboortedatum' is verplicht"
-                            data-vl-error-placeholder="validation-7-error" data-vl-validation-type="date" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-7-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="select-1" data-vl-block>Stad</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <select id="select-1" is="vl-select-demo" data-vl-block name="validation-select" 
-                            data-vl-required="true" 
-                            data-vl-error-message="Een geldige 'Stad' is verplicht"
-                            data-vl-error-placeholder="validation-8-error" data-vl-validation-type="select">
-                            <option placeholder value="">Kies een stad</option>
-                            <option value="Aalst">Aalst</option>
-                            <option value="Antwerpen">Antwerpen</option>
-                        </select>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-8-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="datepicker-1" data-vl-block>Datum</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <vl-datepicker-demo id="datepicker-1" data-vl-block name="validation-datepicker" 
-                            data-vl-required="true" 
-                            data-vl-error-message="Een geldige 'Datum' is verplicht"
-                            data-vl-error-placeholder="validation-9-error" data-vl-validation-type="date">
-                        </vl-datepicker-demo>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-9-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
-                        <button is="vl-button" type="submit" onclick="document.querySelector('#isGeldig').innerHTML = document.querySelector('#form-1').checkValidity(); this.setAttribute('data-vl-disabled', '')">Formulier valideren</button>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
-                        Is geldig: <strong id="isGeldig"></strong>
-                    </div>
-                </div>
-            </form>
-        </vl-demo>
-        <vl-demo data-vl-title="Validitions worden niet getoond als form geen submit heeft.">
-            <form id="form-2">
-                <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-1" data-vl-block>Voornaam</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input id="input-2-1" is="vl-input-field-demo" placeholder="Jos" data-vl-block data-vl-required="true"
-                               data-vl-error-message="Veld 'Voornaam' is verplicht"
-                               data-vl-error-placeholder="validation-1-error"/>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
-                        <button is="vl-button" type="button" onclick="document.querySelector('#isGeldig-2').innerHTML = document.querySelector('#form-1').checkValidity()">Formulier valideren</button>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
-                        Is geldig: <strong id="isGeldig-2"></strong>
-                    </div>
-                </div>
-            </form>
-        </vl-demo>
-        <vl-demo data-vl-title="Validatie fout ook al is er geen data-required attribuut">
-            <form id="form-3">
-                <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-1" data-vl-block>Voornaam</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input id="input-3-1" is="vl-input-field-demo" placeholder="Jos" data-vl-block
-                               data-vl-error-message="Veld 'Voornaam' is verplicht"
-                               data-vl-error-placeholder="validation-1-error"/>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
-                        <button is="vl-button">Formulier valideren</button>
-                    </div>
-                </div>
-            </form>
-        </vl-demo>
-        <vl-demo data-vl-title="Formulier invullen en lezen">
-            <script type="text/javascript">
-                function fillFormData() {
-                    const data = {
-                        "input-4-1": "test",
-                        "input-4-2": "test",
-                        "input-4-3": "test",
-                        "input-4-4": "test",
-                        "input-4-5": "test",
-                        "input-4-6": "test",
-                        "input-4-7": "test",
-                        "select-4-1": "Aalst",
-                        "datepicker-4-1": "12.01.2021",
-                        "checkbox-4-1": "true",
-                    }
+  <body is="vl-body">
+    <vl-demo-page data-vl-webcomponent="vl-form-validation"
+                  data-vl-link="https://overheid.vlaanderen.be/webuniversum/v3/documentation/forms/vl-ui-form-validation">
+      <vl-demo data-vl-title="Form.checkValidity is true ook al is form niet valid.">
+        <form id="form-1">
+          <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-1" data-vl-block>Voornaam</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input id="input-1" is="vl-input-field-demo" placeholder="Jos" data-vl-block
+                     data-vl-required="true"
+                     data-vl-error-message="Veld 'Voornaam' is verplicht"
+                     data-vl-error-placeholder="validation-1-error"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-2" data-vl-block>Naam</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input id="input-2" is="vl-input-field-demo" placeholder="Bosmans" data-vl-block
+                     data-vl-required="true"
+                     data-vl-error-message="Veld 'Naam' is verplicht"
+                     data-vl-error-placeholder="validation-2-error"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-2-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-3" data-vl-block>E-mailadres</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input id="input-3" is="vl-input-field-demo" placeholder="email@provider.com"
+                     data-vl-block type="email"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldig 'E-mailadres' is verplicht"
+                     data-vl-error-placeholder="validation-3-error"
+                     data-vl-validation-type="email"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-3-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-4" data-vl-block>IBAN-nummer</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input id="input-4" is="vl-input-field-demo" placeholder="BE00 0000 0000 0000"
+                     data-vl-block type="text"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldig 'IBAN-nummer' is verplicht"
+                     data-vl-error-placeholder="validation-4-error" data-vl-validation-type="iban"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-5" data-vl-block>Telefoonnummer</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input id="input-5" is="vl-input-field-demo" placeholder="+32 0 000 00 00"
+                     data-vl-block type="phone"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldig 'Telefoonnummer' is verplicht"
+                     data-vl-error-placeholder="validation-5-error"
+                     data-vl-validation-type="phone"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-5-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-6" data-vl-block>Rijksregisternummer</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input id="input-6" is="vl-input-field-demo" placeholder="11.22.33-444.55"
+                     data-vl-block type="text"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldig 'Rijksregisternummer' is verplicht"
+                     data-vl-error-placeholder="validation-6-error" data-vl-validation-type="rrn"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-6-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-7" data-vl-block>Geboortedatum</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input id="input-7" is="vl-input-field-demo" placeholder="01.01.2020" data-vl-block
+                     type="text"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldige 'Geboortedatum' is verplicht"
+                     data-vl-error-placeholder="validation-7-error" data-vl-validation-type="date"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-7-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="select-1" data-vl-block>Stad</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <select id="select-1" is="vl-select-demo" data-vl-block name="validation-select"
+                      data-vl-required="true"
+                      data-vl-error-message="Een geldige 'Stad' is verplicht"
+                      data-vl-error-placeholder="validation-8-error"
+                      data-vl-validation-type="select">
+                <option placeholder value="">Kies een stad</option>
+                <option value="Aalst">Aalst</option>
+                <option value="Antwerpen">Antwerpen</option>
+              </select>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-8-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="datepicker-1" data-vl-block>Datum</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <vl-datepicker-demo id="datepicker-1" data-vl-block name="validation-datepicker"
+                                  data-vl-required="true"
+                                  data-vl-error-message="Een geldige 'Datum' is verplicht"
+                                  data-vl-error-placeholder="validation-9-error"
+                                  data-vl-validation-type="date">
+              </vl-datepicker-demo>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-9-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
+              <button is="vl-button" type="submit"
+                      onclick="document.querySelector('#isGeldig').innerHTML = document.querySelector('#form-1').checkValidity(); this.setAttribute('data-vl-disabled', '')">
+                Formulier valideren
+              </button>
+            </div>
+            <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
+              Is geldig: <strong id="isGeldig"></strong>
+            </div>
+          </div>
+        </form>
+      </vl-demo>
+      <vl-demo data-vl-title="Validitions worden niet getoond als form geen submit heeft.">
+        <form id="form-2">
+          <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-1" data-vl-block>Voornaam</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input id="input-2-1" is="vl-input-field-demo" placeholder="Jos" data-vl-block
+                     data-vl-required="true"
+                     data-vl-error-message="Veld 'Voornaam' is verplicht"
+                     data-vl-error-placeholder="validation-1-error"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
+              <button is="vl-button" type="button"
+                      onclick="document.querySelector('#isGeldig-2').innerHTML = document.querySelector('#form-1').checkValidity()">
+                Formulier valideren
+              </button>
+            </div>
+            <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
+              Is geldig: <strong id="isGeldig-2"></strong>
+            </div>
+          </div>
+        </form>
+      </vl-demo>
+      <vl-demo data-vl-title="Validatie fout ook al is er geen data-required attribuut">
+        <form id="form-3">
+          <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-1" data-vl-block>Voornaam</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input id="input-3-1" is="vl-input-field-demo" placeholder="Jos" data-vl-block
+                     data-vl-error-message="Veld 'Voornaam' is verplicht"
+                     data-vl-error-placeholder="validation-1-error"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-1-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
+              <button is="vl-button">Formulier valideren</button>
+            </div>
+          </div>
+        </form>
+      </vl-demo>
+      <vl-demo data-vl-title="Formulier invullen en lezen">
+        <script type="text/javascript">
+          fillFormData = () => {
+            const data = {
+              'input-4-1': 'test',
+              'input-4-2': 'test',
+              'input-4-3': 'test',
+              'input-4-4': 'test',
+              'input-4-5': 'test',
+              'input-4-6': 'test',
+              'input-4-7': 'test',
+              'select-4-1': 'Aalst',
+              'datepicker-4-1': '12.01.2021',
+              'checkbox-4-1': 'true',
+            };
 
-                    const form = document.querySelector('#form-4');
-                    const names = [...form.querySelectorAll('[name]')].map(node => node.getAttribute('name'));
-                    names.forEach(name => form[name].value = data[name])
-                    document.querySelector('#isGeldig-4').innerHTML = names.map(name => form[name].value);
-                }
-            </script>
-            <form id="form-4">
-                <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-4-1" data-vl-block>Voornaam</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input name="input-4-1" is="vl-input-field-demo" placeholder="Jos" data-vl-block data-vl-required="true"
-                               data-vl-error-message="Veld 'Voornaam' is verplicht"
-                               data-vl-error-placeholder="validation-4-1-error"/>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-1-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-4-2" data-vl-block>Naam</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input name="input-4-2" is="vl-input-field-demo" placeholder="Bosmans" data-vl-block data-vl-required="true"
-                               data-vl-error-message="Veld 'Naam' is verplicht"
-                               data-vl-error-placeholder="validation-4-2-error" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-2-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-4-3" data-vl-block>E-mailadres</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input name="input-4-3" is="vl-input-field-demo" placeholder="email@provider.com" data-vl-block type="email"
-                               data-vl-required="true" data-vl-error-message="Een geldig 'E-mailadres' is verplicht"
-                               data-vl-error-placeholder="validation-4-3-error" data-vl-validation-type="email" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-3-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-4-4" data-vl-block>IBAN-nummer</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input name="input-4-4" is="vl-input-field-demo" placeholder="BE00 0000 0000 0000" data-vl-block type="text"
-                               data-vl-required="true" data-vl-error-message="Een geldig 'IBAN-nummer' is verplicht"
-                               data-vl-error-placeholder="validation-4-4-error" data-vl-validation-type="iban" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-4-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-4-5" data-vl-block>Telefoonnummer</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input name="input-4-5" is="vl-input-field-demo" placeholder="+32 0 000 00 00" data-vl-block type="phone"
-                               data-vl-required="true"
-                               data-vl-error-message="Een geldig 'Telefoonnummer' is verplicht"
-                               data-vl-error-placeholder="validation-4-5-error" data-vl-validation-type="phone" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-5-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-4-6" data-vl-block>Rijksregisternummer</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input name="input-4-6" is="vl-input-field-demo" placeholder="11.22.33-4-4.55" data-vl-block type="text"
-                               data-vl-required="true"
-                               data-vl-error-message="Een geldig 'Rijksregisternummer' is verplicht"
-                               data-vl-error-placeholder="validation-4-6-error" data-vl-validation-type="rrn" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-6-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="input-4-7" data-vl-block>Geboortedatum</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <input name="input-4-7" is="vl-input-field-demo" placeholder="01.01.2020" data-vl-block type="text"
-                               data-vl-required="true"
-                               data-vl-error-message="Een geldige 'Geboortedatum' is verplicht"
-                               data-vl-error-placeholder="validation-4-7-error" data-vl-validation-type="date" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-7-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="select-4-1" data-vl-block>Stad</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <select name="select-4-1" is="vl-multiselect-demo" data-vl-block name="validation-select" multiple
+            const form = document.querySelector('#form-4');
+            const names = [...form.querySelectorAll('[name]')].map(
+                (node) => node.getAttribute('name'));
+            names.forEach((name) => form[name].value = data[name]);
+            document.querySelector('#isGeldig-4').innerHTML = names.map((name) => form[name].value);
+          };
+        </script>
+        <form id="form-4">
+          <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-4-1" data-vl-block>Voornaam</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input name="input-4-1" is="vl-input-field-demo" placeholder="Jos" data-vl-block
+                     data-vl-required="true"
+                     data-vl-error-message="Veld 'Voornaam' is verplicht"
+                     data-vl-error-placeholder="validation-4-1-error"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-1-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-4-2" data-vl-block>Naam</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input name="input-4-2" is="vl-input-field-demo" placeholder="Bosmans" data-vl-block
+                     data-vl-required="true"
+                     data-vl-error-message="Veld 'Naam' is verplicht"
+                     data-vl-error-placeholder="validation-4-2-error"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-2-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-4-3" data-vl-block>E-mailadres</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input name="input-4-3" is="vl-input-field-demo" placeholder="email@provider.com"
+                     data-vl-block type="email"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldig 'E-mailadres' is verplicht"
+                     data-vl-error-placeholder="validation-4-3-error"
+                     data-vl-validation-type="email"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-3-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-4-4" data-vl-block>IBAN-nummer</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input name="input-4-4" is="vl-input-field-demo" placeholder="BE00 0000 0000 0000"
+                     data-vl-block type="text"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldig 'IBAN-nummer' is verplicht"
+                     data-vl-error-placeholder="validation-4-4-error"
+                     data-vl-validation-type="iban"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-4-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-4-5" data-vl-block>Telefoonnummer</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input name="input-4-5" is="vl-input-field-demo" placeholder="+32 0 000 00 00"
+                     data-vl-block type="phone"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldig 'Telefoonnummer' is verplicht"
+                     data-vl-error-placeholder="validation-4-5-error"
+                     data-vl-validation-type="phone"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-5-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-4-6" data-vl-block>Rijksregisternummer</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input name="input-4-6" is="vl-input-field-demo" placeholder="11.22.33-4-4.55"
+                     data-vl-block type="text"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldig 'Rijksregisternummer' is verplicht"
+                     data-vl-error-placeholder="validation-4-6-error"
+                     data-vl-validation-type="rrn"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-6-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="input-4-7" data-vl-block>Geboortedatum</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <input name="input-4-7" is="vl-input-field-demo" placeholder="01.01.2020"
+                     data-vl-block type="text"
+                     data-vl-required="true"
+                     data-vl-error-message="Een geldige 'Geboortedatum' is verplicht"
+                     data-vl-error-placeholder="validation-4-7-error"
+                     data-vl-validation-type="date"/>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-7-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="select-4-1" data-vl-block>Stad</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <select name="select-4-1" is="vl-multiselect-demo" data-vl-block
+                      name="validation-select" multiple
+                      data-vl-required="true"
+                      data-vl-error-message="Een geldige 'Stad' is verplicht"
+                      data-vl-error-placeholder="validation-4-8-error"
+                      data-vl-validation-type="select">
+                <option placeholder value="">Kies een stad</option>
+                <option value="Aalst">Aalst</option>
+                <option value="Antwerpen">Antwerpen</option>
+              </select>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-8-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="datepicker-4-1" data-vl-block>Datum</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <vl-datepicker-demo name="datepicker-4-1" data-vl-block name="validation-datepicker"
+                                  data-vl-required="true"
+                                  data-vl-error-message="Een geldige 'Datum' is verplicht"
+                                  data-vl-error-placeholder="validation-4-9-error"
+                                  data-vl-validation-type="date">
+              </vl-datepicker-demo>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-9-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="3">
+              <label is="vl-form-label" for="checkbox-4-1" data-vl-block>Datum</label>
+            </div>
+            <div is="vl-form-column" data-vl-size="9">
+              <vl-checkbox-demo name="checkbox-4-1" data-vl-block name="validation-checkbox"
+                                data-vl-label="Optie 1"
                                 data-vl-required="true"
-                                data-vl-error-message="Een geldige 'Stad' is verplicht"
-                                data-vl-error-placeholder="validation-4-8-error" data-vl-validation-type="select">
-                            <option placeholder value="">Kies een stad</option>
-                            <option value="Aalst">Aalst</option>
-                            <option value="Antwerpen">Antwerpen</option>
-                        </select>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-8-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="datepicker-4-1" data-vl-block>Datum</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <vl-datepicker-demo name="datepicker-4-1" data-vl-block name="validation-datepicker"
-                                            data-vl-required="true"
-                                            data-vl-error-message="Een geldige 'Datum' is verplicht"
-                                            data-vl-error-placeholder="validation-4-9-error" data-vl-validation-type="date">
-                        </vl-datepicker-demo>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-9-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="3">
-                        <label is="vl-form-label" for="checkbox-4-1" data-vl-block>Datum</label>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9">
-                        <vl-checkbox-demo name="checkbox-4-1" data-vl-block name="validation-checkbox"
-                                            data-vl-label="Optie 1"
-                                            data-vl-required="true"
-                                            data-vl-error-message="Een check is verplicht"
-                                            data-vl-error-placeholder="validation-4-10-error" data-vl-validation-type="date">
-                        </vl-checkbox-demo>
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-4-1à-error"></p>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
-                        <button is="vl-button" type="button" onclick="fillFormData()">Formulier invullen</button>
-                    </div>
-                    <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
-                        FormData: <strong id="isGeldig-4"></strong>
-                    </div>
-                </div>
-            </form>
-        </vl-demo>
+                                data-vl-error-message="Een check is verplicht"
+                                data-vl-error-placeholder="validation-4-10-error"
+                                data-vl-validation-type="date">
+              </vl-checkbox-demo>
+              <p is="vl-form-validation-message" error data-vl-error-id="validation-4-1à-error"></p>
+            </div>
+            <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
+              <button is="vl-button" type="button" onclick="fillFormData()">Formulier invullen
+              </button>
+            </div>
+            <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
+              FormData: <strong id="isGeldig-4"></strong>
+            </div>
+          </div>
+        </form>
+      </vl-demo>
     </vl-demo-page>
-</body>
+  </body>
 
 </html>
