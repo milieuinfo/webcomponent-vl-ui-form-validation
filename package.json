@@ -48,10 +48,12 @@
     "@govflanders/vl-ui-util": "^3.12.3",
     "vl-ui-body": "^1.0.7",
     "vl-ui-button": "^5.0.9",
+    "vl-ui-checkbox": "^3.2.4",
     "vl-ui-datepicker": "^3.2.4",
     "vl-ui-form-grid": "^3.0.7",
     "vl-ui-form-message": "^5.0.5",
     "vl-ui-input-field": "^3.2.7",
+    "vl-ui-multiselect": "^4.1.1",
     "vl-ui-select": "^4.2.0",
     "vl-ui-util": "^5.3.7"
   }
