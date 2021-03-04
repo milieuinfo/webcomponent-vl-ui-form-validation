@@ -7,7 +7,6 @@
     <script type="module" src="/node_modules/vl-ui-body/dist/vl-body.js"></script>
     <script type="module" src="/node_modules/vl-ui-form-grid/dist/vl-form-grid.js"></script>
     <script type="module" src="/node_modules/vl-ui-form-message/dist/vl-form-message.js"></script>
-    <script type="module" src="/node_modules/vl-ui-select/dist/vl-select.js"></script>
     <script type="module" src="/node_modules/vl-ui-button/dist/vl-button.js"></script>
 
     <script type="module" src="/src/vl-form-validation.js"></script>
@@ -99,8 +98,8 @@
                         <label is="vl-form-label" for="select-1" data-vl-block>Stad</label>
                     </div>
                     <div is="vl-form-column" data-vl-size="9">
-                        <select id="select-1" is="vl-select-demo" data-vl-block name="validation-select" 
-                            data-vl-required="true" 
+                        <select id="select-1" is="vl-select-demo" data-vl-block name="validation-select"
+                            data-vl-required="true"
                             data-vl-error-message="Een geldige 'Stad' is verplicht"
                             data-vl-error-placeholder="validation-8-error" data-vl-validation-type="select">
                             <option placeholder value="">Kies een stad</option>
@@ -113,12 +112,22 @@
                         <label is="vl-form-label" for="datepicker-1" data-vl-block>Datum</label>
                     </div>
                     <div is="vl-form-column" data-vl-size="9">
-                        <vl-datepicker-demo id="datepicker-1" data-vl-block name="validation-datepicker" 
-                            data-vl-required="true" 
+                        <vl-datepicker-demo id="datepicker-1" data-vl-block name="validation-datepicker"
+                            data-vl-required="true"
                             data-vl-error-message="Een geldige 'Datum' is verplicht"
                             data-vl-error-placeholder="validation-9-error" data-vl-validation-type="date">
                         </vl-datepicker-demo>
                         <p is="vl-form-validation-message" error data-vl-error-id="validation-9-error"></p>
+                    </div>
+                    <div is="vl-form-column" data-vl-size="3">
+                        <label is="vl-form-label" for="input-uuid" data-vl-block>UUID</label>
+                    </div>
+                    <div is="vl-form-column" data-vl-size="9">
+                        <input id="input-uuid" is="vl-input-field-demo" placeholder="1c6fa548-5eef-11eb-ae93-0242ac130002" data-vl-block type="text"
+                               data-vl-required="true"
+                               data-vl-error-message="Een geldige 'UUID' is verplicht"
+                               data-vl-error-placeholder="validation-uuid-error" data-vl-validation-type="uuid" />
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-uuid-error"></p>
                     </div>
                     <div is="vl-form-column" data-vl-size="9" data-vl-push="3">
                         <button is="vl-button">Formulier valideren</button>

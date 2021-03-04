@@ -81,6 +81,25 @@ describe('vl-form-validation', async () => {
     }
   });
 
+  it('als gebruiker zie ik een foutmelding als een uuid niet geldig is', async () => {
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField('uuid');
+
+    const invalidUuid = ['abc', '1c6fa548-5eef-11ez-ae93-0242ac130002', '1c6fa548-5eef-11ez-ae93-0242ac130002a', '1c6fa5485eef11ezae930242ac130002a'];
+    for (let uuid of invalidUuid) {
+      await input.setValue(uuid);
+      await form.submit();
+      await assert.eventually.isTrue(input.hasError());
+    }
+
+    const validUuid = ['1c6fa548-5eef-11ea-ae93-0242ac130002', '12345678-abcd-1234-ef00-0123456789ef'];
+    for (let uuid of validUuid) {
+      await input.setValue(uuid);
+      await form.submit();
+      await assert.eventually.isFalse(input.hasError());
+    }
+  });
+
   it('als gebruiker zie ik een foutmelding als een datum niet geldig is', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField(7);
