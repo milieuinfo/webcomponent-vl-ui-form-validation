@@ -6,16 +6,16 @@ const {VlButton} = require('vl-ui-button').Test;
 const vlFormValidation = require('./vl-form-validation');
 
 class VlForm extends VlElement {
-  async getInputField(number) {
-    return this._getInputField(number);
+  async getInputField(naam) {
+    return this._getInputField(naam);
   }
 
-  async getSelect(number) {
-    return this._getSelect(number);
+  async getSelect(naam) {
+    return this._getSelect(naam);
   }
 
-  async getDatepicker(number) {
-    return this._getDatepicker(number);
+  async getDatepicker(naam) {
+    return this._getDatepicker(naam);
   }
 
   async submit() {
@@ -27,20 +27,20 @@ class VlForm extends VlElement {
     return new VlButton(this.driver, '[is="vl-button"]');
   }
 
-  async _getInputField(number) {
-    const input = await new VlInputField(this.driver, `#input-${number}`);
+  async _getInputField(naam) {
+    const input = await new VlInputField(this.driver, `#input-${naam}`);
     Object.assign(input, vlFormValidation);
     return input;
   }
 
-  async _getSelect(number) {
-    const select = await new VlSelect(this.driver, `#select-${number}`);
+  async _getSelect(naam) {
+    const select = await new VlSelect(this.driver, `#select-${naam}`);
     Object.assign(select, vlFormValidation);
     return select;
   }
 
-  async _getDatepicker(number) {
-    const datepicker = await new VlDatepicker(this.driver, `#datepicker-${number}`);
+  async _getDatepicker(naam) {
+    const datepicker = await new VlDatepicker(this.driver, `#datepicker-${naam}`);
     Object.assign(datepicker, vlFormValidation);
     return datepicker;
   }
