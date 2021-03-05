@@ -92,7 +92,7 @@ describe('vl-form-validation', async () => {
       await assert.eventually.isTrue(input.hasError());
     }
 
-    const validUuids = ['1c6fa548-5eef-11ea-ae93-0242ac130002', '12345678-abcd-1234-ef00-0123456789ef'];
+    const validUuids = ['1c6fa548-5eef-11ea-ae93-0242ac130002', '12345678-ABCD-1234-ef00-0123456789ef'];
     for (let uuid of validUuids) {
       await input.setValue(uuid);
       await form.submit();
