@@ -136,4 +136,108 @@ describe('vl-form-validation', async () => {
     await form.submit();
     await assert.eventually.isFalse(datepicker.hasError());
   });
+
+  it('als gebruiker zie ik een foutmelding als er geen geheel getal is ingevuld', async () => {
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField('integer');
+    await assert.eventually.isTrue(input.isNumericalityOnlyInteger());
+    await assert.eventually.equal(input.getNumericalityGreaterThanOrEqualTo(), "2");
+    await assert.eventually.equal(input.getNumericalityLessThanOrEqualTo(), "10");
+    await assert.eventually.isNull(input.getNumericalityLessThan());
+    await assert.eventually.isNull(input.getNumericalityGreaterThan());
+
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue("foobar");
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue("4");
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
+
+    await input.setValue("4,5");
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+  });
+
+  it('als gebruiker zie ik een foutmelding als het gehele getal niet tussen het ingestelde bereik ligt', async () => {
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField('integer');
+    await assert.eventually.isTrue(input.isNumericalityOnlyInteger());
+    await assert.eventually.equal(input.getNumericalityGreaterThanOrEqualTo(), "2");
+    await assert.eventually.equal(input.getNumericalityLessThanOrEqualTo(), "10");
+    await assert.eventually.isNull(input.getNumericalityLessThan());
+    await assert.eventually.isNull(input.getNumericalityGreaterThan());
+
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue("2");
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
+
+    await input.setValue("1");
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue("10");
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
+
+    await input.setValue("11");
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+  });
+
+  it('als gebruiker zie ik een foutmelding als er geen (komma)getal is ingevuld', async () => {
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField('decimal');
+    await assert.eventually.isFalse(input.isNumericalityOnlyInteger());
+    await assert.eventually.equal(input.getNumericalityGreaterThan(), "2.5");
+    await assert.eventually.equal(input.getNumericalityLessThan(), "15.4");
+    await assert.eventually.isNull(input.getNumericalityGreaterThanOrEqualTo());
+    await assert.eventually.isNull(input.getNumericalityLessThanOrEqualTo());
+
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue("foobar");
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue("4,6");
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
+  });
+
+  it('als gebruiker zie ik een foutmelding als het kommagetal niet tussen het ingestelde bereik ligt', async () => {
+    const form = await vlFormValidationPage.getForm(1);
+    const input = await form.getInputField('decimal');
+    await assert.eventually.isFalse(input.isNumericalityOnlyInteger());
+    await assert.eventually.equal(input.getNumericalityGreaterThan(), "2.5");
+    await assert.eventually.equal(input.getNumericalityLessThan(), "15.4");
+    await assert.eventually.isNull(input.getNumericalityGreaterThanOrEqualTo());
+    await assert.eventually.isNull(input.getNumericalityLessThanOrEqualTo());
+
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue("2,5001");
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
+
+    await input.setValue("2,5");
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue("15,3999");
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
+
+    await input.setValue("15,4");
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+  });
 });
