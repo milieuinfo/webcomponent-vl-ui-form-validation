@@ -28,6 +28,22 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="vl-form-validation-zonder-error-message-fixture">
+    <template>
+      <form data-vl-validate-form>
+        <label class="vl-form__label" for="validation-naam">Naam</label>
+        <vl-form-validation-element name="validation-naam"
+          data-required="true" 
+          data-vl-error-placeholder="validation-naam-error" 
+          aria-required="true" 
+          aria-invalid="true">
+        </vl-form-validation-element>
+        <div class="error-message" data-vl-error-id="validation-naam-error">Veld 'Naam' is verplicht</div>
+        <button type="submit">Submit</button>
+      </form>
+    </template>
+  </test-fixture>
+
   <script type="module">
     import {vlFormValidation} from '../../src/vl-form-validation.js';
 
@@ -85,6 +101,28 @@
         const message = form.querySelector('.error-message');
         assert.notEqual(message.innerText, '');
       });
+
+      test('wanneer nog niets gevalideerd is, wordt geen tekstuele foutmelding getoond', () => {
+        const form = fixture('vl-form-validation-fixture');
+        const message = form.querySelector('.error-message');
+        assert.equal(message.innerText, '');
+      });
+
+      test('wanneer nog niets gevalideerd is, wordt geen tekstuele foutmelding getoond (zonder error message)', () => {
+        const form = fixture('vl-form-validation-zonder-error-message-fixture');
+        const message = form.querySelector('.error-message');
+        assert.equal(message.innerText, '');
+      });
+
+      test('wanneer nog niets gevalideerd is, wordt geen tekstuele foutmelding getoond', () => {
+        [fixture('vl-form-validation-fixture'), fixture('vl-form-validation-zonder-error-message-fixture')].forEach(form => {
+          const message = form.querySelector('.error-message');
+          assert.equal(message.innerText, '');
+        })
+      });
+
+
+
     });
   </script>
 </body>
