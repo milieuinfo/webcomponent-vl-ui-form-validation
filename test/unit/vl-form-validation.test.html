@@ -38,7 +38,7 @@
           aria-required="true" 
           aria-invalid="true">
         </vl-form-validation-element>
-        <div class="error-message" data-vl-error-id="validation-naam-error">Veld 'Naam' is verplicht</div>
+        <div class="error-message" data-vl-error-id="validation-naam-error">Error via inhoud</div>
         <button type="submit">Submit</button>
       </form>
     </template>
@@ -115,14 +115,20 @@
       });
 
       test('wanneer nog niets gevalideerd is, wordt geen tekstuele foutmelding getoond', () => {
-        [fixture('vl-form-validation-fixture'), fixture('vl-form-validation-zonder-error-message-fixture')].forEach(form => {
+        [fixture('vl-form-validation-fixture'), fixture('vl-form-validation-zonder-error-message-fixture')].forEach((form) => {
           const message = form.querySelector('.error-message');
           assert.equal(message.innerText, '');
-        })
+        });
       });
 
-
-
+      test('er wordt ook een tekstuele foutmelding getoond bij validatie als de foutmelding enkel in de placeholder staat', () => {
+        const form = fixture('vl-form-validation-zonder-error-message-fixture');
+        const button = form.querySelector('button');
+        button.click();
+        const message = form.querySelector('.error-message');
+        console.log(message.innerText);
+        assert.equal(message.innerText, 'Error via inhoud');
+      });
     });
   </script>
 </body>
