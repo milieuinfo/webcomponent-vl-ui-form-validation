@@ -38,7 +38,7 @@
           aria-required="true" 
           aria-invalid="true">
         </vl-form-validation-element>
-        <div class="error-message" data-vl-error-id="validation-naam-error">Error via inhoud</div>
+        <div class="error-message" data-vl-error-id="validation-naam-error">Error message via error placeholder</div>
         <button type="submit">Submit</button>
       </form>
     </template>
@@ -103,18 +103,6 @@
       });
 
       test('wanneer nog niets gevalideerd is, wordt geen tekstuele foutmelding getoond', () => {
-        const form = fixture('vl-form-validation-fixture');
-        const message = form.querySelector('.error-message');
-        assert.equal(message.innerText, '');
-      });
-
-      test('wanneer nog niets gevalideerd is, wordt geen tekstuele foutmelding getoond (zonder error message)', () => {
-        const form = fixture('vl-form-validation-zonder-error-message-fixture');
-        const message = form.querySelector('.error-message');
-        assert.equal(message.innerText, '');
-      });
-
-      test('wanneer nog niets gevalideerd is, wordt geen tekstuele foutmelding getoond', () => {
         [fixture('vl-form-validation-fixture'), fixture('vl-form-validation-zonder-error-message-fixture')].forEach((form) => {
           const message = form.querySelector('.error-message');
           assert.equal(message.innerText, '');
@@ -126,9 +114,23 @@
         const button = form.querySelector('button');
         button.click();
         const message = form.querySelector('.error-message');
-        console.log(message.innerText);
-        assert.equal(message.innerText, 'Error via inhoud');
+        assert.equal(message.innerText, 'Error message via error placeholder');
       });
+
+      // test('De foutmelding verdwijnt als de oorzaak is opgelost', () => {
+      //   const form = fixture('vl-form-validation-zonder-error-message-fixture');
+      //   const button = form.querySelector('button');
+      //   button.click();
+      //   let message = form.querySelector('.error-message');
+      //   assert.equal(message.innerText, 'Error message via error placeholder');
+
+      //   const inputElement = form.querySelector('vl-form-validation-element');
+      //   inputElement._inputElement.value = 'iets';
+      //   button.click();
+      //   debugger;
+      //   message = form.querySelector('.error-message');
+      //   assert.equal(message.innerText, '');
+      // });
     });
   </script>
 </body>
