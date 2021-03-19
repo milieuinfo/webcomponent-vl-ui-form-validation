@@ -11,7 +11,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als een verplicht veld niet is ingevuld in een form dat validatie doet', async () => {
     const formNr = 1;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
     const input = await form.getInputField('voornaam');
     await assert.eventually.isTrue(input.isRequired());
     await assert.eventually.isFalse(input.hasError());
@@ -26,7 +26,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als een e-mailadres verkeerd geformatteerd is', async () => {
     const formNr = 1;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
     const input = await form.getInputField('email');
 
     await input.setValue('invalid@email');
@@ -40,7 +40,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als een iban nummer niet gelding is', async () => {
     const formNr = 1;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
     const input = await form.getInputField('iban');
 
     await input.setValue('BE00 0000 0000 1212');
@@ -54,7 +54,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als een telefoonnr niet geldig is', async () => {
     const formNr = 1;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
     const input = await form.getInputField('telefoon');
 
     await input.setValue('02 123 44 3');
@@ -68,7 +68,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als een rijksregisternummer niet geldig is', async () => {
     const formNr = 1;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
     const input = await form.getInputField('rrn');
 
     const invalidRRN = ['93.05.18-223', '88.12.03-001.96', '00.20.01-053.56', '33.00.00-084.26', '00.00.00-001.27', '44.00.00-281.60'];
@@ -88,7 +88,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als een uuid niet geldig is', async () => {
     const formNr = 1;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
     const input = await form.getInputField('uuid');
 
     const invalidUuids = ['abc', '1c6fa548-5eef-11ez-ae93-0242ac130002', '1c6fa548-5eef-11ez-ae93-0242ac130002a', '1c6fa5485eef11ezae930242ac130002a'];
@@ -108,7 +108,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als een datum niet geldig is', async () => {
     const formNr = 1;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
     const input = await form.getInputField('datum');
 
     await input.setValue('29.02.2019');
@@ -122,7 +122,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async () => {
     const formNr = 1;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
     const select = await form.getSelect('stad');
 
     await form.submit(formNr);
@@ -135,7 +135,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als er geen datum is geselecteerd', async () => {
     const formNr = 1;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
     const datepicker = await form.getDatepicker('datum');
 
     await form.submit(formNr);
@@ -147,7 +147,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding die gedefinieerd is in de error-placeholder als een verplicht veld niet is ingevuld', async () => {
-    const form = await vlFormValidationPage.getForm(4);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
 
     const input = await form.getInputField('form4-voornaam');
     await assert.eventually.isTrue(input.isRequired());
@@ -164,7 +164,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder,  als een e-mailadres verkeerd geformatteerd is', async () => {
     const formNr = 4;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
     const input = await form.getInputField('form4-email');
 
     await input.setValue('invalid@email');
@@ -179,7 +179,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een iban nummer niet gelding is', async () => {
     const formNr = 4;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
     const input = await form.getInputField('form4-iban');
 
     await input.setValue('BE00 0000 0000 1212');
@@ -193,7 +193,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een telefoonnr niet geldig is', async () => {
     const formNr = 4;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
     const input = await form.getInputField('form4-telefoon');
 
     await input.setValue('02 123 44 3');
@@ -207,7 +207,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een rijksregisternummer niet geldig is', async () => {
     const formNr = 4;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
     const input = await form.getInputField('form4-rrn');
 
     const invalidRRN = ['93.05.18-223', '88.12.03-001.96', '00.20.01-053.56', '33.00.00-084.26', '00.00.00-001.27', '44.00.00-281.60'];
@@ -228,7 +228,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een datum niet geldig is', async () => {
     const formNr = 4;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
     const input = await form.getInputField('form4-datum');
 
     await input.setValue('29.02.2019');
@@ -242,7 +242,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async () => {
     const formNr = 4;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
     const select = await form.getSelect('form4-stad');
 
     await form.submit(formNr);
@@ -255,7 +255,7 @@ describe('vl-form-validation', async () => {
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een uuid niet geldig is', async () => {
     const formNr = 4;
-    const form = await vlFormValidationPage.getForm(formNr);
+    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
     const input = await form.getInputField('form4-uuid');
 
     const invalidUuids = ['abc', '1c6fa548-5eef-11ez-ae93-0242ac130002', '1c6fa548-5eef-11ez-ae93-0242ac130002a', '1c6fa5485eef11ezae930242ac130002a'];
