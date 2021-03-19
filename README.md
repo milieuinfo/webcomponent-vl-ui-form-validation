@@ -1,3 +1,8 @@
+#Opmerking
+Deze branch bestaat enkel om even in voortoets te gebruiken. Het bevat een merge van andere branches, die nog niet naar master gebracht werden. Als we hierop dependen in voortoets, kunnen we verder tot er releases zijn van deze 2 branches:
+UIG-1163-numerical-validation 
+UIG-1165_error-messageInApartVeldBeschikbaarmaken
+
 # vl-ui-form-validation
 ![GitHub issues](https://img.shields.io/github/issues-raw/milieuinfo/webcomponent-vl-ui-form-validation) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/milieuinfo/webcomponent-vl-ui-form-validation) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/milieuinfo/webcomponent-vl-ui-form-validation)
 
