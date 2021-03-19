@@ -18,13 +18,13 @@ class VlForm extends VlElement {
     return this._getDatepicker(naam);
   }
 
-  async submit() {
-    const button = await this._getSubmitButton();
+  async submit(form) {
+    const button = await this._getSubmitButton(form);
     await button.click();
   }
 
-  async _getSubmitButton() {
-    return new VlButton(this.driver, '[is="vl-button"]');
+  async _getSubmitButton(form) {
+    return new VlButton(this.driver, `#button-form${form}`);
   }
 
   async _getInputField(naam) {
