@@ -11,12 +11,12 @@ import '/lib/form-validation.js';
  * @property {string} data-vl-error-message - Attribuut wordt gebruikt om de tekst die verschijnt in de vl-form-validation component te bepalen.
  * @property {string} data-vl-error-placeholder - Attribuut wordt gebruikt om de koppeling met de bijhorende vl-form-validation component te maken met id attribuut `data-vl-error-id`.
  * @property {string} data-vl-success-class - Attribuut wordt gebruikt om de klasse te zetten als een vl-form-validation component succesvol gevalideerd is.
- * @property {string} data-vl-error-class -  Attribuut wordt gebruikt om de klasse te zetten als een vl-form-validation component foutief gevalideerd is.
- * @property {boolean} data-vl-numericality-only-integer -  Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie enkel gehele getallen geldig zijn.
- * @property {number} data-vl-numericality-greater-than -  Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie het getal groter moet zijn dan het getal in dit attribuut.
- * @property {number} data-vl-numericality-greater-than-or-equal-to -  Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie het getal groter of gelijk moet zijn aan het getal in dit attribuut.
- * @property {number} data-vl-numericality-less-than -  Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie het getal kleiner moet zijn dan het getal in dit attribuut.
- * @property {number} data-vl-numericality-less-than-or-equal-to -  Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie het getal kleiner of gelijk moet zijn aan het getal in dit attribuut.
+ * @property {string} data-vl-error-class - Attribuut wordt gebruikt om de klasse te zetten als een vl-form-validation component foutief gevalideerd is.
+ * @property {boolean} data-vl-numericality-only-integer - Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie enkel gehele getallen geldig zijn.
+ * @property {number} data-vl-numericality-greater-than - Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie het getal groter moet zijn dan het getal in dit attribuut.
+ * @property {number} data-vl-numericality-greater-than-or-equal-to - Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie het getal groter of gelijk moet zijn aan het getal in dit attribuut.
+ * @property {number} data-vl-numericality-less-than - Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie het getal kleiner moet zijn dan het getal in dit attribuut.
+ * @property {number} data-vl-numericality-less-than-or-equal-to - Attribuut wordt gebruikt om aan te geven dat voor de numericality validatie het getal kleiner of gelijk moet zijn aan het getal in dit attribuut.
  *
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-form-validation/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-form-validation/issues|Issues}
