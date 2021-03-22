@@ -184,6 +184,10 @@ describe('vl-form-validation', async () => {
     await input.setValue('1 001');
     await form.submit();
     await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue('200');
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
   });
 
   it('als gebruiker zie ik een foutmelding als er geen (komma)getal is ingevuld', async () => {
@@ -227,6 +231,10 @@ describe('vl-form-validation', async () => {
     await assert.eventually.isFalse(input.hasError());
 
     await input.setValue('15,4');
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue('10,64');
     await form.submit();
     await assert.eventually.isTrue(input.hasError());
   });
