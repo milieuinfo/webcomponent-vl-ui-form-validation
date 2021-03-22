@@ -14,12 +14,12 @@ class VlFormValidationPage extends Page {
     return new VlForm(this.driver, `#${id}`);
   }
 
-  async getFormMetErrorMessagesAlsAttribuut() {
-    return this._getForm('form-met-error-messages-als-attribuut');
+  async getFormWithErrorMessageAttributes() {
+    return this._getForm('form-with-error-message-attributes');
   }
 
-  async getFormMetErrorMessagesViaPlaceholder() {
-    return this._getForm('form-met-error-messages-via-placeholder');
+  async getFormWithErrorMessageElements() {
+    return this._getForm('form-with-error-message-elements');
   }
 }
 

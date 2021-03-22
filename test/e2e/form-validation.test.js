@@ -10,7 +10,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als een verplicht veld niet is ingevuld in een form dat validatie doet', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
+    const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const input = await form.getInputField('input-voornaam');
     await assert.eventually.isTrue(input.isRequired());
     await assert.eventually.isFalse(input.hasError());
@@ -24,7 +24,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als een e-mailadres verkeerd geformatteerd is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
+    const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const input = await form.getInputField('input-email');
 
     await input.setValue('invalid@email');
@@ -37,7 +37,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als een iban nummer niet gelding is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
+    const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const input = await form.getInputField('input-iban');
 
     await input.setValue('BE00 0000 0000 1212');
@@ -50,7 +50,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als een telefoonnr niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
+    const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const input = await form.getInputField('input-telefoon');
 
     await input.setValue('02 123 44 3');
@@ -63,7 +63,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als een rijksregisternummer niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
+    const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const input = await form.getInputField('input-rrn');
 
     const invalidRRN = ['93.05.18-223', '88.12.03-001.96', '00.20.01-053.56', '33.00.00-084.26', '00.00.00-001.27', '44.00.00-281.60'];
@@ -82,7 +82,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als een uuid niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
+    const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const input = await form.getInputField('input-uuid');
 
     const invalidUuids = ['abc', '1c6fa548-5eef-11ez-ae93-0242ac130002', '1c6fa548-5eef-11ez-ae93-0242ac130002a', '1c6fa5485eef11ezae930242ac130002a'];
@@ -101,7 +101,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als een datum niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
+    const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const input = await form.getInputField('input-datum');
 
     await input.setValue('29.02.2019');
@@ -114,7 +114,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
+    const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const select = await form.getSelect('select-stad');
 
     await form.submit();
@@ -126,7 +126,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als er geen datum is geselecteerd', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesAlsAttribuut();
+    const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const datepicker = await form.getDatepicker('datum');
 
     await form.submit();
@@ -138,7 +138,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding die gedefinieerd is in de error-placeholder als een verplicht veld niet is ingevuld', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
+    const form = await vlFormValidationPage.getFormWithErrorMessageElements();
 
     const input = await form.getInputField('input-voornaam-err-via-placeholder');
     await assert.eventually.isTrue(input.isRequired());
@@ -153,8 +153,8 @@ describe('vl-form-validation', async () => {
   });
 
 
-  it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder,  als een e-mailadres verkeerd geformatteerd is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
+  it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een e-mailadres verkeerd geformatteerd is', async () => {
+    const form = await vlFormValidationPage.getFormWithErrorMessageElements();
     const input = await form.getInputField('input-email-err-via-placeholder');
 
     await input.setValue('invalid@email');
@@ -168,7 +168,7 @@ describe('vl-form-validation', async () => {
 
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een iban nummer niet gelding is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
+    const form = await vlFormValidationPage.getFormWithErrorMessageElements();
     const input = await form.getInputField('input-iban-err-via-placeholder');
 
     await input.setValue('BE00 0000 0000 1212');
@@ -181,7 +181,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een telefoonnr niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
+    const form = await vlFormValidationPage.getFormWithErrorMessageElements();
     const input = await form.getInputField('input-telefoon-err-via-placeholder');
 
     await input.setValue('02 123 44 3');
@@ -194,7 +194,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een rijksregisternummer niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
+    const form = await vlFormValidationPage.getFormWithErrorMessageElements();
     const input = await form.getInputField('input-rrn-err-via-placeholder');
 
     const invalidRRN = ['93.05.18-223', '88.12.03-001.96', '00.20.01-053.56', '33.00.00-084.26', '00.00.00-001.27', '44.00.00-281.60'];
@@ -214,7 +214,7 @@ describe('vl-form-validation', async () => {
 
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een datum niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
+    const form = await vlFormValidationPage.getFormWithErrorMessageElements();
     const input = await form.getInputField('input-datum-err-via-placeholder');
 
     await input.setValue('29.02.2019');
@@ -227,7 +227,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding als er niets is geselecteerd uit een lijst', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
+    const form = await vlFormValidationPage.getFormWithErrorMessageElements();
     const select = await form.getSelect('select-stad-err-via-placeholder');
 
     await form.submit();
@@ -239,7 +239,7 @@ describe('vl-form-validation', async () => {
   });
 
   it('als gebruiker zie ik een foutmelding, die gedefinieerd is in de error-placeholder, als een uuid niet geldig is', async () => {
-    const form = await vlFormValidationPage.getFormMetErrorMessagesViaPlaceholder();
+    const form = await vlFormValidationPage.getFormWithErrorMessageElements();
     const input = await form.getInputField('input-uuid-err-via-placeholder');
 
     const invalidUuids = ['abc', '1c6fa548-5eef-11ez-ae93-0242ac130002', '1c6fa548-5eef-11ez-ae93-0242ac130002a', '1c6fa5485eef11ezae930242ac130002a'];
