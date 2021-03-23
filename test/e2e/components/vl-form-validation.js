@@ -19,24 +19,24 @@ const vlFormValidation = {
     return this.getAttribute('data-vl-success-class');
   },
 
-  async isNumericalityOnlyInteger() {
-    return this.hasAttribute('data-vl-numericality-only-integer');
+  async isNumericalOnlyInteger() {
+    return this.hasAttribute('data-vl-numerical-only-integer');
   },
 
-  async getNumericalityGreaterThan() {
-    return this.getAttribute('data-vl-numericality-greater-than');
+  async getNumericalGreaterThan() {
+    return this.getAttribute('data-vl-numerical-greater-than');
   },
 
-  async getNumericalityGreaterThanOrEqualTo() {
-    return this.getAttribute('data-vl-numericality-greater-than-or-equal-to');
+  async getNumericalGreaterThanOrEqualTo() {
+    return this.getAttribute('data-vl-numerical-greater-than-or-equal-to');
   },
 
-  async getNumericalityLessThan() {
-    return this.getAttribute('data-vl-numericality-less-than');
+  async getNumericalLessThan() {
+    return this.getAttribute('data-vl-numerical-less-than');
   },
 
-  async getNumericalityLessThanOrEqualTo() {
-    return this.getAttribute('data-vl-numericality-less-than-or-equal-to');
+  async getNumericalLessThanOrEqualTo() {
+    return this.getAttribute('data-vl-numerical-less-than-or-equal-to');
   },
 
   async hasError() {
