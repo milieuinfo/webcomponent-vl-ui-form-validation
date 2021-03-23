@@ -9,6 +9,18 @@ class VlFormValidationPage extends Page {
   async load() {
     await super.load(Config.baseUrl + '/demo/vl-form-validation.html');
   }
+
+  async _getForm(id) {
+    return new VlForm(this.driver, `#${id}`);
+  }
+
+  async getFormWithErrorMessageAttributes() {
+    return this._getForm('form-with-error-message-attributes');
+  }
+
+  async getFormWithErrorMessageElements() {
+    return this._getForm('form-with-error-message-elements');
+  }
 }
 
 module.exports = VlFormValidationPage;

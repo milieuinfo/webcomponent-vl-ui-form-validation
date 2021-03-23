@@ -28,6 +28,22 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="vl-form-validation-zonder-error-message-fixture">
+    <template>
+      <form data-vl-validate-form>
+        <label class="vl-form__label" for="validation-naam">Naam</label>
+        <vl-form-validation-element name="validation-naam"
+          data-required="true" 
+          data-vl-error-placeholder="validation-naam-error" 
+          aria-required="true" 
+          aria-invalid="true">
+        </vl-form-validation-element>
+        <div class="error-message" data-vl-error-id="validation-naam-error">Error message via error placeholder</div>
+        <button type="submit">Submit</button>
+      </form>
+    </template>
+  </test-fixture>
+
   <script type="module">
     import {vlFormValidation} from '../../src/vl-form-validation.js';
 
@@ -84,6 +100,14 @@
         button.click();
         const message = form.querySelector('.error-message');
         assert.notEqual(message.innerText, '');
+      });
+
+      test('er wordt ook een tekstuele foutmelding getoond bij validatie als de foutmelding enkel in de placeholder staat', () => {
+        const form = fixture('vl-form-validation-zonder-error-message-fixture');
+        const button = form.querySelector('button');
+        button.click();
+        const message = form.querySelector('.error-message');
+        assert.equal(message.innerText, 'Error message via error placeholder');
       });
     });
   </script>
