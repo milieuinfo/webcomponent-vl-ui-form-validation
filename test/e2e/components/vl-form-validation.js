@@ -19,6 +19,26 @@ const vlFormValidation = {
     return this.getAttribute('data-vl-success-class');
   },
 
+  async isNumericalOnlyInteger() {
+    return this.hasAttribute('data-vl-numerical-only-integer');
+  },
+
+  async getNumericalGreaterThan() {
+    return this.getAttribute('data-vl-numerical-greater-than');
+  },
+
+  async getNumericalGreaterThanOrEqualTo() {
+    return this.getAttribute('data-vl-numerical-greater-than-or-equal-to');
+  },
+
+  async getNumericalLessThan() {
+    return this.getAttribute('data-vl-numerical-less-than');
+  },
+
+  async getNumericalLessThanOrEqualTo() {
+    return this.getAttribute('data-vl-numerical-less-than-or-equal-to');
+  },
+
   async hasError() {
     const errorClass = await this.getErrorClass();
     return this.hasClass(errorClass);
