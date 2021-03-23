@@ -140,7 +140,7 @@ describe('vl-form-validation', async () => {
   it('als gebruiker zie ik een foutmelding als er geen geheel getal is ingevuld', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField('integer');
-    await assert.eventually.isTrue(input.isNumericalityOnlyInteger());
+    await assert.eventually.isTrue(input.isNumericalOnlyInteger());
 
     await form.submit();
     await assert.eventually.isTrue(input.hasError());
@@ -161,10 +161,10 @@ describe('vl-form-validation', async () => {
   it('als gebruiker zie ik een foutmelding als het gehele getal niet tussen het ingestelde bereik ligt', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField('integer');
-    await assert.eventually.equal(input.getNumericalityGreaterThanOrEqualTo(), '2');
-    await assert.eventually.equal(input.getNumericalityLessThanOrEqualTo(), '1000');
-    await assert.eventually.isNull(input.getNumericalityLessThan());
-    await assert.eventually.isNull(input.getNumericalityGreaterThan());
+    await assert.eventually.equal(input.getNumericalGreaterThanOrEqualTo(), '2');
+    await assert.eventually.equal(input.getNumericalLessThanOrEqualTo(), '1000');
+    await assert.eventually.isNull(input.getNumericalLessThan());
+    await assert.eventually.isNull(input.getNumericalGreaterThan());
 
     await form.submit();
     await assert.eventually.isTrue(input.hasError());
@@ -187,13 +187,13 @@ describe('vl-form-validation', async () => {
 
     await input.setValue('200');
     await form.submit();
-    await assert.eventually.isTrue(input.hasError());
+    await assert.eventually.isFalse(input.hasError());
   });
 
   it('als gebruiker zie ik een foutmelding als er geen (komma)getal is ingevuld', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField('decimal');
-    await assert.eventually.isFalse(input.isNumericalityOnlyInteger());
+    await assert.eventually.isFalse(input.isNumericalOnlyInteger());
 
     await form.submit();
     await assert.eventually.isTrue(input.hasError());
@@ -210,10 +210,10 @@ describe('vl-form-validation', async () => {
   it('als gebruiker zie ik een foutmelding als het kommagetal niet tussen het ingestelde bereik ligt', async () => {
     const form = await vlFormValidationPage.getForm(1);
     const input = await form.getInputField('decimal');
-    await assert.eventually.equal(input.getNumericalityGreaterThan(), '2.5');
-    await assert.eventually.equal(input.getNumericalityLessThan(), '15.4');
-    await assert.eventually.isNull(input.getNumericalityGreaterThanOrEqualTo());
-    await assert.eventually.isNull(input.getNumericalityLessThanOrEqualTo());
+    await assert.eventually.equal(input.getNumericalGreaterThan(), '2.5');
+    await assert.eventually.equal(input.getNumericalLessThan(), '15.4');
+    await assert.eventually.isNull(input.getNumericalGreaterThanOrEqualTo());
+    await assert.eventually.isNull(input.getNumericalLessThanOrEqualTo());
 
     await form.submit();
     await assert.eventually.isTrue(input.hasError());
@@ -236,6 +236,6 @@ describe('vl-form-validation', async () => {
 
     await input.setValue('10,64');
     await form.submit();
-    await assert.eventually.isTrue(input.hasError());
+    await assert.eventually.isFalse(input.hasError());
   });
 });
