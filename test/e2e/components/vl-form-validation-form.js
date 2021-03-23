@@ -28,13 +28,13 @@ class VlForm extends VlElement {
   }
 
   async _getInputField(id) {
-    const input = await new VlInputField(this.driver, `#${id}`);
+    const input = await new VlInputField(this.driver, `#input-${id}`);
     Object.assign(input, vlFormValidation);
     return input;
   }
 
   async _getSelect(id) {
-    const select = await new VlSelect(this.driver, `#${id}`);
+    const select = await new VlSelect(this.driver, `#select-${id}`);
     Object.assign(select, vlFormValidation);
     return select;
   }
