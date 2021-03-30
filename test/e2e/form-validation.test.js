@@ -117,12 +117,13 @@ describe('vl-form-validation', async () => {
     const form = await vlFormValidationPage.getFormWithErrorMessageAttributes();
     const select = await form.getSelect('stad');
 
-    await form.submit();
-    await assert.eventually.isTrue(select.hasError());
-
     await select.selectByIndex(1);
     await form.submit();
     await assert.eventually.isFalse(select.hasError());
+
+    await select.selectByIndex(0);
+    await form.submit();
+    await assert.eventually.isTrue(select.hasError());
   });
 
   it('als gebruiker zie ik een foutmelding als er geen datum is geselecteerd', async () => {
