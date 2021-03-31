@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-form-validation",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "description": "De formulier validatie verzekert dat bij het invullen van het formulier de input van de gebruiker geldig is.",
   "author": "DIDM",
   "license": "MIT",
