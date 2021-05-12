@@ -40,6 +40,7 @@ export const vlFormValidation = {
    */
   dress(element) {
     if (element && !element.hasAttribute('data-vl-formvalidation-dressed')) {
+      element.setAttribute('data-vl-validate-form', '');
       vl.formValidation.dress(element);
     }
   },

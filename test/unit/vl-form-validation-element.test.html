@@ -92,10 +92,12 @@
 
       test('indien het element onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
         sandbox.spy(vl.formValidation, 'dress');
-        fixture('vl-form-validation-element-fixture');
+        let form = fixture('vl-form-validation-element-fixture');
         assert(vl.formValidation.dress.notCalled);
-        const form = fixture('vl-form-validation-element-form-fixture');
+        assert.isFalse(form.hasAttribute('data-vl-validate-form'));
+        form = fixture('vl-form-validation-element-form-fixture');
         assert(vl.formValidation.dress.calledWith(form));
+        assert.isTrue(form.hasAttribute('data-vl-validate-form'));
       });
 
       test('de validatie succes en error class attributen worden correct gezet indien het element onderdeel is van een formulier', () => {
