@@ -8,6 +8,7 @@
     <script type="module" src="/node_modules/vl-ui-form-grid/dist/vl-form-grid.js"></script>
     <script type="module" src="/node_modules/vl-ui-form-message/dist/vl-form-message.js"></script>
     <script type="module" src="/node_modules/vl-ui-button/dist/vl-button.js"></script>
+    <script type="module" src="/node_modules/vl-ui-form/dist/vl-form.js"></script>
 
     <script type="module" src="/src/vl-form-validation.js"></script>
     <script type="module" src="/demo/vl-input-field-form-validation-demo.js"></script>
@@ -26,7 +27,7 @@
 <body is="vl-body">
     <vl-demo-page data-vl-webcomponent="vl-form-validation" data-vl-link="https://overheid.vlaanderen.be/webuniversum/v3/documentation/forms/vl-ui-form-validation">
         <vl-demo data-vl-title="Formulier validatie">
-            <form id="form-with-error-message-attributes">
+            <form is="vl-form" id="form-with-error-message-attributes" data-vl-validate-form>
                 <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-label" for="input-voornaam" data-vl-block>Voornaam</label>
@@ -91,8 +92,8 @@
                         <input id="input-datum" is="vl-input-field-demo" placeholder="01.01.2020" data-vl-block type="text"
                             data-vl-required="true"
                             data-vl-error-message="Een geldige 'Geboortedatum' is verplicht"
-                            data-vl-error-placeholder="validation-datum-error" data-vl-validation-type="date" />
-                        <p is="vl-form-validation-message" error data-vl-error-id="validation-datum-error"></p>
+                            data-vl-error-placeholder="validation-geboortedatum-error" data-vl-validation-type="date" />
+                        <p is="vl-form-validation-message" error data-vl-error-id="validation-geboortedatum-error"></p>
                     </div>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-label" for="select-stad" data-vl-block>Stad</label>
@@ -164,7 +165,7 @@
         </vl-demo>
 
         <vl-demo data-vl-title="Formulier validatie met succes melding">
-            <form id="form-with-success" data-vl-validate-form-success="true">
+            <form is="vl-form" id="form-with-success" data-vl-validate-form-success="true">
                 <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-label" for="input-1" data-vl-block>Voornaam</label>
@@ -230,7 +231,7 @@
         </vl-demo>
 
         <vl-demo data-vl-title="Formulier zonder validatie">
-            <form id="form-no-validation" novalidate>
+            <form is="vl-form" id="form-no-validation" novalidate>
                 <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-message" for="naam">Naam</label>
@@ -248,7 +249,7 @@
         </vl-demo>
 
         <vl-demo data-vl-title="Formulier validatie met foutmelding in error-placeholder-element">
-            <form id="form-with-error-message-elements">
+            <form is="vl-form" id="form-with-error-message-elements">
                 <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-label" for="input-voornaam" data-vl-block>Voornaam</label>

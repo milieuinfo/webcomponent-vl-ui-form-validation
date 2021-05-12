@@ -19,4 +19,8 @@ class VlFormValidationHTMLElement extends vlFormValidationElement(vlElement(HTML
   connectedCallback() {
     this._dressFormValidation();
   }
+
+  set value(value) {
+    this._inputElement.value = value;
+  }
 }
