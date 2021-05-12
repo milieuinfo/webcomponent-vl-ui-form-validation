@@ -135,7 +135,6 @@
         const element = form.querySelector('vl-form-validation-element');
         const button = form.querySelector('button');
         sandbox.spy(element, 'focus');
-        assert.equal(element.tabIndex, 0);
         button.click();
         assert(element.focus.called);
       });
@@ -145,9 +144,13 @@
         const element = form.querySelector('input');
         const button = form.querySelector('button');
         sandbox.spy(element, 'focus');
-        assert.equal(element.tabIndex, 0);
         button.click();
         assert(element.focus.called);
+      });
+
+      test('WCAG aria-describedby attribuut beschrijft waar meer informatie gevonden kan worden over het input veld', () => {
+        const element = fixture('vl-form-validation-element-fixture');
+        assert.equal(element.getAttribute('aria-describedby'), element.getAttribute('data-vl-error-placeholder'));
       });
     });
   </script>

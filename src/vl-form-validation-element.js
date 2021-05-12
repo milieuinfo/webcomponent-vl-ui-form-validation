@@ -66,7 +66,6 @@ export const vlFormValidationElement = (SuperClass) => {
         this._observer = this._observeFormValidationClasses();
         Object.assign(this, vlFormValidation);
         this.dress(this.form);
-        this.tabIndex = 0;
         this.addEventListener('focus', () => this.focus());
       }
     }
@@ -102,6 +101,10 @@ export const vlFormValidationElement = (SuperClass) => {
 
     _requiredChangedCallback(oldValue, newValue) {
       this.setAttribute('data-required', newValue);
+    }
+
+    _errorPlaceholderChangedCallback(oldValue, newValue) {
+      this.setAttribute('aria-describedby', newValue);
     }
 
     _setClassAttributes() {

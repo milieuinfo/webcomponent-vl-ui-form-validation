@@ -45,7 +45,7 @@ export const vlFormValidation = {
   },
 
   _observedAttributes() {
-    return ['name', 'required'];
+    return ['name', 'required', 'error-placeholder'];
   },
 };
 
