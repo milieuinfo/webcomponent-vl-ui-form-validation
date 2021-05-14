@@ -8,7 +8,7 @@ import '../lib/form-validation.js';
  * @mixin vlFormValidation
  *
  * @property {(email | date | rrn | uuid | phone | iban | select | numerical)} data-vl-validation-type - Attribuut wordt gebruikt om aan te duiden welke validatie van toepassing is.
- * @property {string} data-required - Attribuut wordt gebruikt om aan te duiden dat het veld verplicht is.
+ * @property {string} data-vl-required - Attribuut wordt gebruikt om aan te duiden dat het veld verplicht is.
  * @property {string} data-vl-error-message - Attribuut wordt gebruikt om de tekst die verschijnt in de vl-form-validation component te bepalen.
  * @property {string} data-vl-error-placeholder - Attribuut wordt gebruikt om de koppeling met de bijhorende vl-form-validation component te maken met id attribuut `data-vl-error-id`.
  * @property {string} data-vl-success-class - Attribuut wordt gebruikt om de klasse te zetten als een vl-form-validation component succesvol gevalideerd is.
@@ -40,12 +40,13 @@ export const vlFormValidation = {
    */
   dress(element) {
     if (element && !element.hasAttribute('data-vl-formvalidation-dressed')) {
+      element.setAttribute('data-vl-validate-form', '');
       vl.formValidation.dress(element);
     }
   },
 
   _observedAttributes() {
-    return ['name', 'required'];
+    return ['name', 'required', 'data-required'];
   },
 };
 
