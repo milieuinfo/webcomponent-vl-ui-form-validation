@@ -15,11 +15,9 @@
   <test-fixture id="vl-form-validation-element-fixture">
     <template>
       <vl-form-validation-element name="validation-naam"
-        data-vl-required="true" 
+        data-vl-required
         data-vl-error-message="Veld 'Naam' is verplicht" 
-        data-vl-error-placeholder="validation-naam-error" 
-        aria-required="true" 
-        aria-invalid="true">
+        data-vl-error-placeholder="validation-naam-error">
       </vl-form-validation-element>
     </template>
   </test-fixture>
@@ -27,11 +25,9 @@
   <test-fixture id="vl-form-validation-input-fixture">
     <template>
       <input is="vl-form-validation-input" name="validation-naam"
-        data-vl-required="true" 
+        data-vl-required 
         data-vl-error-message="Veld 'Naam' is verplicht" 
-        data-vl-error-placeholder="validation-naam-error" 
-        aria-required="true" 
-        aria-invalid="true">
+        data-vl-error-placeholder="validation-naam-error">
       </input>
     </template>
   </test-fixture>
@@ -41,11 +37,9 @@
       <form data-vl-validate-form>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <vl-form-validation-element name="validation-naam"
-          data-vl-required="true" 
+          data-vl-required
           data-vl-error-message="Veld 'Naam' is verplicht" 
-          data-vl-error-placeholder="validation-naam-error" 
-          aria-required="true" 
-          aria-invalid="true">
+          data-vl-error-placeholder="validation-naam-error">
         </vl-form-validation-element>
         <div class="error-message" data-vl-error-id="validation-naam-error"></div>
         <button type="submit">Submit</button>
@@ -58,11 +52,9 @@
       <form data-vl-validate-form>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <input is="vl-form-validation-input" name="validation-naam"
-          data-vl-required="true" 
+          data-vl-required
           data-vl-error-message="Veld 'Naam' is verplicht" 
-          data-vl-error-placeholder="validation-naam-error" 
-          aria-required="true" 
-          aria-invalid="true">
+          data-vl-error-placeholder="validation-naam-error">
         </input>
         <div class="error-message" data-vl-error-id="validation-naam-error"></div>
         <button type="submit">Submit</button>
@@ -100,10 +92,12 @@
 
       test('indien het element onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
         sandbox.spy(vl.formValidation, 'dress');
-        fixture('vl-form-validation-element-fixture');
+        let form = fixture('vl-form-validation-element-fixture');
         assert(vl.formValidation.dress.notCalled);
-        const form = fixture('vl-form-validation-element-form-fixture');
+        assert.isFalse(form.hasAttribute('data-vl-validate-form'));
+        form = fixture('vl-form-validation-element-form-fixture');
         assert(vl.formValidation.dress.calledWith(form));
+        assert.isTrue(form.hasAttribute('data-vl-validate-form'));
       });
 
       test('de validatie succes en error class attributen worden correct gezet indien het element onderdeel is van een formulier', () => {
@@ -122,11 +116,15 @@
       test('element validatie kan ingesteld worden', () => {
         ['element', 'input'].forEach((type) => {
           const element = fixture(`vl-form-validation-${type}-fixture`);
+          assert.isFalse(element.checkValidity());
+          element.value = 'value';
           assert.isTrue(element.checkValidity());
           element.setCustomValidity('message');
           assert.isFalse(element.checkValidity());
           element.setCustomValidity('');
           assert.isTrue(element.checkValidity());
+          element.value = null;
+          assert.isFalse(element.checkValidity());
         });
       });
 
