@@ -121,6 +121,10 @@ export const vlFormValidationElement = (SuperClass) => {
       }
     }
 
+    _dataRequiredChangedCallback(oldValue, newValue) {
+      this._requiredChangedCallback(oldValue, newValue);
+    }
+
     _setClassAttributes() {
       this.setAttribute('data-vl-success-class', `vl-input-field--success`);
       this.setAttribute('data-vl-error-class', `vl-input-field--error`);

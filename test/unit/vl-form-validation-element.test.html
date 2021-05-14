@@ -62,6 +62,12 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="vl-form-validation-element-data-required-fixture">
+    <template>
+      <vl-form-validation-element name="validation-naam" data-required></vl-form-validation-element>
+    </template>
+  </test-fixture>
+
   <script type="module">
     import {vlFormValidationElement} from '../../src/vl-form-validation-element.js';
 
@@ -85,9 +91,17 @@
         assert.equal(element._inputElement.name, name);
       });
     
-      test('het required attribuut wordt correct omgezet', () => {
-        const element = fixture('vl-form-validation-element-fixture');
-        assert.isDefined(element.getAttribute('data-required'));
+      test('het required en data-required attribuut wordt correct omgezet', () => {
+        ['', 'data-required'].forEach((type) => {
+          const element = fixture('vl-form-validation-element-fixture');
+          assert.isTrue(element.hasAttribute('data-required'));
+          assert.isTrue(element.hasAttribute('required'));
+          assert.isTrue(element.hasAttribute('aria-required'));
+          element.removeAttribute('data-vl-required');
+          assert.isFalse(element.hasAttribute('data-required'));
+          assert.isFalse(element.hasAttribute('required'));
+          assert.isFalse(element.hasAttribute('aria-required'));
+        });
       });
 
       test('indien het element onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
