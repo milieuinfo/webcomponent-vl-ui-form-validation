@@ -27,7 +27,7 @@
 <body is="vl-body">
     <vl-demo-page data-vl-webcomponent="vl-form-validation" data-vl-link="https://overheid.vlaanderen.be/webuniversum/v3/documentation/forms/vl-ui-form-validation">
         <vl-demo data-vl-title="Formulier validatie">
-            <form is="vl-form" id="form-with-error-message-attributes">
+            <form is="vl-form" id="form-with-error-message-attributes" data-vl-validate>
                 <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-label" for="input-voornaam" data-vl-block>Voornaam</label>
@@ -165,7 +165,7 @@
         </vl-demo>
 
         <vl-demo data-vl-title="Formulier validatie met succes melding">
-            <form is="vl-form" id="form-with-success" data-vl-validate-form-success="true">
+            <form is="vl-form" id="form-with-success" data-vl-validate-form-success="true" data-vl-validate>
                 <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-label" for="input-1" data-vl-block>Voornaam</label>
@@ -231,7 +231,7 @@
         </vl-demo>
 
         <vl-demo data-vl-title="Formulier zonder validatie">
-            <form is="vl-form" id="form-no-validation" novalidate>
+            <form is="vl-form" id="form-no-validation">
                 <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-message" for="naam">Naam</label>
@@ -249,7 +249,7 @@
         </vl-demo>
 
         <vl-demo data-vl-title="Formulier validatie met foutmelding in error-placeholder-element">
-            <form is="vl-form" id="form-with-error-message-elements">
+            <form is="vl-form" id="form-with-error-message-elements" data-vl-validate>
                 <div is="vl-form-grid" data-vl-is-stacked data-vl-v-center>
                     <div is="vl-form-column" data-vl-size="3">
                         <label is="vl-form-label" for="input-voornaam" data-vl-block>Voornaam</label>
