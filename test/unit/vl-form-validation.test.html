@@ -77,7 +77,7 @@
         const object = {};
         Object.assign(object, vlFormValidation);
         const form = document.createElement('form');
-        form.setAttribute('data-validate-form', '');
+        form.setAttribute('data-vl-validate', '');
         object.dress(form);
         assert(window.vl.formValidation.dress.calledWith(form));
       });

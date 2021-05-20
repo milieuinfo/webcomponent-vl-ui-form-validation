@@ -39,7 +39,7 @@ export const vlFormValidation = {
    * @param {HTMLElement} element
    */
   dress(element) {
-    if (element && element.hasAttribute('data-validate-form') && !element.hasAttribute('data-vl-formvalidation-dressed')) {
+    if (element && element.hasAttribute('data-vl-validate') && !element.hasAttribute('data-vl-formvalidation-dressed')) {
       vl.formValidation.dress(element);
     }
   },

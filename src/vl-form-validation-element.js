@@ -1,3 +1,5 @@
+import '/node_modules/vl-ui-form/dist/vl-form-all.js';
+;
 import {vlFormValidation} from '/src/vl-form-validation.js';
 
 /**
@@ -63,7 +65,7 @@ export const vlFormValidationElement = (SuperClass) => {
     }
 
     _dressFormValidation() {
-      if (this.form) {
+      if (this.form && this.form.hasAttribute('data-vl-validate')) {
         this._setClassAttributes();
         this._observer = this._observeFormValidationClasses();
         Object.assign(this, vlFormValidation);
