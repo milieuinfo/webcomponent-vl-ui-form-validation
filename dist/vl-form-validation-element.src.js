@@ -1,5 +1,3 @@
-import 'vl-ui-form';
-;
 import {vlFormValidation} from '../dist/vl-form-validation.src.js';
 
 /**

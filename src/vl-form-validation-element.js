@@ -1,5 +1,3 @@
-import '/node_modules/vl-ui-form/dist/vl-form-all.js';
-;
 import {vlFormValidation} from '/src/vl-form-validation.js';
 
 /**
