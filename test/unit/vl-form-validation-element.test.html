@@ -6,6 +6,7 @@
   <script src="../../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../../web-component-tester/browser.js"></script>
   <script src="/node_modules/sinon/pkg/sinon.js"></script>
+  <script type="module" src="/node_modules/vl-ui-form/dist/vl-form-all.js"></script>
 
   <script type="module" src="./vl-form-validation-element.js"></script>
   <script type="module" src="./vl-form-validation-input-element.js"></script>
@@ -32,9 +33,24 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="vl-form-validation-element-form-without-validate-fixture">
+    <template>
+      <form is="vl-form">
+        <label class="vl-form__label" for="validation-naam">Naam</label>
+        <vl-form-validation-element name="validation-naam"
+          data-vl-required
+          data-vl-error-message="Veld 'Naam' is verplicht" 
+          data-vl-error-placeholder="validation-naam-error">
+        </vl-form-validation-element>
+        <div class="error-message" data-vl-error-id="validation-naam-error"></div>
+        <button type="submit">Submit</button>
+      </form>
+    </template>
+  </test-fixture>
+
   <test-fixture id="vl-form-validation-element-form-fixture">
     <template>
-      <form data-vl-validate-form>
+      <form is="vl-form" data-vl-validate>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <vl-form-validation-element name="validation-naam"
           data-vl-required
@@ -49,7 +65,7 @@
 
   <test-fixture id="vl-form-validation-input-form-fixture">
     <template>
-      <form data-vl-validate-form>
+      <form is="vl-form" data-vl-validate>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <input is="vl-form-validation-input" name="validation-naam"
           data-vl-required
@@ -104,14 +120,14 @@
         });
       });
 
-      test('indien het element onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
+      test('indien het element onderdeel is van een formulier waar validatie geactiveerd staat, zal de validatie geactiveerd worden', () => {
         sandbox.spy(vl.formValidation, 'dress');
-        let form = fixture('vl-form-validation-element-fixture');
+        fixture('vl-form-validation-element-fixture');
         assert(vl.formValidation.dress.notCalled);
-        assert.isFalse(form.hasAttribute('data-vl-validate-form'));
-        form = fixture('vl-form-validation-element-form-fixture');
+        fixture('vl-form-validation-element-form-without-validate-fixture');
+        assert(vl.formValidation.dress.notCalled);
+        const form = fixture('vl-form-validation-element-form-fixture');
         assert(vl.formValidation.dress.calledWith(form));
-        assert.isTrue(form.hasAttribute('data-vl-validate-form'));
       });
 
       test('de validatie succes en error class attributen worden correct gezet indien het element onderdeel is van een formulier', () => {
