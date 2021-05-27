@@ -112,9 +112,10 @@ export const vlFormValidationElement = (SuperClass) => {
         });
       } else if (newValue != undefined && oldValue == undefined) {
         attributes.forEach((attribute) => {
-          this.setAttribute(attribute, '');
+          const value = attribute === 'required' ? '' : 'true';
+          this.setAttribute(attribute, value);
           if (this._inputElement) {
-            this._inputElement.setAttribute(attribute, '');
+            this._inputElement.setAttribute(attribute, value);
           }
         });
       }

@@ -68,7 +68,6 @@ export const vlFormValidationElement = (SuperClass) => {
         this._observer = this._observeFormValidationClasses();
         Object.assign(this, vlFormValidation);
         this.dress(this.form);
-        this.tabIndex = 0;
         this.addEventListener('focus', () => this.focus());
       }
     }
@@ -113,9 +112,10 @@ export const vlFormValidationElement = (SuperClass) => {
         });
       } else if (newValue != undefined && oldValue == undefined) {
         attributes.forEach((attribute) => {
-          this.setAttribute(attribute, '');
+          const value = attribute === 'required' ? '' : 'true';
+          this.setAttribute(attribute, value);
           if (this._inputElement) {
-            this._inputElement.setAttribute(attribute, '');
+            this._inputElement.setAttribute(attribute, value);
           }
         });
       }
@@ -123,6 +123,10 @@ export const vlFormValidationElement = (SuperClass) => {
 
     _dataRequiredChangedCallback(oldValue, newValue) {
       this._requiredChangedCallback(oldValue, newValue);
+    }
+
+    _errorPlaceholderChangedCallback(oldValue, newValue) {
+      this.setAttribute('aria-describedby', newValue);
     }
 
     _setClassAttributes() {
