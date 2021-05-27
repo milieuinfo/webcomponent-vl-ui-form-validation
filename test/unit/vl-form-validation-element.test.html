@@ -6,6 +6,7 @@
   <script src="../../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../../web-component-tester/browser.js"></script>
   <script src="/node_modules/sinon/pkg/sinon.js"></script>
+  <script type="module" src="/node_modules/vl-ui-form/dist/vl-form-all.js"></script>
 
   <script type="module" src="./vl-form-validation-element.js"></script>
   <script type="module" src="./vl-form-validation-input-element.js"></script>
@@ -15,11 +16,9 @@
   <test-fixture id="vl-form-validation-element-fixture">
     <template>
       <vl-form-validation-element name="validation-naam"
-        data-vl-required="true" 
+        data-vl-required
         data-vl-error-message="Veld 'Naam' is verplicht" 
-        data-vl-error-placeholder="validation-naam-error" 
-        aria-required="true" 
-        aria-invalid="true">
+        data-vl-error-placeholder="validation-naam-error">
       </vl-form-validation-element>
     </template>
   </test-fixture>
@@ -27,25 +26,36 @@
   <test-fixture id="vl-form-validation-input-fixture">
     <template>
       <input is="vl-form-validation-input" name="validation-naam"
-        data-vl-required="true" 
+        data-vl-required 
         data-vl-error-message="Veld 'Naam' is verplicht" 
-        data-vl-error-placeholder="validation-naam-error" 
-        aria-required="true" 
-        aria-invalid="true">
+        data-vl-error-placeholder="validation-naam-error">
       </input>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-form-validation-element-form-without-validate-fixture">
+    <template>
+      <form is="vl-form">
+        <label class="vl-form__label" for="validation-naam">Naam</label>
+        <vl-form-validation-element name="validation-naam"
+          data-vl-required
+          data-vl-error-message="Veld 'Naam' is verplicht" 
+          data-vl-error-placeholder="validation-naam-error">
+        </vl-form-validation-element>
+        <div class="error-message" data-vl-error-id="validation-naam-error"></div>
+        <button type="submit">Submit</button>
+      </form>
     </template>
   </test-fixture>
 
   <test-fixture id="vl-form-validation-element-form-fixture">
     <template>
-      <form data-vl-validate-form>
+      <form is="vl-form" data-vl-validate>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <vl-form-validation-element name="validation-naam"
-          data-vl-required="true" 
+          data-vl-required
           data-vl-error-message="Veld 'Naam' is verplicht" 
-          data-vl-error-placeholder="validation-naam-error" 
-          aria-required="true" 
-          aria-invalid="true">
+          data-vl-error-placeholder="validation-naam-error">
         </vl-form-validation-element>
         <div class="error-message" data-vl-error-id="validation-naam-error"></div>
         <button type="submit">Submit</button>
@@ -55,18 +65,22 @@
 
   <test-fixture id="vl-form-validation-input-form-fixture">
     <template>
-      <form data-vl-validate-form>
+      <form is="vl-form" data-vl-validate>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <input is="vl-form-validation-input" name="validation-naam"
-          data-vl-required="true" 
+          data-vl-required
           data-vl-error-message="Veld 'Naam' is verplicht" 
-          data-vl-error-placeholder="validation-naam-error" 
-          aria-required="true" 
-          aria-invalid="true">
+          data-vl-error-placeholder="validation-naam-error">
         </input>
         <div class="error-message" data-vl-error-id="validation-naam-error"></div>
         <button type="submit">Submit</button>
       </form>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="vl-form-validation-element-data-required-fixture">
+    <template>
+      <vl-form-validation-element name="validation-naam" data-required></vl-form-validation-element>
     </template>
   </test-fixture>
 
@@ -93,14 +107,24 @@
         assert.equal(element._inputElement.name, name);
       });
     
-      test('het required attribuut wordt correct omgezet', () => {
-        const element = fixture('vl-form-validation-element-fixture');
-        assert.isDefined(element.getAttribute('data-required'));
+      test('het required en data-required attribuut wordt correct omgezet', () => {
+        ['', 'data-required'].forEach((type) => {
+          const element = fixture('vl-form-validation-element-fixture');
+          assert.isTrue(element.hasAttribute('data-required'));
+          assert.isTrue(element.hasAttribute('required'));
+          assert.isTrue(element.hasAttribute('aria-required'));
+          element.removeAttribute('data-vl-required');
+          assert.isFalse(element.hasAttribute('data-required'));
+          assert.isFalse(element.hasAttribute('required'));
+          assert.isFalse(element.hasAttribute('aria-required'));
+        });
       });
 
-      test('indien het element onderdeel is van een formulier zal de validatie geactiveerd worden', () => {
+      test('indien het element onderdeel is van een formulier waar validatie geactiveerd staat, zal de validatie geactiveerd worden', () => {
         sandbox.spy(vl.formValidation, 'dress');
         fixture('vl-form-validation-element-fixture');
+        assert(vl.formValidation.dress.notCalled);
+        fixture('vl-form-validation-element-form-without-validate-fixture');
         assert(vl.formValidation.dress.notCalled);
         const form = fixture('vl-form-validation-element-form-fixture');
         assert(vl.formValidation.dress.calledWith(form));
@@ -122,11 +146,15 @@
       test('element validatie kan ingesteld worden', () => {
         ['element', 'input'].forEach((type) => {
           const element = fixture(`vl-form-validation-${type}-fixture`);
+          assert.isFalse(element.checkValidity());
+          element.value = 'value';
           assert.isTrue(element.checkValidity());
           element.setCustomValidity('message');
           assert.isFalse(element.checkValidity());
           element.setCustomValidity('');
           assert.isTrue(element.checkValidity());
+          element.value = null;
+          assert.isFalse(element.checkValidity());
         });
       });
 

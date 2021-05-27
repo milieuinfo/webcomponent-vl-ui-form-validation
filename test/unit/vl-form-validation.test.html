@@ -6,21 +6,21 @@
   <script src="../../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../../web-component-tester/browser.js"></script>
   <script src="/node_modules/sinon/pkg/sinon.js"></script>
-
+  <script type="module" src="/node_modules/vl-ui-form/dist/vl-form-all.js"></script>
+  
+  <script type="module" src="/node_modules/vl-ui-form/dist/vl-form.js"></script>
   <script type="module" src="./vl-form-validation-element.js"></script>
 </head>
 
 <body>
   <test-fixture id="vl-form-validation-fixture">
     <template>
-      <form data-vl-validate-form>
+      <form is="vl-form" data-vl-validate>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <vl-form-validation-element name="validation-naam"
-          data-required="true" 
+          data-vl-required 
           data-vl-error-message="Veld 'Naam' is verplicht" 
-          data-vl-error-placeholder="validation-naam-error" 
-          aria-required="true" 
-          aria-invalid="true">
+          data-vl-error-placeholder="validation-naam-error">
         </vl-form-validation-element>
         <div class="error-message" data-vl-error-id="validation-naam-error"></div>
         <button type="submit">Submit</button>
@@ -30,13 +30,11 @@
 
   <test-fixture id="vl-form-validation-zonder-error-message-fixture">
     <template>
-      <form data-vl-validate-form>
+      <form is="vl-form" data-vl-validate>
         <label class="vl-form__label" for="validation-naam">Naam</label>
         <vl-form-validation-element name="validation-naam"
-          data-required="true" 
-          data-vl-error-placeholder="validation-naam-error" 
-          aria-required="true" 
-          aria-invalid="true">
+          data-vl-required 
+          data-vl-error-placeholder="validation-naam-error">
         </vl-form-validation-element>
         <div class="error-message" data-vl-error-id="validation-naam-error">Error message via error placeholder</div>
         <button type="submit">Submit</button>
@@ -65,32 +63,32 @@
         assert.isDefined(object.dress);
       });
 
-      test('de dress functie zal de form validatie activeren', () => {
+      test('de dress functie zal de form validatie niet activeren indien de validatie niet actief staat', () => {
         sandbox.spy(window.vl.formValidation, 'dress');
         const object = {};
         Object.assign(object, vlFormValidation);
-        const element = document.createElement('div');
-        object.dress(element);
-        assert(window.vl.formValidation.dress.calledWith(element));
+        const form = document.createElement('form');
+        object.dress(form);
+        assert(window.vl.formValidation.dress.notCalled);
       });
 
-      test('de dress functie zal de form validatie niet activeren indien het attribuut novalidation aanwezig is', () => {
+      test('de dress functie zal de form validatie activeren indien de validatie actief staat', () => {
         sandbox.spy(window.vl.formValidation, 'dress');
         const object = {};
         Object.assign(object, vlFormValidation);
-        const element = document.createElement('div');
-        element.setAttribute('novalidate', '');
-        object.dress(element);
-        assert(window.vl.formValidation.dress.notCalled);
+        const form = document.createElement('form');
+        form.setAttribute('data-vl-validate', '');
+        object.dress(form);
+        assert(window.vl.formValidation.dress.calledWith(form));
       });
 
       test('de dress functie zal de form validatie niet activeren indien deze reeds uitgevoerd werd', () => {
         sandbox.spy(window.vl.formValidation, 'dress');
         const object = {};
         Object.assign(object, vlFormValidation);
-        const element = document.createElement('div');
-        element.setAttribute('data-vl-formvalidation-dressed', '');
-        object.dress(element);
+        const form = document.createElement('form');
+        form.setAttribute('data-vl-formvalidation-dressed', '');
+        object.dress(form);
         assert(window.vl.formValidation.dress.notCalled);
       });
 

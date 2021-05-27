@@ -32,7 +32,9 @@ export const vlFormValidationElement = (SuperClass) => {
      * @param {string} message
      */
     setCustomValidity(message) {
-      if (this._internals) {
+      if (this._inputElement) {
+        this._inputElement.setCustomValidity(message);
+      } else if (this._internals) {
         if (message) {
           this._internals.setValidity({customError: true}, message);
         } else {
@@ -40,8 +42,6 @@ export const vlFormValidationElement = (SuperClass) => {
         }
       } else if (super.setCustomValidity) {
         super.setCustomValidity(message);
-      } else {
-        this._inputElement.setCustomValidity(message);
       }
     }
 
@@ -51,17 +51,19 @@ export const vlFormValidationElement = (SuperClass) => {
      * @return {boolean}
      */
     checkValidity() {
-      if (this._internals) {
+      if (this._inputElement) {
+        return this._inputElement.checkValidity();
+      } else if (this._internals) {
         return this._internals.checkValidity();
       } else if (super.checkValidity) {
         return super.checkValidity();
       } else {
-        return this._inputElement.checkValidity();
+        return true;
       }
     }
 
     _dressFormValidation() {
-      if (this.form) {
+      if (this.form && this.form.hasAttribute('data-vl-validate')) {
         this._setClassAttributes();
         this._observer = this._observeFormValidationClasses();
         Object.assign(this, vlFormValidation);
@@ -101,7 +103,26 @@ export const vlFormValidationElement = (SuperClass) => {
     }
 
     _requiredChangedCallback(oldValue, newValue) {
-      this.setAttribute('data-required', newValue);
+      const attributes = ['data-required', 'required', 'aria-required'];
+      if (newValue == undefined) {
+        attributes.forEach((attribute) => {
+          this.removeAttribute(attribute);
+          if (this._inputElement) {
+            this._inputElement.removeAttribute(attribute);
+          }
+        });
+      } else if (newValue != undefined && oldValue == undefined) {
+        attributes.forEach((attribute) => {
+          this.setAttribute(attribute, '');
+          if (this._inputElement) {
+            this._inputElement.setAttribute(attribute, '');
+          }
+        });
+      }
+    }
+
+    _dataRequiredChangedCallback(oldValue, newValue) {
+      this._requiredChangedCallback(oldValue, newValue);
     }
 
     _setClassAttributes() {
