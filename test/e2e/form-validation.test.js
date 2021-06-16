@@ -186,7 +186,15 @@ describe('vl-form-validation', async () => {
     await form.submit();
     await assert.eventually.isTrue(input.hasError());
 
+    await input.setValue('2 0 00');
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
     await input.setValue('200');
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
+
+    await input.setValue('1 0 0');
     await form.submit();
     await assert.eventually.isFalse(input.hasError());
   });
