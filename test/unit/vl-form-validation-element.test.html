@@ -108,11 +108,14 @@
       });
     
       test('het required en data-required attribuut wordt correct omgezet', () => {
-        ['', 'data-required'].forEach((type) => {
-          const element = fixture('vl-form-validation-element-fixture');
+        ['input', 'element'].forEach((type) => {
+          const element = fixture(`vl-form-validation-${type}-fixture`);
           assert.isTrue(element.hasAttribute('data-required'));
           assert.isTrue(element.hasAttribute('required'));
           assert.isTrue(element.hasAttribute('aria-required'));
+          assert.equal(element.getAttribute('data-required'), 'true');
+          assert.equal(element.getAttribute('required'), '');
+          assert.equal(element.getAttribute('aria-required'), 'true');
           element.removeAttribute('data-vl-required');
           assert.isFalse(element.hasAttribute('data-required'));
           assert.isFalse(element.hasAttribute('required'));
@@ -163,7 +166,6 @@
         const element = form.querySelector('vl-form-validation-element');
         const button = form.querySelector('button');
         sandbox.spy(element, 'focus');
-        assert.equal(element.tabIndex, 0);
         button.click();
         assert(element.focus.called);
       });
@@ -173,9 +175,13 @@
         const element = form.querySelector('input');
         const button = form.querySelector('button');
         sandbox.spy(element, 'focus');
-        assert.equal(element.tabIndex, 0);
         button.click();
         assert(element.focus.called);
+      });
+
+      test('WCAG aria-describedby attribuut beschrijft waar meer informatie gevonden kan worden over het input veld', () => {
+        const element = fixture('vl-form-validation-element-fixture');
+        assert.equal(element.getAttribute('aria-describedby'), element.getAttribute('data-vl-error-placeholder'));
       });
     });
   </script>
