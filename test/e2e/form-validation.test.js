@@ -189,6 +189,14 @@ describe('vl-form-validation', async () => {
     await input.setValue('200');
     await form.submit();
     await assert.eventually.isFalse(input.hasError());
+
+    await input.setValue('2 0 00');
+    await form.submit();
+    await assert.eventually.isTrue(input.hasError());
+
+    await input.setValue('1 0 0');
+    await form.submit();
+    await assert.eventually.isFalse(input.hasError());
   });
 
   it('als gebruiker zie ik een foutmelding als er geen (komma)getal is ingevuld', async () => {
