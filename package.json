@@ -37,7 +37,7 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "@govflanders/vl-ui-form-validation": "^4.1.17",
+    "@govflanders/vl-ui-form-validation": "^11.0.0",
     "vl-ui-core": "^7.2.3"
   },
   "peerDependencies": {
